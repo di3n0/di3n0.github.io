@@ -306,6 +306,59 @@
       </tags>
   </entry>
   <entry>
+    <title>KIOPTRIX: LEVEL 1.3</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/kioptrix-level-13-4%2C25/" >Target<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<h2 id="Former-Job"><a href="#Former-Job" class="headerlink" title="Former Job"></a><strong>Former Job</strong></h2><ul>
+<li>Import to VMware</li>
+<li>Virtual machine configuration with different networks-Bridged(<a class="link"   href="https://blog.csdn.net/Attsky/article/details/109320325" >Network<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link"   href="https://blog.csdn.net/qq1069380146/article/details/111995334" >IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png"
+                      width="50%" height="40%"
+                >
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hackmd.io/_uploads/rJOQumtKT.png"
+                      width="50%" height="40%"
+                ></li>
+<li><a class="link"   href="https://youtu.be/6P6ff8onNzk?si=xB0xUZfX43sZ2Zmk" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<br>
+<br>
+
+<h2 id="Step-1-Scan"><a href="#Step-1-Scan" class="headerlink" title="Step 1: Scan"></a><strong>Step 1: Scan</strong></h2><ol>
+<li>Confirm my IP address.<br><code>ifconfig</code><br>I found that my IP address.<code>192.168.1.113</code>。<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/0.png"
+                      width="600" height="800"
+                ></li>
+<li>Search the target.<br><code>sudo netdiscover -r 192.168.1.0/24</code><br>I think the target is 192.168.1.112<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/1.png"
+                      width="600" height="800"
+                ></li>
+<li>Nmap scan the services.<br><code>sudo nmap -A -T4 192.168.1.112</code><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/vulnhub/4/2.png"
+                      width="600" height="800"
+                ></li>
+</ol>
+<h2 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a><strong>Step 2</strong></h2><h2 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a><strong>Step 3</strong></h2><h2 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a><strong>Step 4</strong></h2><h2 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a><strong>Step 5</strong></h2>]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>KIOPTRIX: LEVEL 1.1</title>
     <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -430,86 +483,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>KIOPTRIX: LEVEL 1.3</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1-3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/kioptrix-level-13-4%2C25/" >Target<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
-<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
-<br>
-<br>
-
-<h2 id="Former-Job"><a href="#Former-Job" class="headerlink" title="Former Job"></a><strong>Former Job</strong></h2><ul>
-<li>Import to VMware</li>
-<li>Virtual machine configuration with different networks-Bridged(<a class="link"   href="https://blog.csdn.net/Attsky/article/details/109320325" >Network<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link"   href="https://blog.csdn.net/qq1069380146/article/details/111995334" >IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png"
-                      width="50%" height="40%"
-                >
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hackmd.io/_uploads/rJOQumtKT.png"
-                      width="50%" height="40%"
-                ></li>
-<li><a class="link"   href="https://youtu.be/6P6ff8onNzk?si=xB0xUZfX43sZ2Zmk" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<br>
-<br>
-
-<h2 id="Step-1-Scan"><a href="#Step-1-Scan" class="headerlink" title="Step 1: Scan"></a><strong>Step 1: Scan</strong></h2><ol>
-<li>Confirm my IP address.<br><code>ifconfig</code><br>I found that my IP address.<code>192.168.1.113</code>。<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/0.png"
-                      width="600" height="800"
-                ></li>
-<li>Search the target.<br><code>sudo netdiscover -r 192.168.1.0/24</code><br>I think the target is 192.168.1.112<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/1.png"
-                      width="600" height="800"
-                ></li>
-<li>Nmap scan the services.<br><code>sudo nmap -A -T4 192.168.1.112</code><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/2.png"
-                      width="600" height="800"
-                ></li>
-</ol>
-<h2 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a><strong>Step 2</strong></h2><h2 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a><strong>Step 3</strong></h2><h2 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a><strong>Step 4</strong></h2><h2 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a><strong>Step 5</strong></h2>]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Red Team</title>
-    <url>/2024/12/08/Red-Team/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1-專注於滲透測試和攻擊腳本的資源"><a href="#1-專注於滲透測試和攻擊腳本的資源" class="headerlink" title="1. 專注於滲透測試和攻擊腳本的資源"></a><strong>1. 專注於滲透測試和攻擊腳本的資源</strong></h4><h5 id="1-Exploit-Database-Exploit-DB"><a href="#1-Exploit-Database-Exploit-DB" class="headerlink" title="(1) Exploit Database (Exploit-DB)"></a><strong>(1) <a class="link"   href="https://www.exploit-db.com/" >Exploit Database (Exploit-DB)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><h5 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="(2) GitHub"></a><strong>(2) <a class="link"   href="https://github.com/" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Search: <code>red team scripts</code>、<code>offensive security</code>、<code>post exploitation</code> </p>
-<hr>
-<h4 id="2-專注於紅隊技術的資源"><a href="#2-專注於紅隊技術的資源" class="headerlink" title="2. 專注於紅隊技術的資源"></a><strong>2. 專注於紅隊技術的資源</strong></h4><h5 id="1-Red-Team-Academy"><a href="#1-Red-Team-Academy" class="headerlink" title="(1) Red Team Academy"></a><strong>(1) <a class="link"   href="https://www.redteamacademy.com/" >Red Team Academy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於紅隊技術學習，提供完整的紅隊作業流程，包括社交工程和後滲透技術等。這些內容幫助學習者根據目標環境設計定制化的攻擊劇本，以及進行紅隊任務中的腳本化自動化操作。</p>
-<h5 id="2-PayloadsAllTheThings"><a href="#2-PayloadsAllTheThings" class="headerlink" title="(2) PayloadsAllTheThings"></a><strong>(2) <a class="link"   href="https://github.com/swisskyrepo/PayloadsAllTheThings" >PayloadsAllTheThings<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>這是一個專注於各種攻擊向量的 GitHub 資源庫，包括 SQL Injection、XSS、SSRF 等攻擊場景。它提供了豐富的 Payload 示例，幫助學習者將這些 Payload 整合到自己的攻擊腳本中，並應用於多種場景。</p>
-<h5 id="3-TrustedSec-Blog"><a href="#3-TrustedSec-Blog" class="headerlink" title="(3) TrustedSec Blog"></a><strong>(3) <a class="link"   href="https://www.trustedsec.com/blog/" >TrustedSec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TrustedSec 提供最新的紅隊工具與技術分析，分享實際攻擊場景的案例研究。透過這些資源，學習者能更有效地在紅隊演練中應用工具與腳本。</p>
-<h5 id="4-dmcxblue"><a href="#4-dmcxblue" class="headerlink" title="(4) dmcxblue"></a><strong>(4) <a class="link"   href="https://dmcxblue.net/" >dmcxblue<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>dmcxblue 提供紅隊技術相關的文章和研究，涵蓋多種進階攻擊技術和工具的使用。特別適合想了解攻擊理論和實踐的學習者。</p>
-<hr>
-<h4 id="3-模擬演練和學習攻擊腳本的平台"><a href="#3-模擬演練和學習攻擊腳本的平台" class="headerlink" title="3. 模擬演練和學習攻擊腳本的平台"></a><strong>3. 模擬演練和學習攻擊腳本的平台</strong></h4><h5 id="1-Hack-The-Box"><a href="#1-Hack-The-Box" class="headerlink" title="(1) Hack The Box"></a><strong>(1) <a class="link"   href="https://www.hackthebox.com/" >Hack The Box<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Hack The Box 提供一個互動學習平台，專注於紅隊與藍隊的模擬攻擊場景，適合學習如何在實際演練中使用攻擊腳本。它涵蓋從基礎到高級的滲透測試挑戰，幫助學習者針對不同場景進行腳本開發與應用。</p>
-<h5 id="2-VulnHub"><a href="#2-VulnHub" class="headerlink" title="(2) VulnHub"></a><strong>(2) <a class="link"   href="https://www.vulnhub.com/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>VulnHub 提供可下載的靶機映像，讓學習者可以在本地虛擬環境中進行滲透測試演練，從而提升實戰能力。涵蓋多種難度和場景，適合從初學者到高級使用者。</p>
-<h5 id="3-TryHackMe"><a href="#3-TryHackMe" class="headerlink" title="(3) TryHackMe"></a><strong>(3) <a class="link"   href="https://tryhackme.com/" >TryHackMe<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TryHackMe 提供專門的腳本化攻擊課程，包括 CTF 和專業紅隊技能訓練環境，幫助學習者從基礎腳本開發到複雜攻擊劇本的實踐操作，並結合 <code>pwntools</code> 等工具進行實作。</p>
-<h5 id="4-RangeForce"><a href="#4-RangeForce" class="headerlink" title="(4) RangeForce"></a><strong>(4) <a class="link"   href="https://www.rangeforce.com/" >RangeForce<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>RangeForce 模擬企業場域的防禦與攻擊演練，針對紅隊演練特性提供深度學習環境。學習者可以在此學習如何應對企業防禦措施，並開發和調整針對實際場域的攻擊腳本。</p>
-<h5 id="5-BloodHound"><a href="#5-BloodHound" class="headerlink" title="(5) BloodHound"></a><strong>(5) <a class="link"   href="https://bloodhound.readthedocs.io/" >BloodHound<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>BloodHound 是一個用於內網環境分析的工具，特別針對 Active Directory（AD）環境進行攻擊路徑探索與分析，幫助學習者設計內網滲透策略。</p>
-<hr>
-<h4 id="4-特定工具與框架學習資源"><a href="#4-特定工具與框架學習資源" class="headerlink" title="4. 特定工具與框架學習資源"></a><strong>4. 特定工具與框架學習資源</strong></h4><h5 id="1-Cobalt-Strike-Documentation"><a href="#1-Cobalt-Strike-Documentation" class="headerlink" title="(1) Cobalt Strike Documentation"></a><strong>(1) <a class="link"   href="https://www.cobaltstrike.com/support/user-manuals" >Cobalt Strike Documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供詳細的 Cobalt Strike 使用指南，特別是 Aggressor Scripts 的編寫與應用教學。這幫助學習者了解攻擊腳本的開發流程，並結合現有工具實現任務的自動化腳本設計。</p>
-<h5 id="2-Metasploit-Unleashed"><a href="#2-Metasploit-Unleashed" class="headerlink" title="(2) Metasploit Unleashed"></a><strong>(2) <a class="link"   href="https://www.offensive-security.com/metasploit-unleashed/" >Metasploit Unleashed<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Metasploit 的官方教學，涵蓋腳本模組的開發與應用。學習者可以透過這些內容掌握如何根據需求設計自定義攻擊腳本，以及熟悉 Metasploit 框架的腳本化操作流程。</p>
-<h5 id="3-MITRE-ATT-CK-Framework"><a href="#3-MITRE-ATT-CK-Framework" class="headerlink" title="(3) MITRE ATT&amp;CK Framework"></a><strong>(3) <a class="link"   href="https://attack.mitre.org/" >MITRE ATT&amp;CK Framework<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供標準化的攻擊技術與場景資料庫，幫助學習者模擬 ATT&amp;CK 技術腳本的實現，並設計符合紅隊演練場景的攻擊腳本。</p>
-<h5 id="4-Empire"><a href="#4-Empire" class="headerlink" title="(4) Empire"></a><strong>(4) <a class="link"   href="https://github.com/BC-SECURITY/Empire" >Empire<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Empire 是一個強大的後滲透測試框架，支持腳本化的滲透測試活動，適合進行模擬攻擊與自動化操作。</p>
-<h5 id="5-MITRE-Caldera"><a href="#5-MITRE-Caldera" class="headerlink" title="(5) MITRE Caldera"></a><strong>(5) <a class="link"   href="https://caldera.mitre.org/" >MITRE Caldera<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>MITRE Caldera 是一個自動化紅隊模擬框架，專注於模擬真實的攻擊行為，幫助學習者測試與了解各種攻擊技術。適合用於模擬企業場域的攻擊活動。</p>
-<h5 id="6-Atomic-Red-Team"><a href="#6-Atomic-Red-Team" class="headerlink" title="(6) Atomic Red Team"></a><strong>(6) <a class="link"   href="https://github.com/redcanaryco/atomic-red-team" >Atomic Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Atomic Red Team 提供一組開放式的攻擊技術測試框架，幫助學習者快速測試與模擬常見的攻擊技巧，並結合 MITRE ATT&amp;CK 進行實踐。</p>
-]]></content>
-      <tags>
-        <tag>other</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PortSwigger</title>
     <url>/2024/12/03/PortSwigger/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
@@ -518,25 +491,6 @@
 ]]></content>
       <tags>
         <tag>PortSwigger</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VulnHub</title>
-    <url>/2024/11/30/VulnHub/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
-<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
-<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
-<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
-</ul>
-<p>.<br>.<br>.</p>
-<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
-<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
-</ul>
-<p>.<br>.<br>.</p>
-]]></content>
-      <tags>
-        <tag>VulnHub</tag>
       </tags>
   </entry>
   <entry>
@@ -905,6 +859,52 @@ Since the original query returns two columns and only the second column can stor
 ]]></content>
       <tags>
         <tag>picoCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Red Team</title>
+    <url>/2024/12/08/Red-Team/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1-專注於滲透測試和攻擊腳本的資源"><a href="#1-專注於滲透測試和攻擊腳本的資源" class="headerlink" title="1. 專注於滲透測試和攻擊腳本的資源"></a><strong>1. 專注於滲透測試和攻擊腳本的資源</strong></h4><h5 id="1-Exploit-Database-Exploit-DB"><a href="#1-Exploit-Database-Exploit-DB" class="headerlink" title="(1) Exploit Database (Exploit-DB)"></a><strong>(1) <a class="link"   href="https://www.exploit-db.com/" >Exploit Database (Exploit-DB)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><h5 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="(2) GitHub"></a><strong>(2) <a class="link"   href="https://github.com/" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Search: <code>red team scripts</code>、<code>offensive security</code>、<code>post exploitation</code> </p>
+<hr>
+<h4 id="2-專注於紅隊技術的資源"><a href="#2-專注於紅隊技術的資源" class="headerlink" title="2. 專注於紅隊技術的資源"></a><strong>2. 專注於紅隊技術的資源</strong></h4><h5 id="1-Red-Team-Academy"><a href="#1-Red-Team-Academy" class="headerlink" title="(1) Red Team Academy"></a><strong>(1) <a class="link"   href="https://www.redteamacademy.com/" >Red Team Academy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於紅隊技術學習，提供完整的紅隊作業流程，包括社交工程和後滲透技術等。這些內容幫助學習者根據目標環境設計定制化的攻擊劇本，以及進行紅隊任務中的腳本化自動化操作。</p>
+<h5 id="2-PayloadsAllTheThings"><a href="#2-PayloadsAllTheThings" class="headerlink" title="(2) PayloadsAllTheThings"></a><strong>(2) <a class="link"   href="https://github.com/swisskyrepo/PayloadsAllTheThings" >PayloadsAllTheThings<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>這是一個專注於各種攻擊向量的 GitHub 資源庫，包括 SQL Injection、XSS、SSRF 等攻擊場景。它提供了豐富的 Payload 示例，幫助學習者將這些 Payload 整合到自己的攻擊腳本中，並應用於多種場景。</p>
+<h5 id="3-TrustedSec-Blog"><a href="#3-TrustedSec-Blog" class="headerlink" title="(3) TrustedSec Blog"></a><strong>(3) <a class="link"   href="https://www.trustedsec.com/blog/" >TrustedSec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TrustedSec 提供最新的紅隊工具與技術分析，分享實際攻擊場景的案例研究。透過這些資源，學習者能更有效地在紅隊演練中應用工具與腳本。</p>
+<h5 id="4-dmcxblue"><a href="#4-dmcxblue" class="headerlink" title="(4) dmcxblue"></a><strong>(4) <a class="link"   href="https://dmcxblue.net/" >dmcxblue<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>dmcxblue 提供紅隊技術相關的文章和研究，涵蓋多種進階攻擊技術和工具的使用。特別適合想了解攻擊理論和實踐的學習者。</p>
+<hr>
+<h4 id="3-模擬演練和學習攻擊腳本的平台"><a href="#3-模擬演練和學習攻擊腳本的平台" class="headerlink" title="3. 模擬演練和學習攻擊腳本的平台"></a><strong>3. 模擬演練和學習攻擊腳本的平台</strong></h4><h5 id="1-Hack-The-Box"><a href="#1-Hack-The-Box" class="headerlink" title="(1) Hack The Box"></a><strong>(1) <a class="link"   href="https://www.hackthebox.com/" >Hack The Box<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Hack The Box 提供一個互動學習平台，專注於紅隊與藍隊的模擬攻擊場景，適合學習如何在實際演練中使用攻擊腳本。它涵蓋從基礎到高級的滲透測試挑戰，幫助學習者針對不同場景進行腳本開發與應用。</p>
+<h5 id="2-VulnHub"><a href="#2-VulnHub" class="headerlink" title="(2) VulnHub"></a><strong>(2) <a class="link"   href="https://www.vulnhub.com/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>VulnHub 提供可下載的靶機映像，讓學習者可以在本地虛擬環境中進行滲透測試演練，從而提升實戰能力。涵蓋多種難度和場景，適合從初學者到高級使用者。</p>
+<h5 id="3-TryHackMe"><a href="#3-TryHackMe" class="headerlink" title="(3) TryHackMe"></a><strong>(3) <a class="link"   href="https://tryhackme.com/" >TryHackMe<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TryHackMe 提供專門的腳本化攻擊課程，包括 CTF 和專業紅隊技能訓練環境，幫助學習者從基礎腳本開發到複雜攻擊劇本的實踐操作，並結合 <code>pwntools</code> 等工具進行實作。</p>
+<h5 id="4-RangeForce"><a href="#4-RangeForce" class="headerlink" title="(4) RangeForce"></a><strong>(4) <a class="link"   href="https://www.rangeforce.com/" >RangeForce<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>RangeForce 模擬企業場域的防禦與攻擊演練，針對紅隊演練特性提供深度學習環境。學習者可以在此學習如何應對企業防禦措施，並開發和調整針對實際場域的攻擊腳本。</p>
+<h5 id="5-BloodHound"><a href="#5-BloodHound" class="headerlink" title="(5) BloodHound"></a><strong>(5) <a class="link"   href="https://bloodhound.readthedocs.io/" >BloodHound<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>BloodHound 是一個用於內網環境分析的工具，特別針對 Active Directory（AD）環境進行攻擊路徑探索與分析，幫助學習者設計內網滲透策略。</p>
+<hr>
+<h4 id="4-特定工具與框架學習資源"><a href="#4-特定工具與框架學習資源" class="headerlink" title="4. 特定工具與框架學習資源"></a><strong>4. 特定工具與框架學習資源</strong></h4><h5 id="1-Cobalt-Strike-Documentation"><a href="#1-Cobalt-Strike-Documentation" class="headerlink" title="(1) Cobalt Strike Documentation"></a><strong>(1) <a class="link"   href="https://www.cobaltstrike.com/support/user-manuals" >Cobalt Strike Documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供詳細的 Cobalt Strike 使用指南，特別是 Aggressor Scripts 的編寫與應用教學。這幫助學習者了解攻擊腳本的開發流程，並結合現有工具實現任務的自動化腳本設計。</p>
+<h5 id="2-Metasploit-Unleashed"><a href="#2-Metasploit-Unleashed" class="headerlink" title="(2) Metasploit Unleashed"></a><strong>(2) <a class="link"   href="https://www.offensive-security.com/metasploit-unleashed/" >Metasploit Unleashed<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Metasploit 的官方教學，涵蓋腳本模組的開發與應用。學習者可以透過這些內容掌握如何根據需求設計自定義攻擊腳本，以及熟悉 Metasploit 框架的腳本化操作流程。</p>
+<h5 id="3-MITRE-ATT-CK-Framework"><a href="#3-MITRE-ATT-CK-Framework" class="headerlink" title="(3) MITRE ATT&amp;CK Framework"></a><strong>(3) <a class="link"   href="https://attack.mitre.org/" >MITRE ATT&amp;CK Framework<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供標準化的攻擊技術與場景資料庫，幫助學習者模擬 ATT&amp;CK 技術腳本的實現，並設計符合紅隊演練場景的攻擊腳本。</p>
+<h5 id="4-Empire"><a href="#4-Empire" class="headerlink" title="(4) Empire"></a><strong>(4) <a class="link"   href="https://github.com/BC-SECURITY/Empire" >Empire<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Empire 是一個強大的後滲透測試框架，支持腳本化的滲透測試活動，適合進行模擬攻擊與自動化操作。</p>
+<h5 id="5-MITRE-Caldera"><a href="#5-MITRE-Caldera" class="headerlink" title="(5) MITRE Caldera"></a><strong>(5) <a class="link"   href="https://caldera.mitre.org/" >MITRE Caldera<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>MITRE Caldera 是一個自動化紅隊模擬框架，專注於模擬真實的攻擊行為，幫助學習者測試與了解各種攻擊技術。適合用於模擬企業場域的攻擊活動。</p>
+<h5 id="6-Atomic-Red-Team"><a href="#6-Atomic-Red-Team" class="headerlink" title="(6) Atomic Red Team"></a><strong>(6) <a class="link"   href="https://github.com/redcanaryco/atomic-red-team" >Atomic Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Atomic Red Team 提供一組開放式的攻擊技術測試框架，幫助學習者快速測試與模擬常見的攻擊技巧，並結合 MITRE ATT&amp;CK 進行實踐。</p>
+]]></content>
+      <tags>
+        <tag>other</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VulnHub</title>
+    <url>/2024/11/30/VulnHub/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
+<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
+<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
       </tags>
   </entry>
 </search>
